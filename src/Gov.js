@@ -14,26 +14,21 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
 import { ChartGdp } from "./ChartGdp";
-const [ setData] = useState(null);
-const [setChartData] = useState(null);
-//use state to set the data and chart data
-//const [data, setData] = useState(null);
-//const [chartData, setChartData] = useState(null);
-
 
 
  // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
  async function fetchAPI() {
-  
+  //const [ setData] = useState(null);
 
 //const [loading, setLoading] = useState(false);
+//const [setChartData] = useState(null);
   //setLoading(true);
   const response = await fetch(
     "https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100"
   );
   const data = await response.json();
   console.log(data);
-  setData(data);
+  //setData(data);
   //setLoading(false);
 
   // set the chart data, trim the data to 10 records
@@ -111,7 +106,7 @@ const [setChartData] = useState(null);
   //chartData.datasets[6].data.sort((a, b) => b - a).slice(0, 20);
 
 
-  setChartData(chartData);
+  //setChartData(chartData);
 }
 function Copyright() {
   return (
@@ -163,72 +158,71 @@ const useStyles = makeStyles((theme) => ({
 
 export function Gov({ loggedIn, logout, login }) {
   const classes = useStyles();
+  
   const [data, setData] = useState(null);
-
-  //const [data, setData] = useState(null);
 
 //const [loading, setLoading] = useState(false);
 const [chartData, setChartData] = useState(null);
 //setLoading(true);
 //setChartData(chartData);
 
-return (
-  <div className="App">
-    <div>
-      <button onClick={fetchAPI}>Fetch API</button>
-      {/* Show the ministry department names from the response data */}
-      <div style={{ display: "none" }}>
-        <table width="100%">
-          <tr>
-            {data &&
-              data.field.map((fields) => (
-                <td width="12.5%">
-                  <th>{fields.name}</th>
-                </td>
-              ))}
-          </tr>
-        </table>
-        <div>
+ return (
+    <div className="App">
+      <div>
+        <button onClick={fetchAPI}>Fetch API</button>
+        {/* Show the ministry department names from the response data */}
+        <div style={{ display: "none" }}>
           <table width="100%">
-            {data &&
-              data.records.map((record) => (
-                <tr>
-                  <td align="left" width="12.5%">
-                    {record.ministry_department_state}
+            <tr>
+              {data &&
+                data.field.map((fields) => (
+                  <td width="12.5%">
+                    <th>{fields.name}</th>
                   </td>
-                  <td align="left" width="12.5%">
-                    {record.total_receipts_01_01_2016_to_01_11_2019_}
-                  </td>
-                  <td align="left" width="12.5%">
-                    {record.total_disposal_01_01_2016_to_01_11_2019_}
-                  </td>
-                  <td align="left" width="12.5%">
-                    {record.total_pending_as_on_01_11_2019}
-                  </td>
-                  <td align="left" width="12.5%">
-                    {record.pending_more_than_1_year}
-                  </td>
-                  <td align="left" width="12.5%">
-                    {record.pending_between_6_to_12_months}
-                  </td>
-                  <td align="left" width="12.5%">
-                    {record.pending_between_2_to_6_months}
-                  </td>
-                  <td align="left" width="12.5%">
-                    {record.pending_less_than_2_months}
-                  </td>
-                </tr>
-              ))}
+                ))}
+            </tr>
           </table>
+          <div>
+            <table width="100%">
+              {data &&
+                data.records.map((record) => (
+                  <tr>
+                    <td align="left" width="12.5%">
+                      {record.ministry_department_state}
+                    </td>
+                    <td align="left" width="12.5%">
+                      {record.total_receipts_01_01_2016_to_01_11_2019_}
+                    </td>
+                    <td align="left" width="12.5%">
+                      {record.total_disposal_01_01_2016_to_01_11_2019_}
+                    </td>
+                    <td align="left" width="12.5%">
+                      {record.total_pending_as_on_01_11_2019}
+                    </td>
+                    <td align="left" width="12.5%">
+                      {record.pending_more_than_1_year}
+                    </td>
+                    <td align="left" width="12.5%">
+                      {record.pending_between_6_to_12_months}
+                    </td>
+                    <td align="left" width="12.5%">
+                      {record.pending_between_2_to_6_months}
+                    </td>
+                    <td align="left" width="12.5%">
+                      {record.pending_less_than_2_months}
+                    </td>
+                  </tr>
+                ))}
+            </table>
+          </div>
         </div>
       </div>
+      <div>
+        <h1>Chart</h1>
+      </div>
+      {chartData && <ChartGdp chartData={chartData} />}
     </div>
-    <div>
-      <h1>Chart</h1>
-    </div>
-    {chartData && <ChartGdp chartData={chartData} />}
-  </div>
-);
+  );
   // return (
   //   <Grid container component="main" className={classes.root}>
   //     <CssBaseline />
