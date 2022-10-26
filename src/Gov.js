@@ -27,7 +27,7 @@ import { ChartGdp } from "./ChartGdp";
     "https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100"
   );
   const data = await response.json();
-  console.log(data);
+  console.log("alpha data"+JSON.stringify( data));
   //setData(data);
   //setLoading(false);
 
