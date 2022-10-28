@@ -26,7 +26,7 @@ const options = {
     },
     title: {
       display: true,
-      text: "Bar Chart",
+      text: "Pie Chart",
     },
   },
 };
@@ -34,9 +34,8 @@ const options = {
 //export function ChartPie() {
   export function ChartPie({ chartData }) {
 //
-  alert("ChartPie");
-  return <Pie options={options} data={chartData} />;
-
+  //alert("ChartPie");
+    return <div width="50%" height="50%"><Pie options={options} data={chartData} /></div>;
   // return (
   //   <Chart
   //     chartType="PieChart"

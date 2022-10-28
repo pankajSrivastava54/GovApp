@@ -175,7 +175,21 @@ const fetchForeignCrimeAPI = (callback) => {
       console.log("result data 222"+JSON.stringify(data));
     const result = data.records.filter(record => record !== 0);
     console.log("result data"+JSON.stringify(result));
+    // const chartData = {
+        
+    //   datasets: [
+    //     {
+    //       labels: data.records
+    //       .map((record) => record.year),
+    //       data: data.records
+    //         .map((record) => record.no__of_cyber_fraud_cases_registered),
+    //         //.slice(0, 20),
+    //       backgroundColor: "rgba(155, 99, 132, 0.6)",
+    //       borderWidth: 4,
+    //     },
 
+    //   ],
+    // };
       // set the chart data, trim the data to 10 records
       const chartData = {
         labels: data.records
@@ -828,35 +842,18 @@ const fetchCyberFraudAPI2014T02016 = (callback) => {
 
       // set the chart data, trim the data to 10 records
       const chartData = {
-        labels: data.records
-          .map((record) => record.year),
-          //.slice(0, 20),
+        
         datasets: [
           {
-            //label: data.records
-            //.map((record) => record.year),
+            labels: data.records
+            .map((record) => record.year),
             data: data.records
               .map((record) => record.no__of_cyber_fraud_cases_registered),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
-          // {
-          //   label: "2015",
-          //   data: filtereddata
-          //     .map((record) => record._2015___foeticide),
-          //     //.slice(0, 20),
-          //   backgroundColor: "rgba(55, 99, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "2016",
-          //   data: filtereddata
-          //     .map((record) => record._2016___foeticide),
-          //     //.slice(0, 20),
-          //   backgroundColor: "rgba(55, 99, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
+
         ],
       };
       callback(chartData);
@@ -1016,13 +1013,14 @@ export function Crime({ loggedIn, logout, login }) {
     </div>
 
     <div 
-       style={{
-        height: "1000px",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        filter: "contrast(75%)",
-        //backgroundImage: "url(/img/wallpaper.jpeg)",
-      }}>
+      //  style={{
+      //   height: "50%",
+      //   backgroundPosition: "center",
+      //   backgroundSize: "cover",
+      //   filter: "contrast(75%)",
+      //   backgroundImage: "url(/img/wallpaper.jpeg)",
+      // }}
+      >
         {chartData && <ChartGdp chartData={chartData} />}
       </div>
 
