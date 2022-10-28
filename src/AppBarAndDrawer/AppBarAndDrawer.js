@@ -71,7 +71,7 @@ function ResponsiveDrawer(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    setMobileOpen(mobileOpen);
   };
 
   /* Modifying the source code from the template example to use the react router pathname hook to set
@@ -83,15 +83,15 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {[
-          { text: "home", icon: "home" },
-          { text: "login", icon: "lock" },
-          { text: "gov", icon: "lock" },
-          { text: "profile", icon: "person" },
-          { text: "dashboard", icon: "dashboard" },
-          { text: "people", icon: "people" },
-          { text: "map", icon: "map" },
-          { text: "components", icon: "apps" },
-          { text: "settings", icon: "settings" },
+           { text: "crime", icon: "person" },
+           { text: "login", icon: "lock" },
+           { text: "gov", icon: "lock" },
+           { text: "GDP", icon: "person" },
+           { text: "dashboard", icon: "dashboard" },
+           { text: "people", icon: "people" },
+           { text: "map", icon: "map" },
+           { text: "components", icon: "apps" },
+           { text: "settings", icon: "settings" },
         ].map(({ text, icon }, index) => (
           <ListItem
             component={RouterLink}
@@ -148,21 +148,21 @@ function ResponsiveDrawer(props) {
             Gov World
           </Typography>
           <div style={{ flexGrow: 1 }}></div>
-          <PalettePicker
+          {/* <PalettePicker
             setCurrentTheme={setCurrentTheme}
             currentTheme={currentTheme}
-          />
-          <Badge badgeContent={4} color="primary">
+          /> */}
+          {/* <Badge badgeContent={4} color="primary">
             <MailIcon />
-          </Badge>
-          <IconButton
+          </Badge> */}
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerToggle}
           >
             <Avatar src="/img/driver.png" />
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
       {isHome && !mobileOpen ? (

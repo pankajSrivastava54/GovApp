@@ -3,6 +3,8 @@ import AppBarAndDrawer from "./AppBarAndDrawer/AppBarAndDrawer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { SignIn } from "./SignIn";
 import {Gov} from "./Gov";
+import {Gdp} from "./Gdp";
+
 import { Dashboard } from "./Dashboard/Dashboard";
 import { Home } from "./Home/Home";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -19,6 +21,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import { configureStore } from "@reduxjs/toolkit";
 import peopleReducer from "./ReduxTable/peopleSlice";
 import { Provider } from "react-redux";
+import { Crime } from "./Crime";
 
 export default function App() {
   const store = configureStore({
@@ -42,18 +45,19 @@ export default function App() {
                   {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
                   <Switch>
-                    <Route path="/login">
-                      <SignIn />
+                    <Route path="/crime">
+                      <Crime />
                     </Route>
                     <Route path="/gov">
                       <Gov />
                     </Route>
+                    <Route path="/gdp">
+                      <Gdp />
+                    </Route>
                     <Route path="/profile">
                       <Driver id={1} />
                     </Route>
-                    <Route path="/gov">
-                      <SignIn />
-                    </Route>
+
                     <Route path="/dashboard">
                       <Dashboard />
                     </Route>

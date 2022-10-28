@@ -4,12 +4,14 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
-
+import { SummaryCard } from "../src/People/Driver";
+import Content from "../src/Dashboard/Content";
+import { KEY , API_URL} from "../src/Const/Const";
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchAPI = (callback) => {
-  console.log("fetching data");
+  console.log("fetching data"+KEY);
   const response = fetch(
-    "https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100"
+    API_URL+"1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key="+KEY+"&format=json&offset=0&limit=100"
   );
   response.then((response) => {
     const data = response.json();
@@ -74,18 +76,18 @@ const fetchAPI = (callback) => {
     });
   });
 };
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {"Copyright © "}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Your Website
+//       </Link>{" "}
+//       {new Date().getFullYear()}
+//       {"."}
+//     </Typography>
+//   );
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -123,6 +125,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function Gov({ loggedIn, logout, login }) {
+  //const classes = useStyles();
   const classes = useStyles();
 
   //const [loading, setLoading] = useState(false);
@@ -136,19 +139,40 @@ export function Gov({ loggedIn, logout, login }) {
     });
   };
 
-  useEffect(() => {
-    refreshChart();
-  }, [chartData]);
+  // useEffect(() => {
+  //   refreshChart();
+  // }, [chartData]);
 
   return (
+    <Content>
+    <div
+      style={{
+        height: "10px",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper.jpeg)",
+      }}
+    />
     <div className="App">
-      <div>
-        <button onClick={refreshChart}>Refresh</button>
+      
+      <div className={classes.summaryCards}>
+        <button onClick={refreshChart}>Department-wise receipts, disposal and pendency of Public Grievance detailed statistics from 01.01.2016 to 01.11.2019</button>
       </div>
-      <div>
-        <h1>Chart</h1>
-      </div>
-      {chartData && <ChartGdp chartData={chartData} />}
+
+       <div 
+       style={{
+        height: "1000px",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper.jpeg)",
+      }}>
+        {chartData && <ChartGdp chartData={chartData} />}      
+      </div> 
     </div>
+    </Content>
   );
+
+  
 }
