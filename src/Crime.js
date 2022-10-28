@@ -1023,7 +1023,7 @@ export function Crime({ loggedIn, logout, login }) {
         filter: "contrast(75%)",
         //backgroundImage: "url(/img/wallpaper.jpeg)",
       }}>
-        {chartData && <ChartPie chartData={chartData} />}
+        {chartData && <ChartGdp chartData={chartData} />}
       </div>
 
     </div>

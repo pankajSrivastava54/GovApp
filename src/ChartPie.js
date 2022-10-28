@@ -2,6 +2,7 @@ import React from "react";
 import { Pie } from "react-chartjs-2";
 //import { Chart } from "react-google-charts";
 import {Chart, ArcElement} from 'chart.js'
+import { PieChart, PieChartTwoTone } from "@material-ui/icons";
 Chart.register(ArcElement);
 
 // export const data = [
