@@ -89,7 +89,12 @@ function ResponsiveDrawer(props) {
            { text: "GDP", icon: "person" },
            { text: "dashboard", icon: "dashboard" },
            { text: "people", icon: "people" },
+           { text: "shipping", icon: "map" },
            { text: "map", icon: "map" },
+           { text: "rbi", icon: "map" },
+           { text: "transport", icon: "map" },
+
+           { text: "education", icon: "map" },
            { text: "components", icon: "apps" },
            { text: "settings", icon: "settings" },
         ].map(({ text, icon }, index) => (

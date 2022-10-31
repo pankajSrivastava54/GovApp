@@ -4,7 +4,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { SignIn } from "./SignIn";
 import {Gov} from "./Gov";
 import {Gdp} from "./Gdp";
+import {Rbi} from "./Rbi"
 
+import {Transport} from "./Transport"
+import {Shipping} from "./Shipping"
+
+import {Education} from "./Education"
 import { Dashboard } from "./Dashboard/Dashboard";
 import { Home } from "./Home/Home";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -57,7 +62,9 @@ export default function App() {
                     <Route path="/profile">
                       <Driver id={1} />
                     </Route>
-
+                    <Route path="/education">
+                      <Education />
+                    </Route>
                     <Route path="/dashboard">
                       <Dashboard />
                     </Route>
@@ -66,6 +73,15 @@ export default function App() {
                     </Route>
                     <Route path={`/people/:driverId`}>
                       <Driver />
+                    </Route>
+                    <Route path="/shipping">
+                      <Shipping />
+                    </Route>
+                    <Route path="/rbi">
+                      <Rbi />
+                    </Route>
+                    <Route path="/transport">
+                      <Transport />
                     </Route>
                     <Route path="/map">
                       <Trips />

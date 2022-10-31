@@ -7,6 +7,10 @@ import { ChartGdp } from "./ChartGdp";
 import Content from "../src/Dashboard/Content";
 import { KEY, API_URL } from "../src/Const/Const";
 import { ChartPie } from "./ChartPie";
+import { Card } from "@material-ui/core";
+//import Card from 'react-bootstrap/Card';
+//import { Button } from 'react-bootstrap/Button';
+
 
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchAPI = (callback) => {
@@ -860,6 +864,283 @@ const fetchCyberFraudAPI2014T02016 = (callback) => {
     });
   });
 };
+
+const fetchCityWiseKidnapping2018TO2020 = (callback) => {
+  console.log("fetching data fetchCyberFraudAPI2014T02016");
+  const response = fetch(
+    API_URL+"fc4878fe-9b80-4c33-b401-7cce0c766cee?api-key="+KEY+"&format=json&offset=0&limit=40"
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    //const filtereddata = data.records.filter(record => record._2016___foeticide !== "0" && record._2016___foeticide > 0 );
+    //console.log("data filtereddata"+JSON.stringify(filtereddata));
+
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: data.records
+        .map((record) => record.city),
+        //.slice(0, 20),
+        datasets: [
+          {
+            label: "2018",
+            data: data.records
+              .map((record) => record._2018),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "2019",
+            data: data.records
+              .map((record) => record._2019),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "2020",
+            data: data.records
+              .map((record) => record._2020),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
+const fetchgetDeathsInPoliceCustody2020 = (callback) => {
+  console.log("fetching data fetchgetDeathsInPoliceCustody2020");
+  const response = fetch(
+    API_URL+"67aadebc-311c-43e2-bf2b-2f1ac8f524ed?api-key="+KEY+"&format=json&offset=0&limit=40"
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    const filtereddata = data.records.filter(record => record.deaths_reported____col__3_ !== "0" && record.deaths_reported____col__3_ > 0 );
+    console.log("data filtereddata"+JSON.stringify(filtereddata));
+
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: filtereddata
+        .map((record) => record.state_ut__col__2_),
+        //.slice(0, 20),
+        datasets: [
+          {
+            label: "Deaths Reported",
+            data: filtereddata
+              .map((record) => record.deaths_reported____col__3_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Mag Enquiries Ordered",
+            data: filtereddata
+              .map((record) => record.mag__enquiries_ordered____col__4_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Judicial Enquiries Ordered",
+            data: filtereddata
+              .map((record) => record.judicial_enquiries_ordered____col__5_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Cases Registered",
+            data: filtereddata
+              .map((record) => record.cases___registered____col__6_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Cases Chargesheeted",
+            data: filtereddata
+              .map((record) => record.cases___charge_sheeted____col__7_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Cases Convicted",
+            data: filtereddata
+              .map((record) => record.cases___convicted____col__8_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Cases Acquitted Discharged",
+            data: filtereddata
+              .map((record) => record.cases___acquitted__discharged____col__9_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Policeme Arrested",
+            data: filtereddata
+              .map((record) => record.policemen___arrested____col__10_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Policeme Chargesheeted",
+            data: filtereddata
+              .map((record) => record.policemen___charge_sheeted____col__11_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Policemen Convicted" ,
+            data: filtereddata
+              .map((record) => record.policemen___convicted____col__12_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Policemen Acquitted Discharged",
+            data: filtereddata
+              .map((record) => record.policemen___acquitted__discharged____col__13_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
+const fetchMissingAndTracedPersons2020 = (callback) => {
+  console.log("fetching data fetchMissingAndTracedPersons2020");
+  const response = fetch(
+    API_URL+"b70ed9d7-b350-4117-9987-21fa49d318eb?api-key="+KEY+"&format=json&offset=0&limit=40"
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    const filtereddata = data.records.filter(record => record.deaths_reported____col__3_ !== "0" && record.deaths_reported____col__3_ > 0 );
+    console.log("data filtereddata"+JSON.stringify(filtereddata));
+
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: data.records
+        .map((record) => record.age_group___gender____col__2_),
+        //.slice(0, 20),
+        datasets: [
+          {
+            label: "Deaths Reported",
+            data: data.records
+              .map((record) => record.unrecovered_persons_of_previous_years____col__3_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Mag Enquiries Ordered",
+            data: data.records
+              .map((record) => record.persons_missing_during_2020____col__4_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Judicial Enquiries Ordered",
+            data: data.records
+              .map((record) => record.total_missing__3_4_____col__5_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Cases Registered",
+            data: data.records
+              .map((record) => record.persons_traced___from_previous_years_missing____col__6_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Cases Chargesheeted",
+            data: data.records
+              .map((record) => record.persons_traced___from_missing_persons_2020____col__7_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Cases Convicted",
+            data: data.records
+              .map((record) => record.persons_traced___total_traced____col__8_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Cases Acquitted Discharged",
+            data: data.records
+              .map((record) => record.__of_persons_traced__col_8_col_5___100_____col__9_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Policeme Arrested",
+            data: data.records
+              .map((record) => record.persons_untraced___from_previous_years_missing____col__10_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Policeme Chargesheeted",
+            data: data.records
+              .map((record) => record.persons_untraced___from_missing_persons_2020____col__11_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Policemen Convicted" ,
+            data: data.records
+              .map((record) => record.persons_untraced___total_traced____col__12_),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+ 
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
 // function Copyright() {
 //   return (
 //     <Typography variant="body2" color="textSecondary" align="center">
@@ -895,9 +1176,16 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  button: {
+    alignSelf:'center',
+    width:'20%',
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.error.light,
+
+  },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.light,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -967,6 +1255,26 @@ export function Crime({ loggedIn, logout, login }) {
     });
   };
   
+  const getCityWiseKidnapping2018TO2020 = () => {
+    fetchCityWiseKidnapping2018TO2020((chartData) => {
+      // chartData = chartData;
+      setChartData(chartData);
+    });
+  };
+
+  const getDeathsInPoliceCustody2020 = () => {
+    fetchgetDeathsInPoliceCustody2020((chartData) => {
+      // chartData = chartData;
+      setChartData(chartData);
+    });
+  };
+  
+  const getMissingAndTracedPersons2020 = () => {
+    fetchMissingAndTracedPersons2020((chartData) => {
+      // chartData = chartData;
+      setChartData(chartData);
+    });
+  };
   return (
     <Content>
     <div
@@ -979,52 +1287,39 @@ export function Crime({ loggedIn, logout, login }) {
       }}
     />
     <div className="App">
-    <div >
-        <button onClick={refreshChart}>Crime Head-wise Disposal of Persons Arrested for Offences against State during 2020</button>
+    <div style={{
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        border:"1px solid black",
+        //backgroundImage: "url(/img/wallpaper.jpeg)",
+      }}>
+        <button className={classes.button} onClick={refreshChart}>Crime Head-wise Disposal of Persons Arrested for Offences against State during 2020</button>
+        <button className={classes.button} onClick={getForeignCrime}>Country-Wise Foreign Accused During 2020</button>
+        <button className={classes.button} onClick={getHeroinSeizure}>State/UTs-Wise Seizures Of Heroin As Published By The National Crime Records Bureau (NCRB) From 2016 To 2020</button>
+        <button className={classes.button} onClick={getConvictionRate}>Year-Wise Latest Publish Report Of The National Crime Records Bureau (NCRB), Conviction Rate (CVR) Of IPC Crimes At National Level From 2014 To 2016</button>
+        <button className={classes.button} onClick={getSuicideFarmers}>State/UT-Wise Suicide Committed By Farmers, As Per NCRB Report During 2018 And 2019</button>
+        <button className={classes.button} onClick={getFoeticideCases2018To2019}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2018 to 2019 (From : Ministry of Health and Family Welfare)</button>
+        <button className={classes.button} onClick={getFoeticideCases2014To2016}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2014 to 2016 (From : Ministry of Health and Family Welfare)</button>
+        <button className={classes.button} onClick={getCyberFraud2014To2016}>Year-Wise Details Of Cyber Fraud Cases Registered As Per National Crime Records Bureau (NCRB) From 2014 To 2016 (From : Ministry Of Home Affairs)</button>
+        <button className={classes.button} onClick={getCityWiseKidnapping2018TO2020}>City-Wise Kidnapping & Abduction From 2018 To 2020</button>
+        <button className={classes.button} onClick={getDeathsInPoliceCustody2020}>State/UT-Wise Deaths In Police Custody / Lockup (Persons Not On Remand) During 2020</button>
+        <button className={classes.button} onClick={getMissingAndTracedPersons2020}> Gender & Age-Wise Missing And Traced Persons During 2020</button>
     </div>
-    <div><br /></div>
-    <div >
-        <button onClick={getForeignCrime}>Country-Wise Foreign Accused During 2020</button>
-    </div>
-    <div><br /></div>
-    <div >
-        <button onClick={getHeroinSeizure}>State/UTs-Wise Seizures Of Heroin As Published By The National Crime Records Bureau (NCRB) From 2016 To 2020</button>
-    </div>
-    <div><br /></div>
-    <div >
-        <button onClick={getConvictionRate}>Year-Wise Latest Publish Report Of The National Crime Records Bureau (NCRB), Conviction Rate (CVR) Of IPC Crimes At National Level From 2014 To 2016</button>
-    </div>
-    
-    <div><br /></div>
-    <div >
-        <button onClick={getSuicideFarmers}>State/UT-Wise Suicide Committed By Farmers, As Per NCRB Report During 2018 And 2019</button>
-    </div>
-    <div><br /></div>
-    <div >
-        <button onClick={getFoeticideCases2018To2019}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2018 to 2019 (From : Ministry of Health and Family Welfare)</button>
-    </div>
-    <div><br /></div>
-    <div >
-        <button onClick={getFoeticideCases2014To2016}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2014 to 2016 (From : Ministry of Health and Family Welfare)</button>
-    </div>
-    <div><br /></div>
-    <div >
-        <button onClick={getCyberFraud2014To2016}>Year-Wise Details Of Cyber Fraud Cases Registered As Per National Crime Records Bureau (NCRB) From 2014 To 2016 (From : Ministry Of Home Affairs)</button>
-    </div>
-
     <div 
-      //  style={{
-      //   height: "50%",
-      //   backgroundPosition: "center",
-      //   backgroundSize: "cover",
-      //   filter: "contrast(75%)",
-      //   backgroundImage: "url(/img/wallpaper.jpeg)",
-      // }}
+       style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}
       >
         {chartData && <ChartGdp chartData={chartData} />}
       </div>
 
     </div>
+
     </Content>
 
   );

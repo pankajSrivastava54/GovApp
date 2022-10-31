@@ -7,43 +7,193 @@ import { ChartGdp } from "./ChartGdp";
 import { SummaryCard } from "../src/People/Driver";
 import Content from "../src/Dashboard/Content";
 import { KEY , API_URL} from "../src/Const/Const";
+import { Line } from "react-chartjs-2";
+import 'chart.js/auto'
+
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
-const fetchAPI = (callback) => {
+const fetchLiabilitiesAndAssetsOfRBI2001TO2016API = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"4b97a963-c5ee-43ad-8de6-c38629ff2342?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+"e74bed5c-7578-4a42-8fb0-fecf931d4fb7?api-key="+KEY+"&format=json&offset=0&limit=100"
   );
   response.then((response) => {
     const data = response.json();
-
+    // const chartData = {
+    //   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    //   datasets: [
+    //     {
+    //       label: "First dataset",
+    //       data: [33, 53, 85, 41, 44, 65],
+    //       fill: true,
+    //       backgroundColor: "rgba(75,192,192,0.2)",
+    //       borderColor: "rgba(75,192,192,1)"
+    //     },
+    //     {
+    //       label: "Second dataset",
+    //       data: [33, 25, 35, 51, 54, 76],
+    //       fill: false,
+    //       borderColor: "#742774"
+    //     }
+    //   ]
+    // };
     data.then((data) => {
       // set the chart data, trim the data to 10 records
       console.log("fetching data"+JSON.stringify(data));
 
       const chartData = {
         labels: data.records
-          .map((record) => record._year)
-          .slice(0, 10),
+          .map((record) => record.category+record.heads),
+          //.slice(0, 10),
         datasets: [
           {
-            label: "Level of Real GDP",
+            label: "_2001P",
             data: data.records
-              .map((record) => record.level_of_real_gdp__rs_crore_)
-              .slice(0, 10),
-            backgroundColor: "rgba(155, 99, 132, 0.6)",
+              .map((record) => record._2001),
+              //.slice(0, 10),
+            backgroundColor: "rgba(128,0,128,1)",
             borderWidth: 4,
           },
           {
-            label: "Percentage Change GDP",
+            label: "_2002",
             data: data.records
-              .map((record) => record.percentage_change_in_real_gdp__percent_)
-              .slice(0, 10),
+              .map((record) => record._2002),
+              //.slice(0, 10),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2003",
+            data: data.records
+              .map((record) => record._2003),
+              //.slice(0, 10),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },   
+          {
+            label: "_2004",
+            data: data.records
+              .map((record) => record._2004),
+              //.slice(0, 10),
+            backgroundColor: "rgba(0,128,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2005",
+            data: data.records
+              .map((record) => record._2005),
+              //.slice(0, 10),
+            backgroundColor: "rgba(255,165,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2006",
+            data: data.records
+              .map((record) => record._2006),
+              //.slice(0, 10),
+            backgroundColor: "rgba(255,255,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2007",
+            data: data.records
+              .map((record) => record._2007),
+              //.slice(0, 10),
+            backgroundColor: "rgba(0, 255, 255, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2008",
+            data: data.records
+              .map((record) => record._2008),
+              //.slice(0, 10),
+            backgroundColor: "rgba(202, 225, 255, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2009",
+            data: data.records
+              .map((record) => record._2009),
+              //.slice(0, 10),
+            backgroundColor: "rgba(218, 221, 252, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2010",
+            data: data.records
+              .map((record) => record._2010),
+              //.slice(0, 10),
+            backgroundColor: "rgba(57, 195, 241, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2011",
+            data: data.records
+              .map((record) => record._2011),
+              //.slice(0, 10),
+            backgroundColor: "rgba(0, 128, 255, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2012",
+            data: data.records
+              .map((record) => record._2012),
+              //.slice(0, 10),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
-          
+          {
+            label: "_2013",
+            data: data.records
+              .map((record) => record._2013),
+              //.slice(0, 10),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2014",
+            data: data.records
+              .map((record) => record._2014),
+              //.slice(0, 10),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2015",
+            data: data.records
+              .map((record) => record._2015),
+              //.slice(0, 10),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2016",
+            data: data.records
+              .map((record) => record._2016),
+              //.slice(0, 10),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
         ],
       };
+      //  const chartData = {
+      //   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      //   datasets: [
+      //     {
+      //       label: "First dataset",
+      //       data: [33, 53, 85, 41, 44, 65],
+      //       fill: true,
+      //       backgroundColor: "rgba(75,192,192,0.2)",
+      //       borderColor: "rgba(75,192,192,1)"
+      //     },
+      //     {
+      //       label: "Second dataset",
+      //       data: [33, 25, 35, 51, 54, 76],
+      //       fill: false,
+      //       borderColor: "#742774"
+      //     }
+      //   ]
+      // };
+
 
       //sort the data in descending order and remove the last 10 records
       // chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
@@ -313,84 +463,6 @@ const fetchGrossDefenceBudget = (callback) => {
     });
   });
 };
-
-const fetchGDPIndiaWB = (callback) => {
-  //console.log("fetching data"+KEY);
-  const response = fetch(
-    //API_URL+"028ce5f5-c769-468d-8c1f-f086a74b1ee0?api-key="+KEY+"&format=json"
-    "https://api.worldbank.org/v2/country/IND/indicator/NY.GDP.MKTP.CD?format=json"
-
-  );
-  response.then((response) => {
-    const data = response.json();
-
-    data.then((data) => {
-      // set the chart data, trim the data to 10 records
-      //console.log("fetching data"+JSON.stringify(data));
-      //console.log("fetching data AAAA"+JSON.stringify(data[0]));
-      var arr = [];
-
-      Object.keys(data).forEach(function(key) {
-        console.log("data key"+JSON.stringify(data[1][1].indicator));
-        console.log("data key"+JSON.stringify(data[1][1].country));
-
-        arr.push(data[key]);
-        console.log("data arr"+JSON.stringify(arr));
-
-      });
-
-     // console.log("Array==>"+JSON.stringify(arr.map((rec) => rec.countryiso3code)));
-
-    //   {arr.map(item => {
-    //     console.log("Array BBBBB==>"+JSON.stringify(item));
-    //   }) 
-    // }
-      // data.map(({ countryiso3code,date }) => {
-      //   console.log("Array==>"+JSON.stringify(countryiso3code));
-
-      //   //)
-      // })
-      const chartData = {
-        labels: data.map((record) => record.countryiso3code),
-          //.slice(0, 62),
-        datasets: [
-          {
-            label: "Defence Budget Gross_",
-            data: data
-              .map((record) => record.value),
-            backgroundColor: "rgba(155, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "GDP",
-            data: data
-              .map((record) => record.gdp_),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          
-          {
-            label: "Defence Budget Percentage Of GDP",
-            data: data
-              .map((record) => record.date),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          
-        ],
-      };
-
-      //sort the data in descending order and remove the last 10 records
-      // chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-
-      callback(chartData);
-    });
-  });
-};
 // function Copyright() {
 //   return (
 //     <Typography variant="body2" color="textSecondary" align="center">
@@ -439,7 +511,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Gdp({ loggedIn, logout, login }) {
+export function Rbi({ loggedIn, logout, login }) {
   //const classes = useStyles();
   const classes = useStyles();
 
@@ -447,8 +519,8 @@ export function Gdp({ loggedIn, logout, login }) {
   const [chartData, setChartData] = useState(null);
   // const chartData = null;
 
-  const refreshChart = () => {
-    fetchAPI((chartData) => {
+  const getLiabilitiesAndAssetsOfRBI2001TO2016 = () => {
+    fetchLiabilitiesAndAssetsOfRBI2001TO2016API((chartData) => {
       // chartData = chartData;
       setChartData(chartData);
     });
@@ -462,13 +534,6 @@ export function Gdp({ loggedIn, logout, login }) {
 
   const getGrossDefenceBudget = () => {
     fetchGrossDefenceBudget((chartData) => {
-      // chartData = chartData;
-      setChartData(chartData);
-    });
-  };
-
-  const getGDPIndiaWB = () => {
-    fetchGDPIndiaWB ((chartData) => {
       // chartData = chartData;
       setChartData(chartData);
     });
@@ -491,7 +556,7 @@ export function Gdp({ loggedIn, logout, login }) {
     <div className="App">
       
       <div className={classes.summaryCards}>
-        <button onClick={refreshChart}>Year-Wise Second Advance Estimates Of National Income And Expenditure Components Of GDP Percentage Change In Real GDP From 2018-19 To 2021-22</button>
+        <button onClick={getLiabilitiesAndAssetsOfRBI2001TO2016}>Liabilities And Assets Of The Reserve Bank Of India</button>
       </div>
       <div><br /></div>
 
@@ -503,12 +568,7 @@ export function Gdp({ loggedIn, logout, login }) {
       <div className={classes.summaryCards}>
         <button onClick={getGrossDefenceBudget}>Year-Wise Gross Defence Budget (BE) As Percentage Of GDP From 2019-20 To 2021-22</button>
       </div>
-      <div><br /></div>
 
-      <div className={classes.summaryCards}>
-        <button onClick={getGDPIndiaWB}>GDP data From World Bank</button>
-      </div>
-      
        <div 
        style={{
         height: "1000px",

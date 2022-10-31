@@ -89,7 +89,7 @@ const cards = [
     path: "people",
   },
   {
-    name: "Map",
+    name: "Shipping",
     description: "A Google Map API integration for location based services.",
     img: "Map.PNG",
     path: "map",

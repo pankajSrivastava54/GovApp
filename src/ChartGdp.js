@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -51,5 +51,5 @@ const dataOld = {
 };
 
 export function ChartGdp({ chartData }) {
-  return <Bar options={options} data={chartData} />;
+  return <Line  data={chartData} />;
 }
