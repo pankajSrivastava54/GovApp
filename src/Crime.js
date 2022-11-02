@@ -7,6 +7,8 @@ import { ChartGdp } from "./ChartGdp";
 import Content from "../src/Dashboard/Content";
 import { KEY, API_URL } from "../src/Const/Const";
 import { ChartPie } from "./ChartPie";
+import { ChartDonut } from "./ChartDonut";
+
 import { Card } from "@material-ui/core";
 //import Card from 'react-bootstrap/Card';
 //import { Button } from 'react-bootstrap/Button';
@@ -1189,18 +1191,18 @@ const fetchMissingAndTracedPersons2020 = (callback) => {
     });
   });
 };
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -1247,88 +1249,86 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function Crime({ loggedIn, logout, login }) {
-  //const classes = useStyles();
   const classes = useStyles();
  
-  //const [loading, setLoading] = useState(false);
   const [chartData, setChartData] = useState(null);
-  // const chartData = null;
+  const [chartType, setChartType] = useState('bar');
 
   const refreshChart = () => {
     fetchAPI((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
 
   const getForeignCrime = () => {
     fetchForeignCrimeAPI((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
   const getHeroinSeizure = () => {
     fetchHeroinSeizureAPI((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
   const getConvictionRate = () => {
     fetchConvictionRateAPI((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
   const getSuicideFarmers = () => {
     fetchSuicideFarmersAPI((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
   const getFoeticideCases2018To2019 = () => {
     fetchFoeticideCasesAPI2018T02019((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
   const getFoeticideCases2014To2016 = () => {
     fetchFoeticideCasesAPI2014T02016((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
 
   const getCyberFraud2014To2016 = () => {
     fetchCyberFraudAPI2014T02016((chartData) => {
-      // chartData = chartData;
+      setChartType('pie');
       setChartData(chartData);
     });
   };
   
   const getCityWiseKidnapping2018TO2020 = () => {
     fetchCityWiseKidnapping2018TO2020((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
 
   const getDeathsInPoliceCustody2020 = () => {
     fetchgetDeathsInPoliceCustody2020((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
   
   const getMissingAndTracedPersons2020 = () => {
     fetchMissingAndTracedPersons2020((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
 
   const getNumberofBoysandGirlsReportedMissing2014to2016 = () => {
     fetchNumberofBoysandGirlsReportedMissing2014to2016((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
       setChartData(chartData);
     });
   };
@@ -1366,19 +1366,40 @@ export function Crime({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getNumberofBoysandGirlsReportedMissing2014to2016}>Number of Boys and Girls Reported Missing, as per information compiled by NCRB from 2014 to 2016 (From : Ministry of Home Affairs)</button>
 
     </div>
-    <div 
+    {/* {chartData && chartType === 'bar' */}
+    <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartData && <ChartGdp chartData={chartData} />}
+      </div>
+     {/* } */}
+      <div 
        style={{
         height: "50%",
         backgroundPosition: "center",
         backgroundSize: "cover",
         filter: "contrast(75%)",
         //backgroundImage: "url(/img/wallpaper2-min.png)",
-      }}
-      >
-        {chartData && <ChartGdp chartData={chartData} />}
+      }}>
+        {chartData && <ChartPie chartData={chartData} />}
       </div>
-
+      <div 
+       style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartData && <ChartDonut chartData={chartData} />}
+      </div>
+      
     </div>
+
 
     </Content>
 
