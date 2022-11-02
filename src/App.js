@@ -9,6 +9,7 @@ import {Rbi} from "./Rbi"
 import {Transport} from "./Transport"
 import {Shipping} from "./Shipping"
 
+import {Tourism} from "./Tourism"
 import {Education} from "./Education"
 import { Dashboard } from "./Dashboard/Dashboard";
 import { Home } from "./Home/Home";
@@ -76,6 +77,9 @@ export default function App() {
                     </Route>
                     <Route path="/shipping">
                       <Shipping />
+                    </Route>
+                    <Route path="/tourism">
+                      <Tourism />
                     </Route>
                     <Route path="/rbi">
                       <Rbi />

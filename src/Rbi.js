@@ -9,6 +9,8 @@ import Content from "../src/Dashboard/Content";
 import { KEY , API_URL} from "../src/Const/Const";
 import { Line } from "react-chartjs-2";
 import 'chart.js/auto'
+import { green, purple } from "@material-ui/core/colors";
+import colors from "./Theme/colors";
 
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchLiabilitiesAndAssetsOfRBI2001TO2016API = (callback) => {
@@ -498,6 +500,15 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  button: {
+    alignSelf:'center',
+    width:'20%',
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.error.light,
+    fontSize:20,
+    color : "#f3f6f4",
+    fontWeight : "bold"
+   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
@@ -554,22 +565,22 @@ export function Rbi({ loggedIn, logout, login }) {
       }}
     />
     <div className="App">
-      
-      <div className={classes.summaryCards}>
-        <button onClick={getLiabilitiesAndAssetsOfRBI2001TO2016}>Liabilities And Assets Of The Reserve Bank Of India</button>
-      </div>
-      <div><br /></div>
+    <div style={{
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        border:"1px solid black",
+        style:"blue"
+        //backgroundImage: "url(/img/wallpaper.jpeg)",
+      }}>
+        <button  className={classes.button}  onClick={getLiabilitiesAndAssetsOfRBI2001TO2016} >Liabilities And Assets Of The Reserve Bank Of India</button>
 
-      <div className={classes.summaryCards}>
-        <button onClick={getGDPOfIndia}>GDP Of India And Major Sectors Of Economy, Share Of Each Sector To GDP And Growth Rate Of GDP And Other Sectors Of Economy 1951-52 Onward</button>
-      </div>
-      <div><br /></div>
+        <button className={classes.button} onClick={getGDPOfIndia}>GDP Of India And Major Sectors Of Economy, Share Of Each Sector To GDP And Growth Rate Of GDP And Other Sectors Of Economy 1951-52 Onward</button>
 
-      <div className={classes.summaryCards}>
-        <button onClick={getGrossDefenceBudget}>Year-Wise Gross Defence Budget (BE) As Percentage Of GDP From 2019-20 To 2021-22</button>
+        <button className={classes.button} onClick={getGrossDefenceBudget}>Year-Wise Gross Defence Budget (BE) As Percentage Of GDP From 2019-20 To 2021-22</button>
       </div>
 
-       <div 
+      <div 
        style={{
         height: "1000px",
         backgroundPosition: "center",

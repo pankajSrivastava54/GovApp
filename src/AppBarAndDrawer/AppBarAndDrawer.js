@@ -94,6 +94,7 @@ function ResponsiveDrawer(props) {
            { text: "rbi", icon: "map" },
            { text: "transport", icon: "map" },
 
+           { text: "tourism", icon: "map" },
            { text: "education", icon: "map" },
            { text: "components", icon: "apps" },
            { text: "settings", icon: "settings" },

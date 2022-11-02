@@ -95,6 +95,12 @@ const cards = [
     path: "map",
   },
   {
+    name: "Tourism",
+    description: "Tourism services.",
+    img: "Map.PNG",
+    path: "map",
+  },
+  {
     name: "Components",
     description: "View all components built for this theme.",
     img: "components.PNG",

@@ -426,6 +426,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  button: {
+    alignSelf:'center',
+    width:'20%',
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.error.light,
+
+  },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
@@ -489,34 +496,31 @@ export function Gdp({ loggedIn, logout, login }) {
       }}
     />
     <div className="App">
-      
-      <div className={classes.summaryCards}>
-        <button onClick={refreshChart}>Year-Wise Second Advance Estimates Of National Income And Expenditure Components Of GDP Percentage Change In Real GDP From 2018-19 To 2021-22</button>
-      </div>
-      <div><br /></div>
-
-      <div className={classes.summaryCards}>
-        <button onClick={getGDPOfIndia}>GDP Of India And Major Sectors Of Economy, Share Of Each Sector To GDP And Growth Rate Of GDP And Other Sectors Of Economy 1951-52 Onward</button>
-      </div>
-      <div><br /></div>
-
-      <div className={classes.summaryCards}>
-        <button onClick={getGrossDefenceBudget}>Year-Wise Gross Defence Budget (BE) As Percentage Of GDP From 2019-20 To 2021-22</button>
-      </div>
-      <div><br /></div>
-
-      <div className={classes.summaryCards}>
-        <button onClick={getGDPIndiaWB}>GDP data From World Bank</button>
-      </div>
-      
-       <div 
-       style={{
-        height: "1000px",
+    <div style={{
         backgroundPosition: "center",
         backgroundSize: "cover",
         filter: "contrast(75%)",
+        border:"1px solid black",
         //backgroundImage: "url(/img/wallpaper.jpeg)",
       }}>
+        <button className={classes.button} onClick={refreshChart}>Year-Wise Second Advance Estimates Of National Income And Expenditure Components Of GDP Percentage Change In Real GDP From 2018-19 To 2021-22</button>
+
+        <button className={classes.button} onClick={getGDPOfIndia}>GDP Of India And Major Sectors Of Economy, Share Of Each Sector To GDP And Growth Rate Of GDP And Other Sectors Of Economy 1951-52 Onward</button>
+
+        <button className={classes.button} onClick={getGrossDefenceBudget}>Year-Wise Gross Defence Budget (BE) As Percentage Of GDP From 2019-20 To 2021-22</button>
+
+        <button className={classes.button} onClick={getGDPIndiaWB}>GDP data From World Bank</button>
+        </div>
+
+        <div 
+       style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}
+      >
         {chartData && <ChartGdp chartData={chartData} />}      
       </div> 
     </div>

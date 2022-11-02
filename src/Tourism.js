@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
-import { SummaryCard } from "../src/People/Driver";
 import Content from "../src/Dashboard/Content";
 import { KEY , API_URL} from "../src/Const/Const";
-import { Line } from "react-chartjs-2";
 import 'chart.js/auto'
 
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
-const fetchAmountReleasedByDSTForCentralSectorSchemeFrom201819To202021 = (callback) => {
+const fetchCAGR1951To2017 = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"e25ae4f6-4472-4ded-afd9-30d7851d5fe9?api-key="+KEY+"&format=json&offset=0&limit=18"
+    API_URL+"6bdbea5b-b8e9-4ae4-a197-eced68bda7e2?api-key="+KEY+"&format=json&offset=0&limit=100"
   );
   response.then((response) => {
     const data = response.json();
@@ -72,10 +68,10 @@ const fetchAmountReleasedByDSTForCentralSectorSchemeFrom201819To202021 = (callba
 };
 
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
-const fetchFundAllocationandExpenditurebytheDepartmentofScienceandTechnology201617to202021 = (callback) => {
+const fetchCountryWiseCamparisonOfRoadNetwork = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"f629e371-9104-4a56-be21-80d508fdc55e?api-key="+KEY+"&format=json&limit=62"
+    API_URL+"fc1a2f14-a7a4-4f20-9c4e-128a142b2051?api-key="+KEY+"&format=json&limit=62"
   );
   response.then((response) => {
     const data = response.json();
@@ -86,143 +82,69 @@ const fetchFundAllocationandExpenditurebytheDepartmentofScienceandTechnology2016
 
       const chartData = {
         labels: data.records
-          .map((record) => record._financial_year),
+          .map((record) => record.name_of_the_country),
         datasets: [
           {
-            label: "Budget Estimates( In Crs.)",
+            label: "total_road_length___road_length_in_km",
             data: data.records
-              .map((record) => record.budget_estimates_in_crs_),
-              backgroundColor: "rgba(128,0,128,1)",
-              borderWidth: 4,
-          },
-          {
-            label: "Revised Estimates (In Crs.)",
-            data: data.records
-              .map((record) => record.revised_estimates_in_crs_),
-              backgroundColor: "rgba(255,0,0,1)",
-              borderWidth: 4,
-          },
-          
-          {
-            label: "Actual Expenditure (In Crs.)",
-            data: data.records
-              .map((record) => record.actual_expenditure_in_crs_),
-              backgroundColor: "rgba(0,0,255,1)",
-              borderWidth: 4,
-          },
-          
-        ],
-      };
-      callback(chartData);
-    });
-  });
-};
-
-const fetchOrdinaryApplicationsPatentsFiledFrom198081To201011ByDifferentStates = (callback) => {
-  console.log("fetching data"+KEY);
-  const response = fetch(
-    API_URL+"ba7adee5-a077-4eec-a9e0-d6ed424772c4?api-key="+KEY+"&format=json&limit=16"
-  );
-  response.then((response) => {
-    const data = response.json();
-
-    data.then((data) => {
-      // set the chart data, trim the data to 10 records
-      console.log("fetching data"+JSON.stringify(data));
-
-      const chartData = {
-        labels: data.records
-          .map((record) => record.name_of_the_state__union_territory),
-        datasets: [
-          {
-            label: "1980-81",
-            data: data.records
-              .map((record) => record._1980_81),
+              .map((record) => record.total_road_length___road_length_in_km),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "1985-86",
+            label: "Roads (in KM) per '000 people",
             data: data.records
-              .map((record) => record._1985_86),
+              .map((record) => record.roads__in_km__per__000_people),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
-          },   
+          },
+          
           {
-            label: "1990-91",
+            label: "National Highways - Road in Length in KM",
             data: data.records
-              .map((record) => record._1990_91),
+              .map((record) => record.national_highways___road_in_length_in_km),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "1995-96",
+            label: "National Highways - % share in total length",
             data: data.records
-              .map((record) => record._1995_96),
+              .map((record) => record.national_highways_____share_in_total_length),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "2000-01",
+            label: "Share of Paved Road (%)",
             data: data.records
-              .map((record) => record._2000_01),
+              .map((record) => record.share_of_paved_road____),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "2005-06",
+            label: "Motorways1 - Road Length in KM",
             data: data.records
-              .map((record) => record.__2005_06),
+              .map((record) => record.motorways1___road_length_in_km),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "2006-07",
+            label: "Motorways1 - % share in total road length",
             data: data.records
-              .map((record) => record.__2006_07),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "2007-08",
-            data: data.records
-              .map((record) => record.__2007_08),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "2008-09",
-            data: data.records
-              .map((record) => record.__2008_09),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "2009-10",
-            data: data.records
-              .map((record) => record.__2009_10),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "2010-11",
-            data: data.records
-              .map((record) => record.__2010_11),
+              .map((record) => record.motorways1_____share_in_total_road_length),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
         ],
       };
-
       callback(chartData);
     });
   });
 };
 
-const fetchMPhilDoctorateDegreesAwardedFacultyWise199091To201011 = (callback) => {
+const fetchGrossDefenceBudget = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"f832dc7c-7522-4c6b-af87-15d99cf9c596?api-key="+KEY+"&format=json&limit=13"
+    API_URL+"f69f8c7a-5ce0-4d63-8fed-0ec6ab8bee6c?api-key="+KEY+"&format=json"
   );
   response.then((response) => {
     const data = response.json();
@@ -233,110 +155,76 @@ const fetchMPhilDoctorateDegreesAwardedFacultyWise199091To201011 = (callback) =>
 
       const chartData = {
         labels: data.records
-          .map((record) => record.disciplines+record.faculty),
+          .map((record) => record._year),
         datasets: [
           {
-            label: "1990-91",
+            label: "CRF Cess",
             data: data.records
-              .map((record) => record._1990_91),
+              .map((record) => record.crf_cess),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "1995-96",
+            label: "Additional GBS",
             data: data.records
-              .map((record) => record._1995_96),
+              .map((record) => record.additional_gbs),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },   
           {
-            label: "2000-01",
+            label: "Gbs ner",
             data: data.records
-              .map((record) => record._2000_01),
+              .map((record) => record.gbs_ner_),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "2001-02",
+            label: "Toll Tot",
             data: data.records
-              .map((record) => record.__2001_02),
+              .map((record) => record.toll___tot),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "2002-03",
+            label: "Toll Pbff",
             data: data.records
-              .map((record) => record.__2002_03),
+              .map((record) => record.toll___pbff),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "2003-04",
+            label: "Market Borrowing",
             data: data.records
-              .map((record) => record.__2003_04),
+              .map((record) => record.market_borrowing),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "2004-05",
+            label: "Pvt Investment",
             data: data.records
-              .map((record) => record.__2004_05),
+              .map((record) => record.pvt__investment),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "2005-06",
+            label: "Total",
             data: data.records
-              .map((record) => record.__2005_06),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "2006-07",
-            data: data.records
-              .map((record) => record.__2006_07),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "2007-08",
-            data: data.records
-              .map((record) => record.__2007_08),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "2008-09",
-            data: data.records
-              .map((record) => record.__2008_09),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "2009-10",
-            data: data.records
-              .map((record) => record.__2009_10),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "2010-11",
-            data: data.records
-              .map((record) => record.__2010_11),
+              .map((record) => record._total),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
         ],
       };
+
       callback(chartData);
     });
   });
 };
 
-const fetchResearchersPerMillionPeopleForSelectedCountriesIn2009 = (callback) => {
+const fetchTop15CountriesFTAs = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"b651f642-ce7e-45fe-bb91-041926740e71?api-key="+KEY+"&format=json&limit=29"
+    API_URL+"6c0a9e43-360f-460b-91a1-02837d827f3a?api-key="+KEY+"&format=json&limit=65"
   );
   response.then((response) => {
     const data = response.json();
@@ -350,34 +238,154 @@ const fetchResearchersPerMillionPeopleForSelectedCountriesIn2009 = (callback) =>
           .map((record) => record.country),
         datasets: [
           {
-            label: "No. of Researchers per million people",
+            label: "2019",
             data: data.records
-              .map((record) => record.no__of_researchers_per_million_people),
+              .map((record) => record.ftas_in_india_in_2019),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "Population in Million -2009",
+            label: "Share 2019",
             data: data.records
-              .map((record) => record.population_in_million__2009),
+              .map((record) => record._share_in_2019),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },   
           {
-            label: "Total Researchers (Number) -2009",
+            label: "Rank 2020",
             data: data.records
-              .map((record) => record.total_researchers__number___2009),
+              .map((record) => record.rank_in_2020),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
-            label: "Note on Total Researchers (Number) -2009",
+            label: "2020",
             data: data.records
-              .map((record) => record.note_on_total_researchers__number___2009),
+              .map((record) => record.ftas_in_india_in_2020),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
-          
+          {
+            label: "Share 2020",
+            data: data.records
+              .map((record) => record._share_in_2020),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          // {
+          //   label: "Overseas-Average GRT",
+          //   data: data.records
+          //     .map((record) => record.overseas_average_grt),
+          //   backgroundColor: "rgba(55, 99, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
+          // {
+          //   label: "Total-No. of vessels",
+          //   data: data.records
+          //     .map((record) => record.total_no_of_vessels),
+          //   backgroundColor: "rgba(55, 99, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
+          // {
+          //   label: "Total-GRT",
+          //   data: data.records
+          //     .map((record) => record.total_grt),
+          //   backgroundColor: "rgba(55, 99, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
+          // {
+          //   label: "Total-Average GRT",
+          //   data: data.records
+          //     .map((record) => record.total_average_grt),
+          //   backgroundColor: "rgba(55, 99, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
+const fetchGrowthOfIndianShippingFrom1947Onwards = (callback) => {
+  console.log("fetching data"+KEY);
+  const response = fetch(
+    API_URL+"e8d9007e-fd5d-4657-a3a0-27f666e62df3?api-key="+KEY+"&format=json"
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+
+      const chartData = {
+        labels: data.records
+          .map((record) => record.year),
+        datasets: [
+          {
+            label: "Coastal-No. of vessels",
+            data: data.records
+              .map((record) => record.coastal_no_of_vessels),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Coastal-GRT",
+            data: data.records
+              .map((record) => record.coastal_grt),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },   
+          {
+            label: "Coastal-Average GRT",
+            data: data.records
+              .map((record) => record.coastal_average_grt),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Overseas-No. of vessels",
+            data: data.records
+              .map((record) => record.overseas_no_of_vessels),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Overseas-GRT",
+            data: data.records
+              .map((record) => record.overseas_grt),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Overseas-Average GRT",
+            data: data.records
+              .map((record) => record.overseas_average_grt),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Total-No. of vessels",
+            data: data.records
+              .map((record) => record.total_no_of_vessels),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Total-GRT",
+            data: data.records
+              .map((record) => record.total_grt),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Total-Average GRT",
+            data: data.records
+              .map((record) => record.total_average_grt),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
         ],
       };
       callback(chartData);
@@ -413,7 +421,6 @@ const useStyles = makeStyles((theme) => ({
     width:'20%',
     margin: theme.spacing(1),
     backgroundColor: theme.palette.success.light,
-    fontSize:20,
 
   },
   avatar: {
@@ -429,45 +436,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Education({ loggedIn, logout, login }) {
+export function Tourism({ loggedIn, logout, login }) {
   const classes = useStyles();
 
-  const [chartData, setChartData, bool2] = useState(null);
+  const [chartData, setChartData] = useState(null);
 
-  const getAmountReleasedByDSTForCentralSectorSchemeFrom201819To202021 = () => {
-    fetchAmountReleasedByDSTForCentralSectorSchemeFrom201819To202021((chartData) => {
+  const getCAGR1951To2017 = () => {
+    fetchCAGR1951To2017((chartData) => {
       // chartData = chartData;
       setChartData(chartData);
     });
   };
-  const getFundAllocationandExpenditurebytheDepartmentofScienceandTechnology201617to202021 = () => {
-    fetchFundAllocationandExpenditurebytheDepartmentofScienceandTechnology201617to202021((chartData) => {
+  const getCountryWiseCamparisonOfRoadNetwork = () => {
+    fetchCountryWiseCamparisonOfRoadNetwork((chartData) => {
       // chartData = chartData;
       setChartData(chartData);
     });
   };
 
-  const getOrdinaryApplicationsPatentsFiledFrom198081To201011ByDifferentStates = () => {
-    fetchOrdinaryApplicationsPatentsFiledFrom198081To201011ByDifferentStates((chartData) => {
+  const getGrossDefenceBudget = () => {
+    fetchGrossDefenceBudget((chartData) => {
       // chartData = chartData;
       setChartData(chartData);
-       //bool2 == true;
-      //setChartUsed(true);
     });
   };
   // useEffect(() => {
   //   refreshChart();
   // }, [chartData]);
 
-  const getMPhilDoctorateDegreesAwardedFacultyWise199091To201011 = () => {
-    fetchMPhilDoctorateDegreesAwardedFacultyWise199091To201011((chartData) => {
-      // chartData = chartData;
-      setChartData(chartData);
-    });
-  };
+  // const getGrowthOfIndianShippingAsOn31December2014 = () => {
+  //   fetchGrowthOfIndianShippingAsOn31December2014((chartData) => {
+  //     // chartData = chartData;
+  //     setChartData(chartData);
+  //   });
+  // };
 
-  const getResearchersPerMillionPeopleForSelectedCountriesIn2009 = () => {
-    fetchResearchersPerMillionPeopleForSelectedCountriesIn2009((chartData) => {
+  const getTop15CountriesFTAs = () => {
+    fetchTop15CountriesFTAs((chartData) => {
       // chartData = chartData;
       setChartData(chartData);
     });
@@ -491,12 +496,12 @@ export function Education({ loggedIn, logout, login }) {
         border:"1px solid black",
         //backgroundImage: "url(/img/wallpaper.jpeg)",
       }}>
-        <button className={classes.button} onClick={getResearchersPerMillionPeopleForSelectedCountriesIn2009}>Researchers Per Million People For Selected Countries In 2009</button>
-         <button className={classes.button} onClick={getMPhilDoctorateDegreesAwardedFacultyWise199091To201011}>M.Phil/Doctorate Degrees Awarded Faculty-Wise (1990-91 To 2010-11)</button>
-        <button className={classes.button} onClick={getOrdinaryApplicationsPatentsFiledFrom198081To201011ByDifferentStates}>Number Of Ordinary Applications For Patents Filed From 1980-81 To 2010-11 By Different States</button>
-         <button className={classes.button} onClick={getAmountReleasedByDSTForCentralSectorSchemeFrom201819To202021 }>Amount Released By Department Of Science & Technology (DST) For Central Sector Scheme From 2018-19 To 2020-21</button>
-        <button className={classes.button} onClick={getFundAllocationandExpenditurebytheDepartmentofScienceandTechnology201617to202021}>Fund Allocation And Expenditure By The Department Of Science And Technology (Since 2016-17 To 2020-21)</button>
-        {/*<button className={classes.button} onClick={getFoeticideCases2018To2019}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2018 to 2019 (From : Ministry of Health and Family Welfare)</button>
+        <button className={classes.button} onClick={getTop15CountriesFTAs}>Top 15 Source Countries For Foreign Tourist Arrivals (FTAs) In India During 2019 & 2020</button>
+        {/* <button className={classes.button} onClick={getGrowthOfIndianShippingAsOn31December2014}>Growth Of Indian Shipping As On 31 December, 2014</button>
+        <button className={classes.button} onClick={getCAGR1951To2017}>Compound Annual Growth Rate (CAGR) Of Road Network From 1951 To 2017</button>
+        <button className={classes.button} onClick={getRevenueRealisedFromRoadTransport200910To201617 }>Revenue Realised From Road Transport (Centre) From 2009-10 To 2016-17</button>
+        <button className={classes.button} onClick={getCountryWiseStrengthPenetrationDiffTypesVehicles2016}>Country-Wise Strength And Penetration Of Different Types Of Vehicles During 2016</button>
+        <button className={classes.button} onClick={getFoeticideCases2018To2019}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2018 to 2019 (From : Ministry of Health and Family Welfare)</button>
         <button className={classes.button} onClick={getFoeticideCases2014To2016}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2014 to 2016 (From : Ministry of Health and Family Welfare)</button>
         <button className={classes.button} onClick={getCyberFraud2014To2016}>Year-Wise Details Of Cyber Fraud Cases Registered As Per National Crime Records Bureau (NCRB) From 2014 To 2016 (From : Ministry Of Home Affairs)</button>
         <button className={classes.button} onClick={getCityWiseKidnapping2018TO2020}>City-Wise Kidnapping & Abduction From 2018 To 2020</button>
@@ -525,7 +530,7 @@ export function Education({ loggedIn, logout, login }) {
         filter: "contrast(75%)",
         //backgroundImage: "url(/img/wallpaper.jpeg)",
       }}>
-        { chartData && <ChartGdp chartData={chartData} />}      
+        {chartData && <ChartGdp chartData={chartData} />}      
       </div> 
     </div>
     </Content>

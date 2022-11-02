@@ -111,6 +111,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  button: {
+    alignSelf:'center',
+    width:'20%',
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.error.light,
+
+  },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
@@ -144,7 +151,7 @@ export function Gov({ loggedIn, logout, login }) {
   // }, [chartData]);
 
   return (
-    <Content>
+<Content>
     <div
       style={{
         height: "10px",
@@ -155,10 +162,15 @@ export function Gov({ loggedIn, logout, login }) {
       }}
     />
     <div className="App">
-      
-      <div className={classes.summaryCards}>
-        <button onClick={refreshChart}>Department-wise receipts, disposal and pendency of Public Grievance detailed statistics from 01.01.2016 to 01.11.2019</button>
-      </div>
+    <div style={{
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        border:"1px solid black",
+        //backgroundImage: "url(/img/wallpaper.jpeg)",
+      }}>
+        <button className={classes.button} onClick={refreshChart}>Department-wise receipts, disposal and pendency of Public Grievance detailed statistics from 01.01.2016 to 01.11.2019</button>
+        </div>
 
        <div 
        style={{

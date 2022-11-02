@@ -1033,6 +1033,54 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
   });
 };
 
+const fetchNumberofBoysandGirlsReportedMissing2014to2016 = (callback) => {
+  console.log("fetching data fetchMissingAndTracedPersons2020");
+  const response = fetch(
+    API_URL+"09c94c02-f824-4da8-bda9-3382466189aa?api-key="+KEY+"&format=json&offset=0&limit=40"
+
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    const filtereddata = data.records.filter(record => record.deaths_reported____col__3_ !== "0" && record.deaths_reported____col__3_ > 0 );
+    console.log("data filtereddata"+JSON.stringify(filtereddata));
+
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: data.records
+        .map((record) => record.year),
+        //.slice(0, 20),
+        datasets: [
+          {
+            label: "Girls",
+            data: data.records
+              .map((record) => record.girls),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Boys",
+            data: data.records
+              .map((record) => record.boys),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          
+ 
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
 const fetchMissingAndTracedPersons2020 = (callback) => {
   console.log("fetching data fetchMissingAndTracedPersons2020");
   const response = fetch(
@@ -1181,6 +1229,8 @@ const useStyles = makeStyles((theme) => ({
     width:'20%',
     margin: theme.spacing(1),
     backgroundColor: theme.palette.error.light,
+    fontWeight : "bold",
+    fontSize:20,
 
   },
   avatar: {
@@ -1275,6 +1325,14 @@ export function Crime({ loggedIn, logout, login }) {
       setChartData(chartData);
     });
   };
+
+  const getNumberofBoysandGirlsReportedMissing2014to2016 = () => {
+    fetchNumberofBoysandGirlsReportedMissing2014to2016((chartData) => {
+      // chartData = chartData;
+      setChartData(chartData);
+    });
+  };
+
   return (
     <Content>
     <div
@@ -1305,6 +1363,8 @@ export function Crime({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getCityWiseKidnapping2018TO2020}>City-Wise Kidnapping & Abduction From 2018 To 2020</button>
         <button className={classes.button} onClick={getDeathsInPoliceCustody2020}>State/UT-Wise Deaths In Police Custody / Lockup (Persons Not On Remand) During 2020</button>
         <button className={classes.button} onClick={getMissingAndTracedPersons2020}> Gender & Age-Wise Missing And Traced Persons During 2020</button>
+        <button className={classes.button} onClick={getNumberofBoysandGirlsReportedMissing2014to2016}>Number of Boys and Girls Reported Missing, as per information compiled by NCRB from 2014 to 2016 (From : Ministry of Home Affairs)</button>
+
     </div>
     <div 
        style={{
