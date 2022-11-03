@@ -506,7 +506,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.error.light,
     fontSize:20,
-    color : "#f3f6f4",
+    color : "black",
     fontWeight : "bold"
    },
   avatar: {

@@ -553,13 +553,16 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+
   button: {
     alignSelf:'center',
     width:'20%',
     margin: theme.spacing(1),
     backgroundColor: theme.palette.success.light,
-
-  },
+    fontWeight : "bold",
+    fontSize:20,
+    color:'black'
+    },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,

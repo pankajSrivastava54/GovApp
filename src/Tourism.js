@@ -421,8 +421,10 @@ const useStyles = makeStyles((theme) => ({
     width:'20%',
     margin: theme.spacing(1),
     backgroundColor: theme.palette.success.light,
-
-  },
+    fontWeight : "bold",
+    fontSize:20,
+    color:'black'
+    },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,

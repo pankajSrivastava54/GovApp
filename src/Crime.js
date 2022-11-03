@@ -1230,11 +1230,11 @@ const useStyles = makeStyles((theme) => ({
     alignSelf:'center',
     width:'20%',
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.error.light,
+    backgroundColor: '#6C4AB6',
     fontWeight : "bold",
     fontSize:20,
-
-  },
+    color:'white'
+    },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.light,
@@ -1321,7 +1321,7 @@ export function Crime({ loggedIn, logout, login }) {
   
   const getMissingAndTracedPersons2020 = () => {
     fetchMissingAndTracedPersons2020((chartData) => {
-      setChartType('bar');
+      setChartType('donut');
       setChartData(chartData);
     });
   };
@@ -1366,7 +1366,7 @@ export function Crime({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getNumberofBoysandGirlsReportedMissing2014to2016}>Number of Boys and Girls Reported Missing, as per information compiled by NCRB from 2014 to 2016 (From : Ministry of Home Affairs)</button>
 
     </div>
-    {/* {chartData && chartType === 'bar' */}
+     {chartData && chartType === 'bar' && 
     <div style={{
         height: "50%",
         backgroundPosition: "center",
@@ -1376,7 +1376,8 @@ export function Crime({ loggedIn, logout, login }) {
       }}>
         {chartData && <ChartGdp chartData={chartData} />}
       </div>
-     {/* } */}
+    }
+         {chartData && chartType === 'pie' && 
       <div 
        style={{
         height: "50%",
@@ -1387,6 +1388,9 @@ export function Crime({ loggedIn, logout, login }) {
       }}>
         {chartData && <ChartPie chartData={chartData} />}
       </div>
+          }
+         {chartData && chartType === 'donut' && 
+
       <div 
        style={{
         height: "50%",
@@ -1397,7 +1401,7 @@ export function Crime({ loggedIn, logout, login }) {
       }}>
         {chartData && <ChartDonut chartData={chartData} />}
       </div>
-      
+}
     </div>
 
 

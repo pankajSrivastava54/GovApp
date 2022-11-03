@@ -426,13 +426,16 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+ 
   button: {
     alignSelf:'center',
     width:'20%',
     margin: theme.spacing(1),
     backgroundColor: theme.palette.error.light,
-
-  },
+    fontWeight : "bold",
+    fontSize:20,
+    color:'white'
+    },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
@@ -486,7 +489,7 @@ export function Gdp({ loggedIn, logout, login }) {
 
   return (
     <Content>
-    <div
+  <div
       style={{
         height: "10px",
         backgroundPosition: "center",
