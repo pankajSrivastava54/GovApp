@@ -40,16 +40,16 @@ const dataOld = {
     {
       label: "Dataset 1",
       data: [10, 20, 30, 40, 50, 60, 70],
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      backgroundColor: "rgba(255, 99, 132)",
     },
     {
       label: "Dataset 2",
       data: [10, 20, 30, 40, 50, 60, 70],
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
+      backgroundColor: "rgba(53, 162, 235)",
     },
   ],
 };
 
 export function ChartGdp({ chartData }) {
-  return <Line  data={chartData} />;
+  return <Bar  data={chartData} />;
 }

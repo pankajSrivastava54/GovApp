@@ -145,10 +145,55 @@ const fetchCountryWiseCamparisonOfRoadNetwork = (callback) => {
   });
 };
 
-const fetchGrossDefenceBudget = (callback) => {
+const fetchTreatmentPlant2017 = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"f69f8c7a-5ce0-4d63-8fed-0ec6ab8bee6c?api-key="+KEY+"&format=json"
+    API_URL+"316f90f7-28be-4ddc-8ab2-a34740e2fd6c?api-key="+KEY+"&format=json&limit=100"
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+      let newArr = [];
+
+      {data.records.filter(record => !(record.name_of_state).includes('Total')).map(filteredName => (
+        console.log("filteredName size"+JSON.stringify(filteredName)),
+        newArr.push(filteredName)
+      ))}
+      const chartData = {
+        labels: newArr
+          .map((record) => record.name_of_state),
+        datasets: [
+          {
+            label: "no_of_stp_units_completed",
+            data: newArr
+              .map((record) => record.no_of_stp_units_completed),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "treatment_capacity_created__mld_",
+            data: newArr
+              .map((record) => record.treatment_capacity_created__mld_),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },   
+          
+          
+        ],
+      };
+
+      callback(chartData);
+    });
+  });
+};
+
+const fetchWaterQuality2018To2020 = (callback) => {
+  console.log("fetching data"+KEY);
+  const response = fetch(
+    API_URL+"95273406-7394-489b-ba92-475595008d10?api-key="+KEY+"&format=json&limit=100"
   );
   response.then((response) => {
     const data = response.json();
@@ -159,64 +204,51 @@ const fetchGrossDefenceBudget = (callback) => {
 
       const chartData = {
         labels: data.records
-          .map((record) => record._year),
+          .map((record) => record.state+"-"+record.station_name),
         datasets: [
           {
             label: "CRF Cess",
             data: data.records
-              .map((record) => record.crf_cess),
+              .map((record) => record.parameters___dissolved_oxygen__mg_l______criteria__5_0_mg_l____2018),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Additional GBS",
             data: data.records
-              .map((record) => record.additional_gbs),
+              .map((record) => record.parameters___dissolved_oxygen__mg_l______criteria__5_0_mg_l____2019),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },   
           {
             label: "Gbs ner",
             data: data.records
-              .map((record) => record.gbs_ner_),
+              .map((record) => record.parameters___dissolved_oxygen__mg_l______criteria__5_0_mg_l____2020),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Toll Tot",
             data: data.records
-              .map((record) => record.toll___tot),
+              .map((record) => record.parameters___faecal_coliform__mpn_100_ml_____criteria__2500_mpn_100_ml____2018),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Toll Pbff",
             data: data.records
-              .map((record) => record.toll___pbff),
+              .map((record) => record.parameters___faecal_coliform__mpn_100_ml_____criteria__2500_mpn_100_ml____2019),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Market Borrowing",
             data: data.records
-              .map((record) => record.market_borrowing),
+              .map((record) => record.parameters___faecal_coliform__mpn_100_ml_____criteria__2500_mpn_100_ml____2020),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
-          {
-            label: "Pvt Investment",
-            data: data.records
-              .map((record) => record.pvt__investment),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "Total",
-            data: data.records
-              .map((record) => record._total),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
+          
         ],
       };
 
@@ -311,6 +343,42 @@ const fetchGrowthOfIndianShippingAsOn31December2014 = (callback) => {
   });
 };
 
+const fetchgetWaterQuality2021 = (callback) => {
+  console.log("fetching data"+KEY);
+  const response = fetch(
+    API_URL+"ed5d2b18-acda-4d21-99e9-552792f32e67?api-key="+KEY+"&format=json&limit=100"
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+
+      const chartData = {
+        labels: data.records
+          .map((record) => record.station_code+"("+record.station_name+")"),
+        datasets: [
+          {
+            label: "Parameters - Dissolved Oxygen (mg/l) - (Criteria >5.0 mg/l)",
+            data: data.records
+              .map((record) => record.parameters___dissolved_oxygen__mg_l_____criteria__5_0_mg_l_),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Parameters - Faecal coliform (MPN/100 ml) - (Criteria <2500 MPN/100 ml)",
+            data: data.records
+              .map((record) => record.parameters___faecal_coliform__mpn_100_ml_____criteria__2500_mpn_100_ml_),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },   
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
 const fetchDrainsDischargingIntoRiverGangaApe2022s = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
@@ -322,21 +390,26 @@ const fetchDrainsDischargingIntoRiverGangaApe2022s = (callback) => {
     data.then((data) => {
       // set the chart data, trim the data to 10 records
       console.log("fetching data"+JSON.stringify(data));
+      let newArr = [];
 
+      {data.records.filter(record => !(record.states).includes('Total')).map(filteredName => (
+        console.log("filteredName size"+JSON.stringify(filteredName)),
+        newArr.push(filteredName)
+      ))}
       const chartData = {
-        labels: data.records
+        labels: newArr
           .map((record) => record.states+"("+record.category+")"),
         datasets: [
           {
             label: "Monitored Drains",
-            data: data.records
+            data: newArr
               .map((record) => record.monitored_drains),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Flow (MLD)",
-            data: data.records
+            data: newArr
               .map((record) => record.flow__mld_),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
@@ -347,7 +420,6 @@ const fetchDrainsDischargingIntoRiverGangaApe2022s = (callback) => {
     });
   });
 };
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -375,9 +447,11 @@ const useStyles = makeStyles((theme) => ({
     alignSelf:'center',
     width:'20%',
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.light,
-
-  },
+    backgroundColor: '#6C4AB6',
+    fontWeight : "bold",
+    fontSize:20,
+    color:'white'
+    },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
@@ -409,18 +483,13 @@ export function Ganga({ loggedIn, logout, login }) {
     });
   };
 
-  const getGrossDefenceBudget = () => {
-    fetchGrossDefenceBudget((chartData) => {
-      // chartData = chartData;
-      setChartData(chartData);
-    });
-  };
+
   // useEffect(() => {
   //   refreshChart();
   // }, [chartData]);
 
-  const getGrowthOfIndianShippingAsOn31December2014 = () => {
-    fetchGrowthOfIndianShippingAsOn31December2014((chartData) => {
+  const getWaterQuality2021 = () => {
+    fetchgetWaterQuality2021((chartData) => {
       // chartData = chartData;
       setChartData(chartData);
     });
@@ -428,6 +497,18 @@ export function Ganga({ loggedIn, logout, login }) {
 
   const getDrainsDischargingIntoRiverGangaApr2022 = () => {
     fetchDrainsDischargingIntoRiverGangaApe2022s((chartData) => {
+      // chartData = chartData;
+      setChartData(chartData);
+    });
+  };
+  const getWaterQuality2018To2020 = () => {
+    fetchWaterQuality2018To2020((chartData) => {
+      // chartData = chartData;
+      setChartData(chartData);
+    });
+  };
+  const getTreatmentPlant2017 = () => {
+    fetchTreatmentPlant2017((chartData) => {
       // chartData = chartData;
       setChartData(chartData);
     });
@@ -452,10 +533,10 @@ export function Ganga({ loggedIn, logout, login }) {
         //backgroundImage: "url(/img/wallpaper.jpeg)",
       }}>
         <button className={classes.button} onClick={getDrainsDischargingIntoRiverGangaApr2022}>State-Wise Drains Discharging Into River Ganga And Its Tributaries Discharging Of Raw Water Mixed With Waste Water (In Reply To Unstarred Question On 4 April, 2022)</button>
-         <button className={classes.button} onClick={getGrowthOfIndianShippingAsOn31December2014}>Growth Of Indian Shipping As On 31 December, 2014</button>
-        {/*<button className={classes.button} onClick={getCAGR1951To2017}>Compound Annual Growth Rate (CAGR) Of Road Network From 1951 To 2017</button>
-        <button className={classes.button} onClick={getRevenueRealisedFromRoadTransport200910To201617 }>Revenue Realised From Road Transport (Centre) From 2009-10 To 2016-17</button>
-        <button className={classes.button} onClick={getCountryWiseStrengthPenetrationDiffTypesVehicles2016}>Country-Wise Strength And Penetration Of Different Types Of Vehicles During 2016</button>
+         <button className={classes.button} onClick={getWaterQuality2021}>Station-Wise River Water Quality Of River Ganga During 2021</button>
+        <button className={classes.button} onClick={getWaterQuality2018To2020}>Station-Wise River Water Quality Of River Ganga From 2018 To 2020</button>
+        <button className={classes.button} onClick={getTreatmentPlant2017 }>State-Wise Completion Of Treatment Plant Projects Leading To Cleaning Of River Ganga And Its Tributaries During 2017</button>
+         {/*<button className={classes.button} onClick={getCountryWiseStrengthPenetrationDiffTypesVehicles2016}>Country-Wise Strength And Penetration Of Different Types Of Vehicles During 2016</button>
         <button className={classes.button} onClick={getFoeticideCases2018To2019}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2018 to 2019 (From : Ministry of Health and Family Welfare)</button>
         <button className={classes.button} onClick={getFoeticideCases2014To2016}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2014 to 2016 (From : Ministry of Health and Family Welfare)</button>
         <button className={classes.button} onClick={getCyberFraud2014To2016}>Year-Wise Details Of Cyber Fraud Cases Registered As Per National Crime Records Bureau (NCRB) From 2014 To 2016 (From : Ministry Of Home Affairs)</button>
@@ -463,19 +544,7 @@ export function Ganga({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getDeathsInPoliceCustody2020}>State/UT-Wise Deaths In Police Custody / Lockup (Persons Not On Remand) During 2020</button>
         <button className={classes.button} onClick={getMissingAndTracedPersons2020}> Gender & Age-Wise Missing And Traced Persons During 2020</button> */}
     </div>
-      {/* <div className={classes.summaryCards}>
-        <button onClick={getLiabilitiesAndAssetsOfRBI2001TO2016}>Expenditure (Actual) Incurred In The Development And Maintenance Of National Highways By MORTH By Source Of Financing From 2012-13 To 2017-18</button>
-      </div>
-      <div><br /></div>
-
-      <div className={classes.summaryCards}>
-        <button onClick={getGDPOfIndia}>GDP Of India And Major Sectors Of Economy, Share Of Each Sector To GDP And Growth Rate Of GDP And Other Sectors Of Economy 1951-52 Onward</button>
-      </div>
-      <div><br /></div>
-
-      <div className={classes.summaryCards}>
-        <button onClick={getGrossDefenceBudget}>Year-Wise Gross Defence Budget (BE) As Percentage Of GDP From 2019-20 To 2021-22</button>
-      </div> */}
+      
 
        <div 
        style={{

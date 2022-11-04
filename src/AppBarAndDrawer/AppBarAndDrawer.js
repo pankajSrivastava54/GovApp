@@ -84,20 +84,21 @@ function ResponsiveDrawer(props) {
       <List>
         {[
            { text: "crime", icon: "person" },
-           { text: "login", icon: "lock" },
+          //  { text: "login", icon: "lock" },
            { text: "gov", icon: "lock" },
            { text: "GDP", icon: "person" },
-           { text: "dashboard", icon: "dashboard" },
-           { text: "people", icon: "people" },
+          //  { text: "dashboard", icon: "dashboard" },
+          //  { text: "people", icon: "people" },
            { text: "shipping", icon: "map" },
-           { text: "map", icon: "map" },
+          //  { text: "map", icon: "map" },
            { text: "rbi", icon: "map" },
            { text: "transport", icon: "map" },
 
+           { text: "ganga", icon: "map" },
            { text: "tourism", icon: "map" },
            { text: "education", icon: "map" },
-           { text: "components", icon: "apps" },
-           { text: "settings", icon: "settings" },
+          //  { text: "components", icon: "apps" },
+          //  { text: "settings", icon: "settings" },
         ].map(({ text, icon }, index) => (
           <ListItem
             component={RouterLink}

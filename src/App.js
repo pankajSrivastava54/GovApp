@@ -28,6 +28,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import peopleReducer from "./ReduxTable/peopleSlice";
 import { Provider } from "react-redux";
 import { Crime } from "./Crime";
+import { Ganga } from "./Ganga";
 
 export default function App() {
   const store = configureStore({
@@ -77,6 +78,9 @@ export default function App() {
                     </Route>
                     <Route path="/shipping">
                       <Shipping />
+                    </Route>
+                    <Route path="/ganga">
+                      <Ganga />
                     </Route>
                     <Route path="/tourism">
                       <Tourism />

@@ -179,7 +179,14 @@ const fetchForeignCrimeAPI = (callback) => {
 
     data.then((data) => {
       console.log("result data 222"+JSON.stringify(data));
-    const result = data.records.filter(record => record !== 0);
+    const result = data.records.filter(record => record.afghanistan____col__3_ !== 0 && record.bangladesh____col__4_ );
+    let newArr = [];
+
+    {data.records.filter(record => !(record.crime_head__col__2_).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(filteredName)),
+      newArr.push(filteredName)
+    ))}
+
     console.log("result data"+JSON.stringify(result));
     // const chartData = {
         
@@ -197,148 +204,118 @@ const fetchForeignCrimeAPI = (callback) => {
     //   ],
     // };
       // set the chart data, trim the data to 10 records
+
       const chartData = {
-        labels: data.records
-          .map((record) => record.crime_head__col__2_)
-          .slice(0, 20),
+        labels: newArr
+          .map((record) => record.crime_head__col__2_),
         datasets: [
           {
             label: "Bangladesh",
-            data: data.records
-              .map((record) => record.bangladesh____col__4_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.bangladesh____col__4_),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "nepal",
-            data: data.records
-              .map((record) => record.nepal____col__5_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.nepal____col__5_),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "pakistan",
-            data: data.records
-              .map((record) => record.pakistan____col__6_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.pakistan____col__6_),
             backgroundColor: "rgba(255, 255, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "sri_lanka",
-            data: data.records
-              .map((record) => record.sri_lanka____col__7_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.sri_lanka____col__7_),
             backgroundColor: "rgba(105, 255, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "nigeria",
-            data: data.records
-              .map((record) => record.nigeria____col__37_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.nigeria____col__37_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "sudan",
-            data: data.records
-              .map((record) => record.sudan____col__39_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.sudan____col__39_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "britain",
-            data: data.records
-              .map((record) => record.britain____col__18_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.britain____col__18_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "israel",
-            data: data.records
-              .map((record) => record.israel____col__10_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.israel____col__10_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Iran",
-            data: data.records
-              .map((record) => record.iran____col__11_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.iran____col__11_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Japan",
-            data: data.records
-              .map((record) => record.japan____col__13_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.japan____col__13_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "australia",
-            data: data.records
-              .map((record) => record.australia____col__34_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.australia____col__34_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "brazil",
-            data: data.records
-              .map((record) => record.brazil____col__31_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.brazil____col__31_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "new_zealand",
-            data: data.records
-              .map((record) => record.new_zealand____col__35_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.new_zealand____col__35_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "myanmar",
-            data: data.records
-              .map((record) => record.myanmar____col__14_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.myanmar____col__14_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "yemen",
-            data: data.records
-              .map((record) => record.yemen____col__16_)
-              .slice(0, 20),
+            data: newArr
+              .map((record) => record.yemen____col__16_),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
         ],
       };
-
-      //sort the data in descending order and remove the last 10 records
-       chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-       chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-       chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-       chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-       chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-        chartData.datasets[5].data.sort((a, b) => b - a).slice(0, 20);
-        chartData.datasets[6].data.sort((a, b) => b - a).slice(0, 20);
-        chartData.datasets[7].data.sort((a, b) => b - a).slice(0, 20);
-        chartData.datasets[8].data.sort((a, b) => b - a).slice(0, 20);
-        chartData.datasets[9].data.sort((a, b) => b - a).slice(0, 20);
-        chartData.datasets[10].data.sort((a, b) => b - a).slice(0, 20);
-        
-
 
       callback(chartData);
     });
@@ -347,166 +324,74 @@ const fetchForeignCrimeAPI = (callback) => {
 
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchHeroinSeizureAPI = (callback) => {
-  console.log("fetching data fetchHeroinSeizureAPI");
+  //console.log("fetching data fetchHeroinSeizureAPI");
   const response = fetch(
     API_URL+"43f3d838-7c03-4c48-9a27-5ff8a664f217?api-key="+KEY+"&format=json&offset=0&limit=40"
-
-    //"https://api.data.gov.in/resource/43f3d838-7c03-4c48-9a27-5ff8a664f217?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&limit=40    "
   );
   response.then((response) => {
     const data = response.json();
-    //const result = data.records.filter(record => record !== 0);
-    console.log("result data"+JSON.stringify(data));
 
     data.then((data) => {
-      console.log("result data 222"+JSON.stringify(data));
     const result = data.records.filter(record => record._2016___kgs_ !== "0" && record._2016___kgs_ > 1.0 );
-    console.log("result data"+JSON.stringify(result));
+    let newArr = [];
 
+    console.log("result data"+JSON.stringify(result));
+      {data.records.filter(record => !(record.state_ut).includes('Total')).map(filteredName => (
+        console.log("filteredName size"+JSON.stringify(filteredName)),
+        newArr.push(filteredName)
+      ))}
+
+      console.log("result newArr"+JSON.stringify(newArr));
+      console.log("result size"+data.records.length);
       // set the chart data, trim the data to 10 records
       const chartData = {
-        labels: result
+        labels: newArr
           .map((record) => record.state_ut),
-          //.slice(0, 20),
+         //  .slice(0, result.length-2),
         datasets: [
           {
             label: "_2016",
-            data: result
+            data: newArr
               .map((record) => record._2016___kgs_),
-              //.slice(0, 20),
-            backgroundColor: "rgba(155, 99, 132, 0.6)",
+              //.slice(0, result.length-2),
+              backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "_2017",
-            data: result
+            data: newArr
               .map((record) => record._2017___kgs_),
-              //.slice(0, 20),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
+              //.slice(0, result.length-2),
+              backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "_2018",
-            data: result
+            data: newArr
               .map((record) => record._2018___kgs_),
-              //.slice(0, 20),
-            backgroundColor: "rgba(255, 255, 132, 0.6)",
+              //.slice(0, result.length-2),
+              backgroundColor: "rgba(255, 255, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "_2019",
-            data: result
+            data: newArr
               .map((record) => record._2019___kgs_),
-             // .slice(0, 20),
-            backgroundColor: "rgba(105, 255, 132, 0.6)",
+              //.slice(0, result.length-2),
+              backgroundColor: "rgba(105, 255, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "_2020",
-            data: result
+            data: newArr
               .map((record) => record._2020___kgs_),
-              //.slice(0, 20),
-            backgroundColor: "rgba(45, 155, 132, 0.6)",
+              //.slice(0, result.length-2),
+              backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
-          // {
-          //   label: "sudan",
-          //   data: data.records
-          //     .map((record) => record.sudan____col__39_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "britain",
-          //   data: data.records
-          //     .map((record) => record.britain____col__18_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "israel",
-          //   data: data.records
-          //     .map((record) => record.israel____col__10_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "Iran",
-          //   data: data.records
-          //     .map((record) => record.iran____col__11_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "Japan",
-          //   data: data.records
-          //     .map((record) => record.japan____col__13_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "australia",
-          //   data: data.records
-          //     .map((record) => record.australia____col__34_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "brazil",
-          //   data: data.records
-          //     .map((record) => record.brazil____col__31_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "new_zealand",
-          //   data: data.records
-          //     .map((record) => record.new_zealand____col__35_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "myanmar",
-          //   data: data.records
-          //     .map((record) => record.myanmar____col__14_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "yemen",
-          //   data: data.records
-          //     .map((record) => record.yemen____col__16_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
+ 
         ],
       };
-
-      //sort the data in descending order and remove the last 10 records
-       //chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-       //chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-       //chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-       //chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      //  chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[5].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[6].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[7].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[8].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[9].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[10].data.sort((a, b) => b - a).slice(0, 20);
-        
-
-
       callback(chartData);
     });
   });
@@ -517,8 +402,6 @@ const fetchConvictionRateAPI = (callback) => {
   console.log("fetching data fetchConvictionRateAPI");
   const response = fetch(
     API_URL+"2f4cba8d-8190-4dcc-8b9b-3b39ed59ef44?api-key="+KEY+"&format=json&offset=0&limit=40"
-
-    //"https://api.data.gov.in/resource/2f4cba8d-8190-4dcc-8b9b-3b39ed59ef44?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json"
   );
   response.then((response) => {
     const data = response.json();
@@ -544,136 +427,9 @@ const fetchConvictionRateAPI = (callback) => {
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
-          // {
-          //   label: "2015",
-          //   data: data.records
-          //     .map((record) => record.conviction_rate_cvr_),
-          //     //.slice(0, 20),
-          //   backgroundColor: "rgba(55, 99, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "2016",
-          //   data: data.records
-          //     .map((record) => record.conviction_rate_cvr_),
-          //     //.slice(0, 20),
-          //   backgroundColor: "rgba(255, 255, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "_2019",
-          //   data: result
-          //     .map((record) => record._2019___kgs_),
-          //    // .slice(0, 20),
-          //   backgroundColor: "rgba(105, 255, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "_2020",
-          //   data: result
-          //     .map((record) => record._2020___kgs_),
-          //     //.slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "sudan",
-          //   data: data.records
-          //     .map((record) => record.sudan____col__39_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "britain",
-          //   data: data.records
-          //     .map((record) => record.britain____col__18_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "israel",
-          //   data: data.records
-          //     .map((record) => record.israel____col__10_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "Iran",
-          //   data: data.records
-          //     .map((record) => record.iran____col__11_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "Japan",
-          //   data: data.records
-          //     .map((record) => record.japan____col__13_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "australia",
-          //   data: data.records
-          //     .map((record) => record.australia____col__34_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "brazil",
-          //   data: data.records
-          //     .map((record) => record.brazil____col__31_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "new_zealand",
-          //   data: data.records
-          //     .map((record) => record.new_zealand____col__35_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "myanmar",
-          //   data: data.records
-          //     .map((record) => record.myanmar____col__14_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
-          // {
-          //   label: "yemen",
-          //   data: data.records
-          //     .map((record) => record.yemen____col__16_)
-          //     .slice(0, 20),
-          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
-          //   borderWidth: 4,
-          // },
+         
         ],
       };
-
-      //sort the data in descending order and remove the last 10 records
-       //chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-       //chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-       //chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-       //chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      //  chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[5].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[6].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[7].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[8].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[9].data.sort((a, b) => b - a).slice(0, 20);
-      //   chartData.datasets[10].data.sort((a, b) => b - a).slice(0, 20);
-        
-
-
       callback(chartData);
     });
   });
@@ -684,7 +440,6 @@ const fetchSuicideFarmersAPI = (callback) => {
   const response = fetch(
     API_URL+"855d712f-8bf9-420d-a430-23dbf61c1dbe?api-key="+KEY+"&format=json&offset=0&limit=40"
 
-    //"https://api.data.gov.in/resource/2f4cba8d-8190-4dcc-8b9b-3b39ed59ef44?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json"
   );
   response.then((response) => {
     const data = response.json();
@@ -776,9 +531,6 @@ const fetchFoeticideCasesAPI2014T02016 = (callback) => {
   console.log("fetching data fetchFoeticideCasesAPI2014T02016");
   const response = fetch(
     API_URL+"67a3c702-ae08-4e84-8623-738bd9bfc826?api-key="+KEY+"&format=json&offset=0&limit=40"
-    //https://api.data.gov.in/resource/67a3c702-ae08-4e84-8623-738bd9bfc826?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&limit=40
-
-    //"https://api.data.gov.in/resource/2f4cba8d-8190-4dcc-8b9b-3b39ed59ef44?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json"
   );
   response.then((response) => {
     const data = response.json();
@@ -831,10 +583,7 @@ const fetchCyberFraudAPI2014T02016 = (callback) => {
   console.log("fetching data fetchCyberFraudAPI2014T02016");
   const response = fetch(
     API_URL+"4fe95be3-99e7-4699-b2ca-798877cd7108?api-key="+KEY+"&format=json&offset=0&limit=40"
-    //https://api.data.gov.in/resource/67a3c702-ae08-4e84-8623-738bd9bfc826?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&limit=40
-    //https://api.data.gov.in/resource/4fe95be3-99e7-4699-b2ca-798877cd7108?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json
 
-    //"https://api.data.gov.in/resource/2f4cba8d-8190-4dcc-8b9b-3b39ed59ef44?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json"
   );
   response.then((response) => {
     const data = response.json();
@@ -843,8 +592,6 @@ const fetchCyberFraudAPI2014T02016 = (callback) => {
 
     data.then((data) => {
       console.log("data data 222"+JSON.stringify(data));
-    //const filtereddata = data.records.filter(record => record._2016___foeticide !== "0" && record._2016___foeticide > 0 );
-    //console.log("data filtereddata"+JSON.stringify(filtereddata));
 
       // set the chart data, trim the data to 10 records
       const chartData = {
@@ -881,16 +628,21 @@ const fetchCityWiseKidnapping2018TO2020 = (callback) => {
       console.log("data data 222"+JSON.stringify(data));
     //const filtereddata = data.records.filter(record => record._2016___foeticide !== "0" && record._2016___foeticide > 0 );
     //console.log("data filtereddata"+JSON.stringify(filtereddata));
+    let newArr = [];
 
+    {data.records.filter(record => !(record.city).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(filteredName)),
+      newArr.push(filteredName)
+    ))}
       // set the chart data, trim the data to 10 records
       const chartData = {
-        labels: data.records
+        labels: newArr
         .map((record) => record.city),
         //.slice(0, 20),
         datasets: [
           {
             label: "2018",
-            data: data.records
+            data: newArr
               .map((record) => record._2018),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -898,7 +650,7 @@ const fetchCityWiseKidnapping2018TO2020 = (callback) => {
           },
           {
             label: "2019",
-            data: data.records
+            data: newArr
               .map((record) => record._2019),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -906,7 +658,7 @@ const fetchCityWiseKidnapping2018TO2020 = (callback) => {
           },
           {
             label: "2020",
-            data: data.records
+            data: newArr
               .map((record) => record._2020),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -919,7 +671,7 @@ const fetchCityWiseKidnapping2018TO2020 = (callback) => {
   });
 };
 
-const fetchgetDeathsInPoliceCustody2020 = (callback) => {
+const fetchDeathsInPoliceCustody2020 = (callback) => {
   console.log("fetching data fetchgetDeathsInPoliceCustody2020");
   const response = fetch(
     API_URL+"67aadebc-311c-43e2-bf2b-2f1ac8f524ed?api-key="+KEY+"&format=json&offset=0&limit=40"
@@ -933,16 +685,21 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
       console.log("data data 222"+JSON.stringify(data));
     const filtereddata = data.records.filter(record => record.deaths_reported____col__3_ !== "0" && record.deaths_reported____col__3_ > 0 );
     console.log("data filtereddata"+JSON.stringify(filtereddata));
+    let newArr = [];
 
+    {filtereddata.filter(record => !(record.state_ut__col__2_).includes('Total')).map(filteredName => (
+      //console.log("filteredName size"+JSON.stringify(filteredName)),
+      newArr.push(filteredName)
+    ))}
       // set the chart data, trim the data to 10 records
       const chartData = {
-        labels: filtereddata
+        labels: newArr
         .map((record) => record.state_ut__col__2_),
         //.slice(0, 20),
         datasets: [
           {
             label: "Deaths Reported",
-            data: filtereddata
+            data: newArr
               .map((record) => record.deaths_reported____col__3_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -950,7 +707,7 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
           },
           {
             label: "Mag Enquiries Ordered",
-            data: filtereddata
+            data: newArr
               .map((record) => record.mag__enquiries_ordered____col__4_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -958,7 +715,7 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
           },
           {
             label: "Judicial Enquiries Ordered",
-            data: filtereddata
+            data: newArr
               .map((record) => record.judicial_enquiries_ordered____col__5_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -966,7 +723,7 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
           },
           {
             label: "Cases Registered",
-            data: filtereddata
+            data: newArr
               .map((record) => record.cases___registered____col__6_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -974,7 +731,7 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
           },
           {
             label: "Cases Chargesheeted",
-            data: filtereddata
+            data: newArr
               .map((record) => record.cases___charge_sheeted____col__7_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -982,7 +739,7 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
           },
           {
             label: "Cases Convicted",
-            data: filtereddata
+            data: newArr
               .map((record) => record.cases___convicted____col__8_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -990,7 +747,7 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
           },
           {
             label: "Cases Acquitted Discharged",
-            data: filtereddata
+            data: newArr
               .map((record) => record.cases___acquitted__discharged____col__9_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -998,7 +755,7 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
           },
           {
             label: "Policeme Arrested",
-            data: filtereddata
+            data: newArr
               .map((record) => record.policemen___arrested____col__10_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -1006,7 +763,7 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
           },
           {
             label: "Policeme Chargesheeted",
-            data: filtereddata
+            data: newArr
               .map((record) => record.policemen___charge_sheeted____col__11_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -1014,7 +771,7 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
           },
           {
             label: "Policemen Convicted" ,
-            data: filtereddata
+            data: newArr
               .map((record) => record.policemen___convicted____col__12_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -1022,7 +779,7 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
           },
           {
             label: "Policemen Acquitted Discharged",
-            data: filtereddata
+            data: newArr
               .map((record) => record.policemen___acquitted__discharged____col__13_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -1035,6 +792,86 @@ const fetchgetDeathsInPoliceCustody2020 = (callback) => {
   });
 };
 
+const fetchCasesRegisteredByNIAFrom2017To2021 = (callback) => {
+  console.log("fetching data fetchMissingAndTracedPersons2020");
+  const response = fetch(
+    API_URL+"ba0713b7-e646-4dc7-9c26-e7f8dc592df0?api-key="+KEY+"&format=json&offset=0&limit=100"
+
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    const filtereddata = data.records.filter(record => record.deaths_reported____col__3_ !== "0" && record.deaths_reported____col__3_ > 0 );
+    console.log("data filtereddata"+JSON.stringify(filtereddata));
+
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: data.records
+        .map((record) => record._year)
+        .slice(0,data.records.length-1),
+        datasets: [
+          {
+            label: "Number of cases registered by NIA",
+            data: data.records
+              .map((record) => record.number_of_cases_registered_by_nia)
+              .slice(0,data.records.length-1),
+              backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
+const fetchForeignOriginUndertrialdec2020 = (callback) => {
+  console.log("fetching data fetchMissingAndTracedPersons2020");
+  const response = fetch(
+    API_URL+"141e98f7-9ce4-4fe0-81d5-8d537118530e?api-key="+KEY+"&format=json&offset=0&limit=100"
+
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    const filtereddata = data.records.filter(record => record.nationality_country !== "0" && record.deaths_reported____col__3_ > 0 );
+    console.log("data filtereddata"+JSON.stringify(filtereddata));
+    let newArr = [];
+
+    {data.records.filter(record => !(record.nationality_country).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(filteredName)),
+      newArr.push(filteredName)
+    ))}
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: newArr
+        .map((record) => record.nationality_country),
+        //.slice(0, 20),
+        datasets: [
+          {
+            label: "Number of Foreign-origin Undertrial Prisoners",
+            data: newArr
+              .map((record) => record.number_of_foreign_origin_undertrial_prisoners),
+              //.slice(0, 20),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
 const fetchNumberofBoysandGirlsReportedMissing2014to2016 = (callback) => {
   console.log("fetching data fetchMissingAndTracedPersons2020");
   const response = fetch(
@@ -1051,9 +888,11 @@ const fetchNumberofBoysandGirlsReportedMissing2014to2016 = (callback) => {
       console.log("data data 222"+JSON.stringify(data));
     const filtereddata = data.records.filter(record => record.deaths_reported____col__3_ !== "0" && record.deaths_reported____col__3_ > 0 );
     console.log("data filtereddata"+JSON.stringify(filtereddata));
+    console.log("data record size"+JSON.stringify(data.records.length));
 
       // set the chart data, trim the data to 10 records
       const chartData = {
+        
         labels: data.records
         .map((record) => record.year),
         //.slice(0, 20),
@@ -1313,7 +1152,7 @@ export function Crime({ loggedIn, logout, login }) {
   };
 
   const getDeathsInPoliceCustody2020 = () => {
-    fetchgetDeathsInPoliceCustody2020((chartData) => {
+    fetchDeathsInPoliceCustody2020((chartData) => {
       setChartType('bar');
       setChartData(chartData);
     });
@@ -1332,7 +1171,19 @@ export function Crime({ loggedIn, logout, login }) {
       setChartData(chartData);
     });
   };
-
+  const getForeignOriginUndertrialdec2020 = () => {
+    fetchForeignOriginUndertrialdec2020((chartData) => {
+      setChartType('bar');
+      setChartData(chartData);
+    });
+  };
+  const getCasesRegisteredByNIAFrom2017To2021 = () => {
+    fetchCasesRegisteredByNIAFrom2017To2021((chartData) => {
+      setChartType('bar');
+      setChartData(chartData);
+    });
+  };
+  
   return (
     <Content>
     <div
@@ -1364,7 +1215,10 @@ export function Crime({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getDeathsInPoliceCustody2020}>State/UT-Wise Deaths In Police Custody / Lockup (Persons Not On Remand) During 2020</button>
         <button className={classes.button} onClick={getMissingAndTracedPersons2020}> Gender & Age-Wise Missing And Traced Persons During 2020</button>
         <button className={classes.button} onClick={getNumberofBoysandGirlsReportedMissing2014to2016}>Number of Boys and Girls Reported Missing, as per information compiled by NCRB from 2014 to 2016 (From : Ministry of Home Affairs)</button>
+        <button className={classes.button} onClick={getForeignOriginUndertrialdec2020}>Country-Wise Number Of Foreign-Origin Undertrial Prisoners Lodged In Prisons Across The Country As On 31 December, 2020</button>
 
+        <button className={classes.button} onClick={getCasesRegisteredByNIAFrom2017To2021}>Year-Wise Number Of Cases Registered By National Investigation Agency (NIA) From 2017 To 2021</button>
+        
     </div>
      {chartData && chartType === 'bar' && 
     <div style={{

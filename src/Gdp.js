@@ -7,6 +7,7 @@ import { ChartGdp } from "./ChartGdp";
 import { SummaryCard } from "../src/People/Driver";
 import Content from "../src/Dashboard/Content";
 import { KEY , API_URL} from "../src/Const/Const";
+import { ChartPie } from "./ChartPie";
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchAPI = (callback) => {
   console.log("fetching data"+KEY);
@@ -515,7 +516,7 @@ export function Gdp({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getGDPIndiaWB}>GDP data From World Bank</button>
         </div>
 
-        <div 
+      <div 
        style={{
         height: "50%",
         backgroundPosition: "center",
@@ -525,6 +526,17 @@ export function Gdp({ loggedIn, logout, login }) {
       }}
       >
         {chartData && <ChartGdp chartData={chartData} />}      
+      </div> 
+      <div 
+       style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}
+      >
+        {chartData && <ChartPie chartData={chartData} />}      
       </div> 
     </div>
     </Content>

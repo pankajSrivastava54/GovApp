@@ -57,55 +57,79 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [
   {
-    name: "Login",
-    description: "Log in or register users for your app.",
-    img: "Login.PNG",
-    path: "login",
+    name: "Crime",
+    description: "Crime Related Charts & Data.",
+    img: "Crime.PNG",
+    path: "crime",
   },
+  // {
+  //   name: "Login",
+  //   description: "Log in or register users for your app.",
+  //   img: "Login.PNG",
+  //   path: "login",
+  // },
   {
     name: "Gov",
-    description: "Gov App.",
-    img: "Login.PNG",
+    description: "Government Related Charts & Data.",
+    img: "Gov.PNG",
     path: "Gov",
   },
   {
-    name: "Profile",
-    description: "A profile dashboard page for viewing a user's data",
-    img: "Profile.PNG",
-    path: "profile",
+    name: "Gdp",
+    description: "GDP Related Charts & Data.",
+    img: "GDP.PNG",
+    path: "Gdp",
   },
-  {
-    name: "Dashboard",
-    description:
-      "A detailed analysis of business revenue with actions and integrated expense adding.",
-    img: "Dashboard.PNG",
-    path: "dashboard",
-  },
-  {
-    name: "Redux Table",
-    description:
-      "A functioning CRUD table built with Redux. Add, delete and edit multiple users.",
-    img: "Crud.PNG",
-    path: "people",
-  },
+  // {
+  //   name: "Profile",
+  //   description: "A profile dashboard page for viewing a user's data",
+  //   img: "Profile.PNG",
+  //   path: "profile",
+  // },
+  // {
+  //   name: "Dashboard",
+  //   description:
+  //     "A detailed analysis of business revenue with actions and integrated expense adding.",
+  //   img: "Dashboard.PNG",
+  //   path: "dashboard",
+  // },
+  // {
+  //   name: "Redux Table",
+  //   description:
+  //     "A functioning CRUD table built with Redux. Add, delete and edit multiple users.",
+  //   img: "Crud.PNG",
+  //   path: "people",
+  // },
   {
     name: "Shipping",
-    description: "A Google Map API integration for location based services.",
-    img: "Map.PNG",
-    path: "map",
+    description: "Shipping Related Chart & Data.",
+    img: "Shipping.PNG",
+    path: "shipping",
+  },
+  {
+    name: "Ganga",
+    description: "Maa Ganga Related Chart & Data.",
+    img: "Ganga.PNG",
+    path: "ganga",
   },
   {
     name: "Tourism",
-    description: "Tourism services.",
-    img: "Map.PNG",
+    description: "Tourism Related Chart & Data.",
+    img: "Tourism.PNG",
     path: "map",
   },
   {
-    name: "Components",
-    description: "View all components built for this theme.",
-    img: "components.PNG",
-    path: "components",
+    name: "Education",
+    description: "Education Related Chart & Data.",
+    img: "Education.PNG",
+    path: "education",
   },
+  // {
+  //   name: "Components",
+  //   description: "View all components built for this theme.",
+  //   img: "components.PNG",
+  //   path: "components",
+  // },
 ];
 
 export function Home() {
@@ -124,7 +148,7 @@ export function Home() {
               color="textPrimary"
               gutterBottom
             >
-              Elite Material Dashboard - Treasure
+              Data is pulled from data.gov.in website using API
             </Typography>
             <Typography
               variant="h5"
@@ -132,10 +156,9 @@ export function Home() {
               color="textSecondary"
               paragraph
             >
-              Explore our Material UI template and get started building your
-              next billion dollar app.
+              This is the Open Government Data Portal designed, developed and hosted by the National Informatics Centre (NIC), a premier ICT organization of the Government of India under the aegis of the Ministry of Electronics & Information Technology..
             </Typography>
-            <div className={classes.heroButtons}>
+            {/* <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
                   <Button
@@ -148,7 +171,7 @@ export function Home() {
                   </Button>
                 </Grid>
               </Grid>
-            </div>
+            </div> */}
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
