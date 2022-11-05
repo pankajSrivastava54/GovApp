@@ -6,12 +6,21 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
 import { SummaryCard } from "../src/People/Driver";
 import Content from "../src/Dashboard/Content";
-import { KEY , API_URL} from "../src/Const/Const";
+import { KEY , API_URL,ret_type,ret_limit,DepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019_Resource,
+  StateDonorLoanWiseLoanReceivedByStatesFromInternationalFinancialInstitutionsFrom201920To202122,
+  YearWiseQuantityAndValueOfTheUreaImportedByTheCountryFrom201617To202021,YearWiseCasesOfCorruptionAgainstTheCentralGovernmentEmployeesWorkingIn45DepartmentsCBIFrom2017To2021,
+  SectorWiseFDIEquityInflowFrom201617To202021_Resource,CountryWiseExportIndiaWheatInTermsQuantityTop25CountriesFrom1stApril2021To21stMarch2022_Resource,
+  CategoryWisePharmaceuticalsImportsFromChinaFrom201516To202122_Resource,StateDonorLoanWiseLoanReceivedByStatesFromInternationalFinancialInstitutionsFrom201920To202122_Resource,
+  YearWiseCasesOfCorruptionAgainstTheCentralGovernmentEmployeesWorkingIn45DepartmentsCBIFrom2017To2021_Resource,
+  YearWiseQuantityAndValueOfTheUreaImportedByTheCountryFrom201617To202021_Resource,DepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019,
+  SectorWiseFDIEquityInflowFrom201617To202021,CountryWiseExportIndiaWheatInTermsQuantityTop25CountriesFrom1stApril2021To21stMarch2022,CategoryWisePharmaceuticalsImportsFromChinaFrom201516To202122} from "../src/Const/Const";
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
-const fetchAPI = (callback) => {
+const fetchDepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019API = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+DepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -80,7 +89,9 @@ const fetchAPI = (callback) => {
 const fetchCasesOfCorruptionCentralGovtEmployeeCBIFrom2017To2021API = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"e297f7c6-3ffa-4776-92b3-0dd05dde4e2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"e297f7c6-3ffa-4776-92b3-0dd05dde4e2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+YearWiseCasesOfCorruptionAgainstTheCentralGovernmentEmployeesWorkingIn45DepartmentsCBIFrom2017To2021_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -115,7 +126,9 @@ const fetchCasesOfCorruptionCentralGovtEmployeeCBIFrom2017To2021API = (callback)
 const fetchYearWiseQuantityValueOfUreaImportedfrom201617To202021API = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"bfcc38d2-1ff2-45e9-a483-4b3cadb430fa?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"bfcc38d2-1ff2-45e9-a483-4b3cadb430fa?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+YearWiseQuantityAndValueOfTheUreaImportedByTheCountryFrom201617To202021_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -150,7 +163,9 @@ const fetchYearWiseQuantityValueOfUreaImportedfrom201617To202021API = (callback)
 const fetchLoanReceivedFromInternationalFinancialInstitutionsFrom201920To202122API = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"2aeccebd-e76d-49a4-81f8-0becf72c5f2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"2aeccebd-e76d-49a4-81f8-0becf72c5f2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+StateDonorLoanWiseLoanReceivedByStatesFromInternationalFinancialInstitutionsFrom201920To202122_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -184,14 +199,6 @@ const fetchLoanReceivedFromInternationalFinancialInstitutionsFrom201920To202122A
           
         ],
       };
-
-      //sort the data in descending order and remove the last 10 records
-      // chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-
       callback(chartData);
     });
   });
@@ -200,7 +207,9 @@ const fetchLoanReceivedFromInternationalFinancialInstitutionsFrom201920To202122A
 const fetchPharmaceuticalsImportsFromChinaFrom201516To202122API = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"f6b2b6a0-f752-401f-b9d1-a72d0e3a6cac?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"f6b2b6a0-f752-401f-b9d1-a72d0e3a6cac?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+CategoryWisePharmaceuticalsImportsFromChinaFrom201516To202122_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -263,13 +272,6 @@ const fetchPharmaceuticalsImportsFromChinaFrom201516To202122API = (callback) => 
         ],
       };
 
-      //sort the data in descending order and remove the last 10 records
-      // chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-
       callback(chartData);
     });
   });
@@ -277,7 +279,9 @@ const fetchPharmaceuticalsImportsFromChinaFrom201516To202122API = (callback) => 
 const fetchWheatExport1stApril2021To21stMarch2022API = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"d93922cf-b61d-4ab9-9f33-0e3312203ee2?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"d93922cf-b61d-4ab9-9f33-0e3312203ee2?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+CountryWiseExportIndiaWheatInTermsQuantityTop25CountriesFrom1stApril2021To21stMarch2022_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -313,7 +317,9 @@ const fetchWheatExport1stApril2021To21stMarch2022API = (callback) => {
 const fetchFDI201617To202021API = (callback) => {
   //console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"0e3a5b95-4dcb-4d77-8b3f-fbd7ef203736?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"0e3a5b95-4dcb-4d77-8b3f-fbd7ef203736?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+SectorWiseFDIEquityInflowFrom201617To202021_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -371,13 +377,7 @@ const fetchFDI201617To202021API = (callback) => {
         ],
       };
 
-      //sort the data in descending order and remove the last 10 records
-      chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-
+      
       callback(chartData);
     });
   });
@@ -446,49 +446,59 @@ export function Gov({ loggedIn, logout, login }) {
 
   //const [loading, setLoading] = useState(false);
   const [chartData, setChartData] = useState(null);
+  const [chartType, setChartType] = useState(null);
+  const [chartTitle, setChartTitle] = useState(null);
+
   // const chartData = null;
 
-  const refreshChart = () => {
-    fetchAPI((chartData) => {
-      // chartData = chartData;
+  const getDepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019 = () => {
+    fetchDepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019API((chartData) => {
+      setChartType('line');
+      setChartTitle(DepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019);
       setChartData(chartData);
     });
   };
 
   const getFDI201617To202021 = () => {
     fetchFDI201617To202021API((chartData) => {
-      // chartData = chartData;
+      setChartType('line');
+      setChartTitle(SectorWiseFDIEquityInflowFrom201617To202021);
       setChartData(chartData);
     });
   };
 
   const getWheatExport1stApril2021To21stMarch2022 = () => {
     fetchWheatExport1stApril2021To21stMarch2022API((chartData) => {
-      // chartData = chartData;
+      setChartType('line');
+      setChartTitle(CountryWiseExportIndiaWheatInTermsQuantityTop25CountriesFrom1stApril2021To21stMarch2022);
       setChartData(chartData);
     });
   };
   const getPharmaceuticalsImportsFromChinaFrom201516To202122 = () => {
     fetchPharmaceuticalsImportsFromChinaFrom201516To202122API((chartData) => {
-      // chartData = chartData;
+      setChartType('line');
+      setChartTitle(CategoryWisePharmaceuticalsImportsFromChinaFrom201516To202122);
       setChartData(chartData);
     });
   };
   const getLoanReceivedFromInternationalFinancialInstitutionsFrom201920To202122 = () => {
     fetchLoanReceivedFromInternationalFinancialInstitutionsFrom201920To202122API((chartData) => {
-      // chartData = chartData;
+      setChartType('line');
+      setChartTitle(StateDonorLoanWiseLoanReceivedByStatesFromInternationalFinancialInstitutionsFrom201920To202122);
       setChartData(chartData);
     });
   };
   const getYearWiseQuantityValueOfUreaImportedfrom201617To202021 = () => {
     fetchYearWiseQuantityValueOfUreaImportedfrom201617To202021API((chartData) => {
-      // chartData = chartData;
+      setChartType('line');
+      setChartTitle(YearWiseQuantityAndValueOfTheUreaImportedByTheCountryFrom201617To202021);
       setChartData(chartData);
     });
   };
   const getCasesOfCorruptionCentralGovtEmployeeCBIFrom2017To2021 = () => {
     fetchCasesOfCorruptionCentralGovtEmployeeCBIFrom2017To2021API((chartData) => {
-      // chartData = chartData;
+      setChartType('line');
+      setChartTitle(YearWiseCasesOfCorruptionAgainstTheCentralGovernmentEmployeesWorkingIn45DepartmentsCBIFrom2017To2021);
       setChartData(chartData);
     });
   };
@@ -512,25 +522,35 @@ export function Gov({ loggedIn, logout, login }) {
         border:"1px solid black",
         //backgroundImage: "url(/img/wallpaper.jpeg)",
       }}>
-        <button className={classes.button} onClick={refreshChart}>Department-wise receipts, disposal and pendency of Public Grievance detailed statistics from 01.01.2016 to 01.11.2019</button>
-        <button className={classes.button} onClick={getFDI201617To202021}>Sector-Wise Foreign Direct Investment (FDI) Equity Inflow From 2016-17 To 2020-21</button>
-        <button className={classes.button} onClick={getWheatExport1stApril2021To21stMarch2022}>Country-Wise Export Of India Of Wheat In Terms Of Quantity To Top 25 Countries From 1st April 2021 To 21st March 2022</button>
+        <button className={classes.button} onClick={getDepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019}>{DepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019}</button>
+        <button className={classes.button} onClick={getFDI201617To202021}>{SectorWiseFDIEquityInflowFrom201617To202021}</button>
+        <button className={classes.button} onClick={getWheatExport1stApril2021To21stMarch2022}>{CountryWiseExportIndiaWheatInTermsQuantityTop25CountriesFrom1stApril2021To21stMarch2022}</button>
         
-        <button className={classes.button} onClick={getPharmaceuticalsImportsFromChinaFrom201516To202122}>Category-Wise Pharmaceuticals Imports From China From 2015-16 To 2021-22</button>
-        <button className={classes.button} onClick={getLoanReceivedFromInternationalFinancialInstitutionsFrom201920To202122}>State /Donor /Loan-Wise Loan Received By States From International Financial Institutions From 2019-20 To 2021-22</button>
-        <button className={classes.button} onClick={getYearWiseQuantityValueOfUreaImportedfrom201617To202021}>Year-Wise Quantity And Value Of The Urea Imported By The Country From 2016-17 To 2020-21</button>
+        <button className={classes.button} onClick={getPharmaceuticalsImportsFromChinaFrom201516To202122}>{CategoryWisePharmaceuticalsImportsFromChinaFrom201516To202122}</button>
+        <button className={classes.button} onClick={getLoanReceivedFromInternationalFinancialInstitutionsFrom201920To202122}>{StateDonorLoanWiseLoanReceivedByStatesFromInternationalFinancialInstitutionsFrom201920To202122}</button>
+        <button className={classes.button} onClick={getYearWiseQuantityValueOfUreaImportedfrom201617To202021}>{YearWiseQuantityAndValueOfTheUreaImportedByTheCountryFrom201617To202021}</button>
 
-        <button className={classes.button} onClick={getCasesOfCorruptionCentralGovtEmployeeCBIFrom2017To2021}>Year-Wise Cases Of Corruption Against The Central Government Employees Working In 45 Departments Central Bureau Of Investigation (CBI) From 2017 To 2021.</button>
+        <button className={classes.button} onClick={getCasesOfCorruptionCentralGovtEmployeeCBIFrom2017To2021}>{YearWiseCasesOfCorruptionAgainstTheCentralGovernmentEmployeesWorkingIn45DepartmentsCBIFrom2017To2021}</button>
         </div>
 
-       <div 
-       style={{
-        height: "1000px",
+        <div style={{
+        height: "50%",
         backgroundPosition: "center",
         backgroundSize: "cover",
         filter: "contrast(75%)",
-        //backgroundImage: "url(/img/wallpaper.jpeg)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
       }}>
+          <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
         {chartData && <ChartGdp chartData={chartData} />}      
       </div> 
     </div>

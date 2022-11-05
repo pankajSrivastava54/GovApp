@@ -1,24 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
 import Content from "../src/Dashboard/Content";
-import { KEY, API_URL } from "../src/Const/Const";
+import { KEY, API_URL,CrimeDisposalPersonsArrested2020_Resource,ret_type,ret_limit,CrimeDisposalPersonsArrested2020,
+  CountryWiseForeignAccusedDuring2020,CountryWiseForeignAccusedDuring2020_Resource,SeizuresHeroinNCRB2016To2020_Resource,
+  NCRBConvictionRate20162020_Resource,NCRBConvictionRate20162020,NCRBFarmersSuicide2018And2019_Resource,NCRBCFoeticide20182019_Resource,NCRBFoeticide20142016_Resource,
+  NCRBCyberFraud20142016_Resource,NCRBKidnappingAbduction20182020_Resource,NCRBDeathsInPoliceCustody2020_Resource,NCRBMissingAndTracedPersons2020_Resource,
+  ForeignPrisoners31December2020_Resource,NCRBBoysandGirlsReportedMissing20142016_Resource,NCRBCyberFraud20142016,NCRBKidnappingAbduction20182020,
+  SeizuresHeroinNCRB2016To2020,NCRBMissingAndTracedPersons2020,NCRBBoysandGirlsReportedMissing20142016,ForeignPrisoners31December2020,
+  CasesNIA2017To2021,NCRBFarmersSuicide2018And2019,NCRBFoeticide20182019,NCRBFoeticide20142016,DisposalPersonsArrestedOffencesagainstState2020,
+  NCRBDeathsInPoliceCustody2020,CasesNIA2017To2021_Resource} from "../src/Const/Const";
+
 import { ChartPie } from "./ChartPie";
+
 import { ChartDonut } from "./ChartDonut";
 
-import { Card } from "@material-ui/core";
-//import Card from 'react-bootstrap/Card';
-//import { Button } from 'react-bootstrap/Button';
+import { ChartLine } from "./ChartLine";
 
 
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchAPI = (callback) => {
-  console.log("fetching data");
+  console.log("fetching data"+API_URL+CrimeDisposalPersonsArrested2020_Resource+KEY+ret_type+ret_limit);
   const response = fetch(
-    API_URL+"a5fc05b9-4e5b-4625-a694-ead8caf11327?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+CrimeDisposalPersonsArrested2020_Resource+KEY+ret_type+ret_limit
   );
   response.then((response) => {
     const data = response.json();
@@ -45,14 +52,14 @@ const fetchAPI = (callback) => {
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
-          {
-            label: "Persons Arrested - Total",
-            data: data.records
-              .map((record) => record.persons_arrested___total____col__5_),
-              //.slice(0, 10),
-            backgroundColor: "rgba(255, 255, 132, 0.6)",
-            borderWidth: 4,
-          },
+          // {
+          //   label: "Persons Arrested - Total",
+          //   data: data.records
+          //     .map((record) => record.persons_arrested___total____col__5_),
+          //     //.slice(0, 10),
+          //   backgroundColor: "rgba(255, 255, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
           {
             label: "Persons Chargesheeted - Male",
             data: data.records
@@ -69,14 +76,14 @@ const fetchAPI = (callback) => {
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
-          {
-            label: "Persons Chargesheeted - Total",
-            data: data.records
-              .map((record) => record.persons_chargesheeted___total____col__8_),
-              //.slice(0, 10),
-            backgroundColor: "rgba(45, 155, 132, 0.6)",
-            borderWidth: 4,
-          },
+          // {
+          //   label: "Persons Chargesheeted - Total",
+          //   data: data.records
+          //     .map((record) => record.persons_chargesheeted___total____col__8_),
+          //     //.slice(0, 10),
+          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
           {
             label: "Persons Convicted - Male",
             data: data.records
@@ -93,14 +100,14 @@ const fetchAPI = (callback) => {
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
-          {
-            label: "Persons Convicted - Total",
-            data: data.records
-              .map((record) => record.persons_convicted___total____col__11_),
-              //.slice(0, 10),
-            backgroundColor: "rgba(45, 155, 132, 0.6)",
-            borderWidth: 4,
-          },
+          // {
+          //   label: "Persons Convicted - Total",
+          //   data: data.records
+          //     .map((record) => record.persons_convicted___total____col__11_),
+          //     //.slice(0, 10),
+          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
           {
             label: "Persons Discharged - Male",
             data: data.records
@@ -117,14 +124,14 @@ const fetchAPI = (callback) => {
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
-          {
-            label: "Persons Discharged - Total",
-            data: data.records
-              .map((record) => record.persons_discharged___total____col__14_),
-              //.slice(0, 10),
-            backgroundColor: "rgba(45, 155, 132, 0.6)",
-            borderWidth: 4,
-          },
+          // {
+          //   label: "Persons Discharged - Total",
+          //   data: data.records
+          //     .map((record) => record.persons_discharged___total____col__14_),
+          //     //.slice(0, 10),
+          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
           {
             label: "Persons Acquitted - Male",
             data: data.records
@@ -141,23 +148,16 @@ const fetchAPI = (callback) => {
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
-          {
-            label: "Persons Acquitted - Total",
-            data: data.records
-              .map((record) => record.persons_acquitted___total____col__17_),
-              //.slice(0, 10),
-            backgroundColor: "rgba(45, 155, 132, 0.6)",
-            borderWidth: 4,
-          },
+          // {
+          //   label: "Persons Acquitted - Total",
+          //   data: data.records
+          //     .map((record) => record.persons_acquitted___total____col__17_),
+          //     //.slice(0, 10),
+          //   backgroundColor: "rgba(45, 155, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
         ],
       };
-
-      //sort the data in descending order and remove the last 10 records
-      chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
 
       callback(chartData);
     });
@@ -168,9 +168,8 @@ const fetchAPI = (callback) => {
 const fetchForeignCrimeAPI = (callback) => {
   console.log("fetching data fetchForeignCrimeAPI");
   const response = fetch(
-    API_URL+"a6424291-57f4-4011-b019-931e24fda24e?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+CountryWiseForeignAccusedDuring2020_Resource+KEY+ret_type+ret_limit
 
-    //"https://api.data.gov.in/resource/a6424291-57f4-4011-b019-931e24fda24e?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&limit=30"
   );
   response.then((response) => {
     const data = response.json();
@@ -188,23 +187,7 @@ const fetchForeignCrimeAPI = (callback) => {
     ))}
 
     console.log("result data"+JSON.stringify(result));
-    // const chartData = {
-        
-    //   datasets: [
-    //     {
-    //       labels: data.records
-    //       .map((record) => record.year),
-    //       data: data.records
-    //         .map((record) => record.no__of_cyber_fraud_cases_registered),
-    //         //.slice(0, 20),
-    //       backgroundColor: "rgba(155, 99, 132, 0.6)",
-    //       borderWidth: 4,
-    //     },
-
-    //   ],
-    // };
-      // set the chart data, trim the data to 10 records
-
+  
       const chartData = {
         labels: newArr
           .map((record) => record.crime_head__col__2_),
@@ -326,7 +309,8 @@ const fetchForeignCrimeAPI = (callback) => {
 const fetchHeroinSeizureAPI = (callback) => {
   //console.log("fetching data fetchHeroinSeizureAPI");
   const response = fetch(
-    API_URL+"43f3d838-7c03-4c48-9a27-5ff8a664f217?api-key="+KEY+"&format=json&offset=0&limit=40"
+    API_URL+SeizuresHeroinNCRB2016To2020_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -401,7 +385,9 @@ const fetchHeroinSeizureAPI = (callback) => {
 const fetchConvictionRateAPI = (callback) => {
   console.log("fetching data fetchConvictionRateAPI");
   const response = fetch(
-    API_URL+"2f4cba8d-8190-4dcc-8b9b-3b39ed59ef44?api-key="+KEY+"&format=json&offset=0&limit=40"
+    //API_URL+"2f4cba8d-8190-4dcc-8b9b-3b39ed59ef44?api-key="+KEY+"&format=json&offset=0&limit=40"
+    API_URL+NCRBConvictionRate20162020_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -438,7 +424,9 @@ const fetchConvictionRateAPI = (callback) => {
 const fetchSuicideFarmersAPI = (callback) => {
   console.log("fetching data fetchSuicideFarmersAPI");
   const response = fetch(
-    API_URL+"855d712f-8bf9-420d-a430-23dbf61c1dbe?api-key="+KEY+"&format=json&offset=0&limit=40"
+    //API_URL+"855d712f-8bf9-420d-a430-23dbf61c1dbe?api-key="+KEY+"&format=json&offset=0&limit=40"
+    API_URL+NCRBFarmersSuicide2018And2019_Resource+KEY+ret_type+ret_limit
+
 
   );
   response.then((response) => {
@@ -450,27 +438,32 @@ const fetchSuicideFarmersAPI = (callback) => {
       console.log("data data 222"+JSON.stringify(data));
     const filtereddata = data.records.filter(record => record._2018 !== "0" && record._2018 > 0 );
     console.log("data filtereddata"+JSON.stringify(filtereddata));
+    let newArr = [];
 
+    {filtereddata.filter(record => !(record.state_ut).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(filteredName)),
+      newArr.push(filteredName)
+    ))}
       // set the chart data, trim the data to 10 records
       const chartData = {
-        labels: filtereddata
+        labels: newArr
           .map((record) => record.state_ut),
           //.slice(0, 20),
         datasets: [
           {
             label: "_2018",
-            data: filtereddata
+            data: newArr
               .map((record) => record._2018),
               //.slice(0, 20),
-            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            backgroundColor: "rgba(128,0,128,1)",
             borderWidth: 4,
           },
           {
             label: "_2019",
-            data: filtereddata
+            data: newArr
               .map((record) => record._2019),
               //.slice(0, 20),
-            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            backgroundColor: "rgba(255,0,0,1)",
             borderWidth: 4,
           },
   
@@ -484,7 +477,8 @@ const fetchSuicideFarmersAPI = (callback) => {
 const fetchFoeticideCasesAPI2018T02019 = (callback) => {
   console.log("fetching data fetchFoeticideCasesAPI2018T02019");
   const response = fetch(
-    API_URL+"855d712f-8bf9-420d-a430-23dbf61c1dbe?api-key="+KEY+"&format=json&offset=0&limit=40"
+    //API_URL+"855d712f-8bf9-420d-a430-23dbf61c1dbe?api-key="+KEY+"&format=json&offset=0&limit=40"
+    API_URL+NCRBCFoeticide20182019_Resource+KEY+ret_type+ret_limit
 
     //"https://api.data.gov.in/resource/2f4cba8d-8190-4dcc-8b9b-3b39ed59ef44?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json"
   );
@@ -530,7 +524,9 @@ const fetchFoeticideCasesAPI2018T02019 = (callback) => {
 const fetchFoeticideCasesAPI2014T02016 = (callback) => {
   console.log("fetching data fetchFoeticideCasesAPI2014T02016");
   const response = fetch(
-    API_URL+"67a3c702-ae08-4e84-8623-738bd9bfc826?api-key="+KEY+"&format=json&offset=0&limit=40"
+    //API_URL+"67a3c702-ae08-4e84-8623-738bd9bfc826?api-key="+KEY+"&format=json&offset=0&limit=40"
+    API_URL+NCRBFoeticide20142016_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -582,7 +578,9 @@ const fetchFoeticideCasesAPI2014T02016 = (callback) => {
 const fetchCyberFraudAPI2014T02016 = (callback) => {
   console.log("fetching data fetchCyberFraudAPI2014T02016");
   const response = fetch(
-    API_URL+"4fe95be3-99e7-4699-b2ca-798877cd7108?api-key="+KEY+"&format=json&offset=0&limit=40"
+    //API_URL+"4fe95be3-99e7-4699-b2ca-798877cd7108?api-key="+KEY+"&format=json&offset=0&limit=40"
+    API_URL+NCRBCyberFraud20142016_Resource+KEY+ret_type+ret_limit
+
 
   );
   response.then((response) => {
@@ -595,11 +593,11 @@ const fetchCyberFraudAPI2014T02016 = (callback) => {
 
       // set the chart data, trim the data to 10 records
       const chartData = {
-        
+        labels: data.records
+        .map((record) => record.year),
         datasets: [
           {
-            labels: data.records
-            .map((record) => record.year),
+
             data: data.records
               .map((record) => record.no__of_cyber_fraud_cases_registered),
               //.slice(0, 20),
@@ -617,7 +615,9 @@ const fetchCyberFraudAPI2014T02016 = (callback) => {
 const fetchCityWiseKidnapping2018TO2020 = (callback) => {
   console.log("fetching data fetchCyberFraudAPI2014T02016");
   const response = fetch(
-    API_URL+"fc4878fe-9b80-4c33-b401-7cce0c766cee?api-key="+KEY+"&format=json&offset=0&limit=40"
+    //API_URL+"fc4878fe-9b80-4c33-b401-7cce0c766cee?api-key="+KEY+"&format=json&offset=0&limit=40"
+    API_URL+NCRBKidnappingAbduction20182020_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -674,7 +674,9 @@ const fetchCityWiseKidnapping2018TO2020 = (callback) => {
 const fetchDeathsInPoliceCustody2020 = (callback) => {
   console.log("fetching data fetchgetDeathsInPoliceCustody2020");
   const response = fetch(
-    API_URL+"67aadebc-311c-43e2-bf2b-2f1ac8f524ed?api-key="+KEY+"&format=json&offset=0&limit=40"
+    //API_URL+"67aadebc-311c-43e2-bf2b-2f1ac8f524ed?api-key="+KEY+"&format=json&offset=0&limit=40"
+    API_URL+NCRBDeathsInPoliceCustody2020_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -795,7 +797,8 @@ const fetchDeathsInPoliceCustody2020 = (callback) => {
 const fetchCasesRegisteredByNIAFrom2017To2021 = (callback) => {
   console.log("fetching data fetchMissingAndTracedPersons2020");
   const response = fetch(
-    API_URL+"ba0713b7-e646-4dc7-9c26-e7f8dc592df0?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"ba0713b7-e646-4dc7-9c26-e7f8dc592df0?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+CasesNIA2017To2021_Resource+KEY+ret_type+ret_limit
 
 
   );
@@ -820,7 +823,7 @@ const fetchCasesRegisteredByNIAFrom2017To2021 = (callback) => {
             data: data.records
               .map((record) => record.number_of_cases_registered_by_nia)
               .slice(0,data.records.length-1),
-              backgroundColor: "rgba(155, 99, 132, 0.6)",
+            backgroundColor: "rgba(128,0,128,1)",
             borderWidth: 4,
           },
         ],
@@ -833,7 +836,8 @@ const fetchCasesRegisteredByNIAFrom2017To2021 = (callback) => {
 const fetchForeignOriginUndertrialdec2020 = (callback) => {
   console.log("fetching data fetchMissingAndTracedPersons2020");
   const response = fetch(
-    API_URL+"141e98f7-9ce4-4fe0-81d5-8d537118530e?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"141e98f7-9ce4-4fe0-81d5-8d537118530e?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+ForeignPrisoners31December2020_Resource+KEY+ret_type+ret_limit
 
 
   );
@@ -875,7 +879,8 @@ const fetchForeignOriginUndertrialdec2020 = (callback) => {
 const fetchNumberofBoysandGirlsReportedMissing2014to2016 = (callback) => {
   console.log("fetching data fetchMissingAndTracedPersons2020");
   const response = fetch(
-    API_URL+"09c94c02-f824-4da8-bda9-3382466189aa?api-key="+KEY+"&format=json&offset=0&limit=40"
+    //API_URL+"09c94c02-f824-4da8-bda9-3382466189aa?api-key="+KEY+"&format=json&offset=0&limit=40"
+    API_URL+NCRBBoysandGirlsReportedMissing20142016_Resource+KEY+ret_type+ret_limit
 
 
   );
@@ -902,7 +907,7 @@ const fetchNumberofBoysandGirlsReportedMissing2014to2016 = (callback) => {
             data: data.records
               .map((record) => record.girls),
               //.slice(0, 20),
-            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            backgroundColor: "rgba(255,0,0,1)",
             borderWidth: 4,
           },
           {
@@ -910,7 +915,7 @@ const fetchNumberofBoysandGirlsReportedMissing2014to2016 = (callback) => {
             data: data.records
               .map((record) => record.boys),
               //.slice(0, 20),
-            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            backgroundColor: "rgba(128,0,128,1)",
             borderWidth: 4,
           },
           
@@ -925,7 +930,9 @@ const fetchNumberofBoysandGirlsReportedMissing2014to2016 = (callback) => {
 const fetchMissingAndTracedPersons2020 = (callback) => {
   console.log("fetching data fetchMissingAndTracedPersons2020");
   const response = fetch(
-    API_URL+"b70ed9d7-b350-4117-9987-21fa49d318eb?api-key="+KEY+"&format=json&offset=0&limit=40"
+    //API_URL+"b70ed9d7-b350-4117-9987-21fa49d318eb?api-key="+KEY+"&format=json&offset=0&limit=40"
+    API_URL+NCRBMissingAndTracedPersons2020_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -944,7 +951,7 @@ const fetchMissingAndTracedPersons2020 = (callback) => {
         //.slice(0, 20),
         datasets: [
           {
-            label: "Deaths Reported",
+            label: "Unrecovered Persons of Previous Years",
             data: data.records
               .map((record) => record.unrecovered_persons_of_previous_years____col__3_),
               //.slice(0, 20),
@@ -952,23 +959,23 @@ const fetchMissingAndTracedPersons2020 = (callback) => {
             borderWidth: 4,
           },
           {
-            label: "Mag Enquiries Ordered",
+            label: "Persons Missing During 2020",
             data: data.records
               .map((record) => record.persons_missing_during_2020____col__4_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
+          // {
+          //   label: "Total Missing",
+          //   data: data.records
+          //     .map((record) => record.total_missing__3_4_____col__5_),
+          //     //.slice(0, 20),
+          //   backgroundColor: "rgba(155, 99, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
           {
-            label: "Judicial Enquiries Ordered",
-            data: data.records
-              .map((record) => record.total_missing__3_4_____col__5_),
-              //.slice(0, 20),
-            backgroundColor: "rgba(155, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "Cases Registered",
+            label: "Persons Traced From Previous Years Missing",
             data: data.records
               .map((record) => record.persons_traced___from_previous_years_missing____col__6_),
               //.slice(0, 20),
@@ -976,31 +983,31 @@ const fetchMissingAndTracedPersons2020 = (callback) => {
             borderWidth: 4,
           },
           {
-            label: "Cases Chargesheeted",
+            label: "Persons Traced From Missing Persons 2020",
             data: data.records
               .map((record) => record.persons_traced___from_missing_persons_2020____col__7_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
+          // {
+          //   label: "Cases Convicted",
+          //   data: data.records
+          //     .map((record) => record.persons_traced___total_traced____col__8_),
+          //     //.slice(0, 20),
+          //   backgroundColor: "rgba(155, 99, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
+          // {
+          //   label: "__of_persons_traced__col_8_col_5___100_____col__9_",
+          //   data: data.records
+          //     .map((record) => record.__of_persons_traced__col_8_col_5___100_____col__9_),
+          //     //.slice(0, 20),
+          //   backgroundColor: "rgba(155, 99, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
           {
-            label: "Cases Convicted",
-            data: data.records
-              .map((record) => record.persons_traced___total_traced____col__8_),
-              //.slice(0, 20),
-            backgroundColor: "rgba(155, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "Cases Acquitted Discharged",
-            data: data.records
-              .map((record) => record.__of_persons_traced__col_8_col_5___100_____col__9_),
-              //.slice(0, 20),
-            backgroundColor: "rgba(155, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
-          {
-            label: "Policeme Arrested",
+            label: "Persons Untraced From Previous Years Missing",
             data: data.records
               .map((record) => record.persons_untraced___from_previous_years_missing____col__10_),
               //.slice(0, 20),
@@ -1008,21 +1015,21 @@ const fetchMissingAndTracedPersons2020 = (callback) => {
             borderWidth: 4,
           },
           {
-            label: "Policeme Chargesheeted",
+            label: "Persons Untraced From_ Missing Persons 2020",
             data: data.records
               .map((record) => record.persons_untraced___from_missing_persons_2020____col__11_),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
-          {
-            label: "Policemen Convicted" ,
-            data: data.records
-              .map((record) => record.persons_untraced___total_traced____col__12_),
-              //.slice(0, 20),
-            backgroundColor: "rgba(155, 99, 132, 0.6)",
-            borderWidth: 4,
-          },
+          // {
+          //   label: "Policemen Convicted" ,
+          //   data: data.records
+          //     .map((record) => record.persons_untraced___total_traced____col__12_),
+          //     //.slice(0, 20),
+          //   backgroundColor: "rgba(155, 99, 132, 0.6)",
+          //   borderWidth: 4,
+          // },
  
         ],
       };
@@ -1093,46 +1100,59 @@ export function Crime({ loggedIn, logout, login }) {
   const [chartData, setChartData] = useState(null);
   const [chartType, setChartType] = useState('bar');
 
+  const [chartTitle, setChartTitle] = useState('bar');
   const refreshChart = () => {
     fetchAPI((chartData) => {
-      setChartType('bar');
+      setChartType('line');
+      setChartTitle(CrimeDisposalPersonsArrested2020);
+
       setChartData(chartData);
     });
   };
 
   const getForeignCrime = () => {
     fetchForeignCrimeAPI((chartData) => {
-      setChartType('bar');
+      setChartType('line');
+      setChartTitle(CountryWiseForeignAccusedDuring2020);
+
       setChartData(chartData);
     });
   };
   const getHeroinSeizure = () => {
     fetchHeroinSeizureAPI((chartData) => {
       setChartType('bar');
+      setChartTitle(SeizuresHeroinNCRB2016To2020);
       setChartData(chartData);
     });
   };
   const getConvictionRate = () => {
     fetchConvictionRateAPI((chartData) => {
       setChartType('bar');
+      setChartTitle(NCRBConvictionRate20162020);
       setChartData(chartData);
     });
   };
   const getSuicideFarmers = () => {
     fetchSuicideFarmersAPI((chartData) => {
-      setChartType('bar');
+      setChartType('bar');      
+      setChartTitle(NCRBFarmersSuicide2018And2019);
+
       setChartData(chartData);
     });
   };
   const getFoeticideCases2018To2019 = () => {
     fetchFoeticideCasesAPI2018T02019((chartData) => {
       setChartType('bar');
+      setChartTitle(NCRBFoeticide20182019);
+
       setChartData(chartData);
     });
   };
   const getFoeticideCases2014To2016 = () => {
     fetchFoeticideCasesAPI2014T02016((chartData) => {
-      setChartType('bar');
+      setChartType('bar');     
+       setChartTitle(NCRBFoeticide20142016);
+
       setChartData(chartData);
     });
   };
@@ -1140,6 +1160,8 @@ export function Crime({ loggedIn, logout, login }) {
   const getCyberFraud2014To2016 = () => {
     fetchCyberFraudAPI2014T02016((chartData) => {
       setChartType('pie');
+      setChartTitle(NCRBCyberFraud20142016);
+
       setChartData(chartData);
     });
   };
@@ -1147,6 +1169,8 @@ export function Crime({ loggedIn, logout, login }) {
   const getCityWiseKidnapping2018TO2020 = () => {
     fetchCityWiseKidnapping2018TO2020((chartData) => {
       setChartType('bar');
+      setChartTitle(NCRBKidnappingAbduction20182020);
+
       setChartData(chartData);
     });
   };
@@ -1154,13 +1178,17 @@ export function Crime({ loggedIn, logout, login }) {
   const getDeathsInPoliceCustody2020 = () => {
     fetchDeathsInPoliceCustody2020((chartData) => {
       setChartType('bar');
+      setChartTitle(NCRBDeathsInPoliceCustody2020);
+
       setChartData(chartData);
     });
   };
   
   const getMissingAndTracedPersons2020 = () => {
     fetchMissingAndTracedPersons2020((chartData) => {
-      setChartType('donut');
+      setChartType('bar');
+      setChartTitle(NCRBMissingAndTracedPersons2020);
+
       setChartData(chartData);
     });
   };
@@ -1168,18 +1196,24 @@ export function Crime({ loggedIn, logout, login }) {
   const getNumberofBoysandGirlsReportedMissing2014to2016 = () => {
     fetchNumberofBoysandGirlsReportedMissing2014to2016((chartData) => {
       setChartType('bar');
+      setChartTitle(NCRBBoysandGirlsReportedMissing20142016);
+
       setChartData(chartData);
     });
   };
   const getForeignOriginUndertrialdec2020 = () => {
     fetchForeignOriginUndertrialdec2020((chartData) => {
       setChartType('bar');
+      setChartTitle(ForeignPrisoners31December2020);
+
       setChartData(chartData);
     });
   };
   const getCasesRegisteredByNIAFrom2017To2021 = () => {
     fetchCasesRegisteredByNIAFrom2017To2021((chartData) => {
-      setChartType('bar');
+      setChartType('line');
+      setChartTitle(CasesNIA2017To2021);
+
       setChartData(chartData);
     });
   };
@@ -1203,21 +1237,20 @@ export function Crime({ loggedIn, logout, login }) {
         border:"1px solid black",
         //backgroundImage: "url(/img/wallpaper.jpeg)",
       }}>
-        <button className={classes.button} onClick={refreshChart}>Crime Head-wise Disposal of Persons Arrested for Offences against State during 2020</button>
-        <button className={classes.button} onClick={getForeignCrime}>Country-Wise Foreign Accused During 2020</button>
-        <button className={classes.button} onClick={getHeroinSeizure}>State/UTs-Wise Seizures Of Heroin As Published By The National Crime Records Bureau (NCRB) From 2016 To 2020</button>
-        <button className={classes.button} onClick={getConvictionRate}>Year-Wise Latest Publish Report Of The National Crime Records Bureau (NCRB), Conviction Rate (CVR) Of IPC Crimes At National Level From 2014 To 2016</button>
-        <button className={classes.button} onClick={getSuicideFarmers}>State/UT-Wise Suicide Committed By Farmers, As Per NCRB Report During 2018 And 2019</button>
-        <button className={classes.button} onClick={getFoeticideCases2018To2019}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2018 to 2019 (From : Ministry of Health and Family Welfare)</button>
-        <button className={classes.button} onClick={getFoeticideCases2014To2016}>State/UT-wise Cases Registered under Foeticide as per National Crime Records Bureau (NCRB) from 2014 to 2016 (From : Ministry of Health and Family Welfare)</button>
-        <button className={classes.button} onClick={getCyberFraud2014To2016}>Year-Wise Details Of Cyber Fraud Cases Registered As Per National Crime Records Bureau (NCRB) From 2014 To 2016 (From : Ministry Of Home Affairs)</button>
-        <button className={classes.button} onClick={getCityWiseKidnapping2018TO2020}>City-Wise Kidnapping & Abduction From 2018 To 2020</button>
-        <button className={classes.button} onClick={getDeathsInPoliceCustody2020}>State/UT-Wise Deaths In Police Custody / Lockup (Persons Not On Remand) During 2020</button>
-        <button className={classes.button} onClick={getMissingAndTracedPersons2020}> Gender & Age-Wise Missing And Traced Persons During 2020</button>
-        <button className={classes.button} onClick={getNumberofBoysandGirlsReportedMissing2014to2016}>Number of Boys and Girls Reported Missing, as per information compiled by NCRB from 2014 to 2016 (From : Ministry of Home Affairs)</button>
-        <button className={classes.button} onClick={getForeignOriginUndertrialdec2020}>Country-Wise Number Of Foreign-Origin Undertrial Prisoners Lodged In Prisons Across The Country As On 31 December, 2020</button>
-
-        <button className={classes.button} onClick={getCasesRegisteredByNIAFrom2017To2021}>Year-Wise Number Of Cases Registered By National Investigation Agency (NIA) From 2017 To 2021</button>
+        <button className={classes.button} onClick={refreshChart}>{DisposalPersonsArrestedOffencesagainstState2020}</button>
+        <button className={classes.button} onClick={getForeignCrime}>{CountryWiseForeignAccusedDuring2020}</button>
+        <button className={classes.button} onClick={getHeroinSeizure}>{SeizuresHeroinNCRB2016To2020}</button>
+        <button className={classes.button} onClick={getConvictionRate}>{NCRBConvictionRate20162020}</button>
+        <button className={classes.button} onClick={getSuicideFarmers}>{NCRBFarmersSuicide2018And2019}</button>
+        <button className={classes.button} onClick={getFoeticideCases2018To2019}>{NCRBFoeticide20182019}</button>
+        <button className={classes.button} onClick={getFoeticideCases2014To2016}>{NCRBFoeticide20142016}</button>
+        <button className={classes.button} onClick={getCyberFraud2014To2016}>{NCRBCyberFraud20142016}</button>
+        <button className={classes.button} onClick={getCityWiseKidnapping2018TO2020}>{NCRBKidnappingAbduction20182020}</button>
+        <button className={classes.button} onClick={getDeathsInPoliceCustody2020}>{NCRBDeathsInPoliceCustody2020}</button>
+        <button className={classes.button} onClick={getMissingAndTracedPersons2020}>{NCRBMissingAndTracedPersons2020}</button>
+        <button className={classes.button} onClick={getNumberofBoysandGirlsReportedMissing2014to2016}>{NCRBBoysandGirlsReportedMissing20142016}</button>
+        <button className={classes.button} onClick={getForeignOriginUndertrialdec2020}>{ForeignPrisoners31December2020}</button>
+        <button className={classes.button} onClick={getCasesRegisteredByNIAFrom2017To2021}>{CasesNIA2017To2021}</button>
         
     </div>
      {chartData && chartType === 'bar' && 
@@ -1228,6 +1261,18 @@ export function Crime({ loggedIn, logout, login }) {
         filter: "contrast(75%)",
         //backgroundImage: "url(/img/wallpaper2-min.png)",
       }}>
+        <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
+
         {chartData && <ChartGdp chartData={chartData} />}
       </div>
     }
@@ -1240,6 +1285,17 @@ export function Crime({ loggedIn, logout, login }) {
         filter: "contrast(75%)",
         //backgroundImage: "url(/img/wallpaper2-min.png)",
       }}>
+               <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
         {chartData && <ChartPie chartData={chartData} />}
       </div>
           }
@@ -1253,9 +1309,45 @@ export function Crime({ loggedIn, logout, login }) {
         filter: "contrast(75%)",
         //backgroundImage: "url(/img/wallpaper2-min.png)",
       }}>
+               <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
         {chartData && <ChartDonut chartData={chartData} />}
       </div>
+      }
+         {chartData && chartType === 'line' && 
+
+<div 
+ style={{
+  height: "50%",
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+  filter: "contrast(75%)",
+  //backgroundImage: "url(/img/wallpaper2-min.png)",
+}}>
+                <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
+  {chartData && <ChartLine chartData={chartData} />}
+</div>
 }
+
     </div>
 
 

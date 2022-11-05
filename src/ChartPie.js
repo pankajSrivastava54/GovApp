@@ -34,7 +34,7 @@ const options = {
   export function ChartPie({ chartData }) {
 //
   //alert("ChartPie");
-    return <div width="50%" height="50%"><Pie options={options} data={chartData} /></div>;
+    return <div width="50%" height="50%"><Pie options={options} data={chartData} title="My Alpha chart"/></div>;
   // return (
   //   <Chart
   //     chartType="PieChart"
