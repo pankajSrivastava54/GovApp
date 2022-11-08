@@ -29,6 +29,7 @@ import peopleReducer from "./ReduxTable/peopleSlice";
 import { Provider } from "react-redux";
 import { Crime } from "./Crime";
 import { Ganga } from "./Ganga";
+import { Weather } from "./Weather";
 
 export default function App() {
   const store = configureStore({
@@ -84,6 +85,9 @@ export default function App() {
                     </Route>
                     <Route path="/tourism">
                       <Tourism />
+                    </Route>
+                    <Route path="/weather">
+                      <Weather />
                     </Route>
                     <Route path="/rbi">
                       <Rbi />

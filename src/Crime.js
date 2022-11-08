@@ -12,7 +12,10 @@ import { KEY, API_URL,CrimeDisposalPersonsArrested2020_Resource,ret_type,ret_lim
   ForeignPrisoners31December2020_Resource,NCRBBoysandGirlsReportedMissing20142016_Resource,NCRBCyberFraud20142016,NCRBKidnappingAbduction20182020,
   SeizuresHeroinNCRB2016To2020,NCRBMissingAndTracedPersons2020,NCRBBoysandGirlsReportedMissing20142016,ForeignPrisoners31December2020,
   CasesNIA2017To2021,NCRBFarmersSuicide2018And2019,NCRBFoeticide20182019,NCRBFoeticide20142016,DisposalPersonsArrestedOffencesagainstState2020,
-  NCRBDeathsInPoliceCustody2020,CasesNIA2017To2021_Resource} from "../src/Const/Const";
+  NCRBDeathsInPoliceCustody2020,CasesNIA2017To2021_Resource,CasesPoAActNCRB2015to2017_Resource,CasesPoAActNCRB2015to2017,
+  NDPSCasesNCRB2018to2020_Resource,NDPSCasesNCRB2018to2020,CasesCrimesagainstChildrenNCRB2014to2017_Resource,CasesCrimesagainstChildrenNCRB2014to2017,
+  NRIMaritalComplaintsJanuary2017to31stDecember2021_Resource,NRIMaritalComplaintsJanuary2017to31stDecember2021,
+  SeizedCounterfeitCurrencyNotesFrom2016To2020_Resource,SeizedCounterfeitCurrencyNotesFrom2016To2020} from "../src/Const/Const";
 
 import { ChartPie } from "./ChartPie";
 
@@ -480,7 +483,6 @@ const fetchFoeticideCasesAPI2018T02019 = (callback) => {
     //API_URL+"855d712f-8bf9-420d-a430-23dbf61c1dbe?api-key="+KEY+"&format=json&offset=0&limit=40"
     API_URL+NCRBCFoeticide20182019_Resource+KEY+ret_type+ret_limit
 
-    //"https://api.data.gov.in/resource/2f4cba8d-8190-4dcc-8b9b-3b39ed59ef44?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json"
   );
   response.then((response) => {
     const data = response.json();
@@ -491,16 +493,21 @@ const fetchFoeticideCasesAPI2018T02019 = (callback) => {
       console.log("data data 222"+JSON.stringify(data));
     const filtereddata = data.records.filter(record => record._2018 !== "0" && record._2018 > 0 );
     console.log("data filtereddata"+JSON.stringify(filtereddata));
+    let newArr = [];
 
+    {data.records.filter(record => !(record.state_ut).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(filteredName)),
+      newArr.push(filteredName)
+    ))}
       // set the chart data, trim the data to 10 records
       const chartData = {
-        labels: filtereddata
+        labels: newArr
           .map((record) => record.state_ut),
           //.slice(0, 20),
         datasets: [
           {
             label: "2018",
-            data: filtereddata
+            data: newArr
               .map((record) => record._2018),
               //.slice(0, 20),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
@@ -508,7 +515,7 @@ const fetchFoeticideCasesAPI2018T02019 = (callback) => {
           },
           {
             label: "2019",
-            data: filtereddata
+            data: newArr
               .map((record) => record._2019),
               //.slice(0, 20),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
@@ -833,6 +840,359 @@ const fetchCasesRegisteredByNIAFrom2017To2021 = (callback) => {
   });
 };
 
+const fetchNDPSCasesNCRB2018to2020 = (callback) => {
+  console.log("fetching data fetchNDPSCasesNCRB2018to2020");
+  const response = fetch(
+    //API_URL+"ba0713b7-e646-4dc7-9c26-e7f8dc592df0?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+NDPSCasesNCRB2018to2020_Resource+KEY+ret_type+ret_limit
+
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    const filtereddata = data.records.filter(record => record.deaths_reported____col__3_ !== "0" && record.deaths_reported____col__3_ > 0 );
+    console.log("data filtereddata"+JSON.stringify(filtereddata));
+    let newArr = [];
+
+    {data.records.filter(record => !(record.state_ut).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(filteredName)),
+      newArr.push(filteredName)
+    ))}
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: newArr
+        .map((record) => record.state_ut),
+        datasets: [
+          {
+            label: "2018",
+            data: newArr
+              .map((record) => record._2018),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2019",
+            data: newArr
+              .map((record) => record._2019),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2020",
+            data: newArr
+              .map((record) => record._2020),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+         
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+const fetchNRIMaritalComplaintsJanuary2017to31stDecember2021 = (callback) => {
+  console.log("fetching data fetchNRIMaritalComplaintsJanuary2017to31stDecember2021");
+  const response = fetch(
+    //API_URL+"ba0713b7-e646-4dc7-9c26-e7f8dc592df0?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+NRIMaritalComplaintsJanuary2017to31stDecember2021_Resource+KEY+ret_type+ret_limit
+
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    const filtereddata = data.records.filter(record => record.country !== "0" && record.country > 0 );
+    console.log("data filtereddata"+JSON.stringify(filtereddata));
+    let newArr = [];
+
+    {data.records.filter(record => !(record.country).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(filteredName)),
+      newArr.push(filteredName)
+    ))}
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: newArr
+        .map((record) => record.country),
+        datasets: [
+          {
+            label: "Total No. of Complaints",
+            data: newArr
+              .map((record) => record.total_no__of_complaints),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
+const fetchCasesCrimesagainstChildrenNCRB2014to2017 = (callback) => {
+  console.log("fetching data fetchCasesCrimesagainstChildrenNCRB2014to2017");
+  const response = fetch(
+    //API_URL+"ba0713b7-e646-4dc7-9c26-e7f8dc592df0?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+CasesCrimesagainstChildrenNCRB2014to2017_Resource+KEY+ret_type+ret_limit
+
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    let newArr = [];
+
+    {data.records.filter(record => !(record.state_ut).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(data.records)),
+      newArr.push(filteredName)
+    ))}
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: newArr
+        .map((record) => record.state_ut),
+        datasets: [
+          {
+            label: "2014",
+            data: newArr
+              .map((record) => record._2014),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2015",
+            data: newArr
+              .map((record) => record._2015),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2016",
+            data: newArr
+              .map((record) => record._2016),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2017",
+            data: newArr
+              .map((record) => record._2017),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+         
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
+const fetchSeizedCounterfeitCurrencyNotesFrom2016To2020 = (callback) => {
+  console.log("fetching data fetchSeizedCounterfeitCurrencyNotesFrom2016To2020");
+  const response = fetch(
+    API_URL+SeizedCounterfeitCurrencyNotesFrom2016To2020_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    let newArr = [];
+
+    {data.records.filter(record => !(record.year_).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(data.records)),
+      newArr.push(filteredName)
+    ))}
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: newArr
+        .map((record) => record.year_),
+        datasets: [
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 2000",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___2000),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 1000",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___1000),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 500(O)",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___500_o_),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 500(N)",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___500_n_),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 200",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___200),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 100",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___100),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 50(O)",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___50_o_),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 50(N)",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___50_n_),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 20",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___20),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 10",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___10),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 5",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___5),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 2",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___2),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 1",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___1),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+const fetchCasesPoAActNCRB2015to2017 = (callback) => {
+  console.log("fetching data fetchCasesPoAActNCRB2015to2017");
+  const response = fetch(
+    //API_URL+"ba0713b7-e646-4dc7-9c26-e7f8dc592df0?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+CasesPoAActNCRB2015to2017_Resource+KEY+ret_type+ret_limit
+
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    const filtereddata = data.records.filter(record => record.deaths_reported____col__3_ !== "0" && record.deaths_reported____col__3_ > 0 );
+    console.log("data filtereddata"+JSON.stringify(filtereddata));
+
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: data.records
+        .map((record) => record.year),
+        datasets: [
+          {
+            label: "Number of cases in Courts including brought forward from previous year",
+            data: data.records
+              .map((record) => record.number_of_cases_in_courts_including_brought_forward_from_previous_year),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Number of cases compounded or withdrawn during trial",
+            data: data.records
+              .map((record) => record.number_of_cases_compounded_or_withdrawn_during_trial),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Number of cases ended in conviction",
+            data: data.records
+              .map((record) => record.number_of_cases_ended_in_conviction),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Number of cases ended in acquittal",
+            data: data.records
+              .map((record) => record.number_of_cases_ended_in_acquittal),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Number of cases pending with the courts at the end of the year",
+            data: data.records
+              .map((record) => record.number_of_cases_pending_with_the_courts_at_the_end_of_the_year),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Total number of cases disposed of by the Courts",
+            data: data.records
+              .map((record) => record.total_number_of_cases_disposed_of_by_the_courts),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
 const fetchForeignOriginUndertrialdec2020 = (callback) => {
   console.log("fetching data fetchMissingAndTracedPersons2020");
   const response = fetch(
@@ -1218,6 +1578,48 @@ export function Crime({ loggedIn, logout, login }) {
     });
   };
   
+  const getCasesPoAActNCRB2015to2017 = () => {
+    fetchCasesPoAActNCRB2015to2017((chartData) => {
+      setChartType('line');
+      setChartTitle(CasesNIA2017To2021);
+
+      setChartData(chartData);
+    });
+  };
+  
+  const getNDPSCasesNCRB2018to2020 = () => {
+    fetchNDPSCasesNCRB2018to2020((chartData) => {
+      setChartType('line');
+      setChartTitle(CasesNIA2017To2021);
+
+      setChartData(chartData);
+    });
+  };
+  const getNRIMaritalComplaintsJanuary2017to31stDecember2021 = () => {
+    fetchNRIMaritalComplaintsJanuary2017to31stDecember2021((chartData) => {
+      setChartType('line');
+      setChartTitle(NRIMaritalComplaintsJanuary2017to31stDecember2021);
+
+      setChartData(chartData);
+    });
+  };
+  
+  const getCasesCrimesagainstChildrenNCRB2014to2017 = () => {
+    fetchCasesCrimesagainstChildrenNCRB2014to2017((chartData) => {
+      setChartType('line');
+      setChartTitle(CasesCrimesagainstChildrenNCRB2014to2017);
+
+      setChartData(chartData);
+    });
+  };
+  const getSeizedCounterfeitCurrencyNotesFrom2016To2020 = () => {
+    fetchSeizedCounterfeitCurrencyNotesFrom2016To2020((chartData) => {
+      setChartType('line');
+      setChartTitle(SeizedCounterfeitCurrencyNotesFrom2016To2020);
+      setChartData(chartData);
+    });
+  };
+  
   return (
     <Content>
     <div
@@ -1235,7 +1637,7 @@ export function Crime({ loggedIn, logout, login }) {
         backgroundSize: "cover",
         filter: "contrast(75%)",
         border:"1px solid black",
-        //backgroundImage: "url(/img/wallpaper.jpeg)",
+        backgroundImage: "url(/img/Crime.png)",
       }}>
         <button className={classes.button} onClick={refreshChart}>{DisposalPersonsArrestedOffencesagainstState2020}</button>
         <button className={classes.button} onClick={getForeignCrime}>{CountryWiseForeignAccusedDuring2020}</button>
@@ -1251,7 +1653,12 @@ export function Crime({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getNumberofBoysandGirlsReportedMissing2014to2016}>{NCRBBoysandGirlsReportedMissing20142016}</button>
         <button className={classes.button} onClick={getForeignOriginUndertrialdec2020}>{ForeignPrisoners31December2020}</button>
         <button className={classes.button} onClick={getCasesRegisteredByNIAFrom2017To2021}>{CasesNIA2017To2021}</button>
-        
+        <button className={classes.button} onClick={getCasesPoAActNCRB2015to2017}>{CasesPoAActNCRB2015to2017}</button>
+        <button className={classes.button} onClick={getNDPSCasesNCRB2018to2020}>{NDPSCasesNCRB2018to2020}</button>
+        <button className={classes.button} onClick={getNRIMaritalComplaintsJanuary2017to31stDecember2021}>{NRIMaritalComplaintsJanuary2017to31stDecember2021}</button>
+        <button className={classes.button} onClick={getCasesCrimesagainstChildrenNCRB2014to2017}>{CasesCrimesagainstChildrenNCRB2014to2017}</button>
+        <button className={classes.button} onClick={getSeizedCounterfeitCurrencyNotesFrom2016To2020}>{SeizedCounterfeitCurrencyNotesFrom2016To2020}</button>
+
     </div>
      {chartData && chartType === 'bar' && 
     <div style={{

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
-import { SummaryCard } from "../src/People/Driver";
 import Content from "../src/Dashboard/Content";
+import { ChartPie } from "./ChartPie";
+
+import { ChartDonut } from "./ChartDonut";
+
+import { ChartLine } from "./ChartLine";
 import { KEY , API_URL,ret_type,ret_limit,DepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019_Resource,
   StateDonorLoanWiseLoanReceivedByStatesFromInternationalFinancialInstitutionsFrom201920To202122,
   YearWiseQuantityAndValueOfTheUreaImportedByTheCountryFrom201617To202021,YearWiseCasesOfCorruptionAgainstTheCentralGovernmentEmployeesWorkingIn45DepartmentsCBIFrom2017To2021,
@@ -13,7 +15,9 @@ import { KEY , API_URL,ret_type,ret_limit,Departmentwisereceiptsdisposalandpende
   CategoryWisePharmaceuticalsImportsFromChinaFrom201516To202122_Resource,StateDonorLoanWiseLoanReceivedByStatesFromInternationalFinancialInstitutionsFrom201920To202122_Resource,
   YearWiseCasesOfCorruptionAgainstTheCentralGovernmentEmployeesWorkingIn45DepartmentsCBIFrom2017To2021_Resource,
   YearWiseQuantityAndValueOfTheUreaImportedByTheCountryFrom201617To202021_Resource,DepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019,
-  SectorWiseFDIEquityInflowFrom201617To202021,CountryWiseExportIndiaWheatInTermsQuantityTop25CountriesFrom1stApril2021To21stMarch2022,CategoryWisePharmaceuticalsImportsFromChinaFrom201516To202122} from "../src/Const/Const";
+  SectorWiseFDIEquityInflowFrom201617To202021,CountryWiseExportIndiaWheatInTermsQuantityTop25CountriesFrom1stApril2021To21stMarch2022,CategoryWisePharmaceuticalsImportsFromChinaFrom201516To202122,
+  RainfallInAllIndia1901To2019_Resource,RainfallInAllIndia1901To2019,StateUTswiseIndianArmyIntakefrom201718to201920_Resource,
+  StateUTswiseIndianArmyIntakefrom201718to201920} from "../src/Const/Const";
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchDepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019API = (callback) => {
   console.log("fetching data"+KEY);
@@ -28,59 +32,47 @@ const fetchDepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom0101201
       // set the chart data, trim the data to 10 records
       const chartData = {
         labels: data.records
-          .map((record) => record.ministry_department_state)
-          .slice(0, 10),
+          .map((record) => record.ministry_department_state),
         datasets: [
           {
             label: "Total Pending",
             data: data.records
-              .map((record) => record.total_pending_as_on_01_11_2019)
-              .slice(0, 10),
+              .map((record) => record.total_pending_as_on_01_11_2019),
             backgroundColor: "rgba(155, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Pending > 1 year",
             data: data.records
-              .map((record) => record.pending_more_than_1_year)
-              .slice(0, 10),
+              .map((record) => record.pending_more_than_1_year),
             backgroundColor: "rgba(55, 99, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Pending Between 6 - 12 Month",
             data: data.records
-              .map((record) => record.pending_between_6_to_12_months)
-              .slice(0, 10),
+              .map((record) => record.pending_between_6_to_12_months),
             backgroundColor: "rgba(255, 255, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Pending Between 2 - 6 Month",
             data: data.records
-              .map((record) => record.pending_between_2_to_6_months)
-              .slice(0, 10),
+              .map((record) => record.pending_between_2_to_6_months),
             backgroundColor: "rgba(105, 255, 132, 0.6)",
             borderWidth: 4,
           },
           {
             label: "Pending < 2 Month",
             data: data.records
-              .map((record) => record.pending_less_than_2_months)
-              .slice(0, 10),
+              .map((record) => record.pending_less_than_2_months),
             backgroundColor: "rgba(45, 155, 132, 0.6)",
             borderWidth: 4,
           },
         ],
       };
 
-      //sort the data in descending order and remove the last 10 records
-      chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-
+      
       callback(chartData);
     });
   });
@@ -116,6 +108,106 @@ const fetchCasesOfCorruptionCentralGovtEmployeeCBIFrom2017To2021API = (callback)
             borderWidth: 4,
           },
  
+          
+        ],
+      };  
+      callback(chartData);
+    });
+  });
+};
+
+const fetchRainfallInAllIndia1901To2019 = (callback) => {
+  console.log(" fetchRainfallInAllIndia1901To2019"+KEY);
+  const response = fetch(
+    //API_URL+"e297f7c6-3ffa-4776-92b3-0dd05dde4e2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+RainfallInAllIndia1901To2019_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: data.records
+          .map((record) => record.year),
+        datasets: [
+          {
+            label: "Jun",
+            data: data.records
+              .map((record) => record.jun),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Jul",
+            data: data.records
+              .map((record) => record.jul),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Aug",
+            data: data.records
+              .map((record) => record.aug),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Sep",
+            data: data.records
+              .map((record) => record.sep),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "Jun - Sep",
+            data: data.records
+              .map((record) => record.jun_sep),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+        ],
+      };  
+      callback(chartData);
+    });
+  });
+};
+const fetchStateUTswiseIndianArmyIntakefrom201718to201920 = (callback) => {
+  console.log(" fetchStateUTswiseIndianArmyIntakefrom201718to201920"+KEY);
+  const response = fetch(
+    //API_URL+"e297f7c6-3ffa-4776-92b3-0dd05dde4e2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+StateUTswiseIndianArmyIntakefrom201718to201920_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: data.records
+          .map((record) => record.states__ut),
+        datasets: [
+          {
+            label: "Intake - 2017-18",
+            data: data.records
+              .map((record) => record.intake___2017_18),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Intake - 2018-19",
+            data: data.records
+              .map((record) => record.Intake - 2018-19),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Intake - 2019-20",
+            data: data.records
+              .map((record) => record.intake___2019_20),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
           
         ],
       };  
@@ -502,6 +594,20 @@ export function Gov({ loggedIn, logout, login }) {
       setChartData(chartData);
     });
   };
+  const getRainfallInAllIndia1901To2019 = () => {
+    fetchRainfallInAllIndia1901To2019((chartData) => {
+      setChartType('line');
+      setChartTitle(RainfallInAllIndia1901To2019);
+      setChartData(chartData);
+    });
+  };
+  const getStateUTswiseIndianArmyIntakefrom201718to201920 = () => {
+    fetchStateUTswiseIndianArmyIntakefrom201718to201920((chartData) => {
+      setChartType('line');
+      setChartTitle(StateUTswiseIndianArmyIntakefrom201718to201920);
+      setChartData(chartData);
+    });
+  };
   
   return (
 <Content>
@@ -520,7 +626,7 @@ export function Gov({ loggedIn, logout, login }) {
         backgroundSize: "cover",
         filter: "contrast(75%)",
         border:"1px solid black",
-        //backgroundImage: "url(/img/wallpaper.jpeg)",
+        backgroundImage: "url(/img/Gov.png)",
       }}>
         <button className={classes.button} onClick={getDepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019}>{DepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019}</button>
         <button className={classes.button} onClick={getFDI201617To202021}>{SectorWiseFDIEquityInflowFrom201617To202021}</button>
@@ -531,16 +637,20 @@ export function Gov({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getYearWiseQuantityValueOfUreaImportedfrom201617To202021}>{YearWiseQuantityAndValueOfTheUreaImportedByTheCountryFrom201617To202021}</button>
 
         <button className={classes.button} onClick={getCasesOfCorruptionCentralGovtEmployeeCBIFrom2017To2021}>{YearWiseCasesOfCorruptionAgainstTheCentralGovernmentEmployeesWorkingIn45DepartmentsCBIFrom2017To2021}</button>
+        <button className={classes.button} onClick={getRainfallInAllIndia1901To2019}>{RainfallInAllIndia1901To2019}</button>
+
+        <button className={classes.button} onClick={getStateUTswiseIndianArmyIntakefrom201718to201920}>{StateUTswiseIndianArmyIntakefrom201718to201920}</button>
         </div>
 
-        <div style={{
+        {chartData && chartType === 'bar' && 
+    <div style={{
         height: "50%",
         backgroundPosition: "center",
         backgroundSize: "cover",
         filter: "contrast(75%)",
         //backgroundImage: "url(/img/wallpaper2-min.png)",
       }}>
-          <div style={{
+        <div style={{
         height: "50%",
         backgroundPosition: "center",
         backgroundSize: "cover",
@@ -551,11 +661,86 @@ export function Gov({ loggedIn, logout, login }) {
       }}>
         {chartTitle}
         </div>
-        {chartData && <ChartGdp chartData={chartData} />}      
-      </div> 
-    </div>
-    </Content>
-  );
 
-  
+        {chartData && <ChartGdp chartData={chartData} />}
+      </div>
+    }
+         {chartData && chartType === 'pie' && 
+      <div 
+       style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+               <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
+        {chartData && <ChartPie chartData={chartData} />}
+      </div>
+          }
+         {chartData && chartType === 'donut' && 
+
+      <div 
+       style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+               <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
+        {chartData && <ChartDonut chartData={chartData} />}
+      </div>
+      }
+         {chartData && chartType === 'line' && 
+
+<div 
+ style={{
+  height: "50%",
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+  filter: "contrast(75%)",
+  //backgroundImage: "url(/img/wallpaper2-min.png)",
+}}>
+                <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
+  {chartData && <ChartLine chartData={chartData} />}
+</div>
+}
+
+    </div>
+
+
+    </Content>
+
+  );
 }

@@ -6,7 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
 import { SummaryCard } from "../src/People/Driver";
 import Content from "../src/Dashboard/Content";
-import { KEY , API_URL} from "../src/Const/Const";
+import { KEY , API_URL, ret_type,ret_limit,GDPOfIndia_Resource,LiabilitiesAndAssetsOfTheReserveBankOfIndia_Resource,
+  LiabilitiesAndAssetsOfTheReserveBankOfIndia,GrossDefenceBudget_Resource,GDPOfIndia,GrossDefenceBudget} from "../src/Const/Const";
 import { Line } from "react-chartjs-2";
 import 'chart.js/auto'
 import { green, purple } from "@material-ui/core/colors";
@@ -16,28 +17,13 @@ import colors from "./Theme/colors";
 const fetchLiabilitiesAndAssetsOfRBI2001TO2016API = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"e74bed5c-7578-4a42-8fb0-fecf931d4fb7?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"e74bed5c-7578-4a42-8fb0-fecf931d4fb7?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+LiabilitiesAndAssetsOfTheReserveBankOfIndia_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
-    // const chartData = {
-    //   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    //   datasets: [
-    //     {
-    //       label: "First dataset",
-    //       data: [33, 53, 85, 41, 44, 65],
-    //       fill: true,
-    //       backgroundColor: "rgba(75,192,192,0.2)",
-    //       borderColor: "rgba(75,192,192,1)"
-    //     },
-    //     {
-    //       label: "Second dataset",
-    //       data: [33, 25, 35, 51, 54, 76],
-    //       fill: false,
-    //       borderColor: "#742774"
-    //     }
-    //   ]
-    // };
+
     data.then((data) => {
       // set the chart data, trim the data to 10 records
       console.log("fetching data"+JSON.stringify(data));
@@ -177,33 +163,7 @@ const fetchLiabilitiesAndAssetsOfRBI2001TO2016API = (callback) => {
           },
         ],
       };
-      //  const chartData = {
-      //   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-      //   datasets: [
-      //     {
-      //       label: "First dataset",
-      //       data: [33, 53, 85, 41, 44, 65],
-      //       fill: true,
-      //       backgroundColor: "rgba(75,192,192,0.2)",
-      //       borderColor: "rgba(75,192,192,1)"
-      //     },
-      //     {
-      //       label: "Second dataset",
-      //       data: [33, 25, 35, 51, 54, 76],
-      //       fill: false,
-      //       borderColor: "#742774"
-      //     }
-      //   ]
-      // };
-
-
-      //sort the data in descending order and remove the last 10 records
-      // chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-
+    
       callback(chartData);
     });
   });
@@ -213,7 +173,9 @@ const fetchLiabilitiesAndAssetsOfRBI2001TO2016API = (callback) => {
 const fetchGDPOfIndiaAPI = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"07d49df4-233f-4898-92db-e6855d4dd94c?api-key="+KEY+"&format=json&limit=62"
+    //API_URL+"07d49df4-233f-4898-92db-e6855d4dd94c?api-key="+KEY+"&format=json&limit=62"
+    API_URL+GDPOfIndia_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -393,14 +355,6 @@ const fetchGDPOfIndiaAPI = (callback) => {
           },
         ],
       };
-
-      //sort the data in descending order and remove the last 10 records
-      // chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-
       callback(chartData);
     });
   });
@@ -409,8 +363,9 @@ const fetchGDPOfIndiaAPI = (callback) => {
 const fetchGrossDefenceBudget = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"028ce5f5-c769-468d-8c1f-f086a74b1ee0?api-key="+KEY+"&format=json"
+    //API_URL+"028ce5f5-c769-468d-8c1f-f086a74b1ee0?api-key="+KEY+"&format=json"
     //https://api.data.gov.in/resource/028ce5f5-c769-468d-8c1f-f086a74b1ee0?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json
+    API_URL+GrossDefenceBudget_Resource+KEY+ret_type+ret_limit
 
   );
   response.then((response) => {
@@ -528,30 +483,32 @@ export function Rbi({ loggedIn, logout, login }) {
 
   //const [loading, setLoading] = useState(false);
   const [chartData, setChartData] = useState(null);
-  // const chartData = null;
+  const [chartType, setChartType] = useState(null);
+  const [chartTitle, setChartTitle] = useState(null);
 
   const getLiabilitiesAndAssetsOfRBI2001TO2016 = () => {
     fetchLiabilitiesAndAssetsOfRBI2001TO2016API((chartData) => {
-      // chartData = chartData;
+      setChartType('line');
+      setChartTitle(LiabilitiesAndAssetsOfTheReserveBankOfIndia);
       setChartData(chartData);
     });
   };
   const getGDPOfIndia = () => {
     fetchGDPOfIndiaAPI((chartData) => {
-      // chartData = chartData;
+      setChartType('line');
+      setChartTitle(GDPOfIndia);
       setChartData(chartData);
     });
   };
 
   const getGrossDefenceBudget = () => {
     fetchGrossDefenceBudget((chartData) => {
-      // chartData = chartData;
+      setChartType('line');
+      setChartTitle(GrossDefenceBudget);
       setChartData(chartData);
     });
   };
-  // useEffect(() => {
-  //   refreshChart();
-  // }, [chartData]);
+
 
   return (
     <Content>
@@ -570,24 +527,34 @@ export function Rbi({ loggedIn, logout, login }) {
         backgroundSize: "cover",
         filter: "contrast(75%)",
         border:"1px solid black",
-        style:"blue"
-        //backgroundImage: "url(/img/wallpaper.jpeg)",
+        style:"blue",
+        backgroundImage: "url(/img/Rbi.png)",
       }}>
-        <button  className={classes.button}  onClick={getLiabilitiesAndAssetsOfRBI2001TO2016} >Liabilities And Assets Of The Reserve Bank Of India</button>
+        <button  className={classes.button}  onClick={getLiabilitiesAndAssetsOfRBI2001TO2016}>{LiabilitiesAndAssetsOfTheReserveBankOfIndia}</button>
 
-        <button className={classes.button} onClick={getGDPOfIndia}>GDP Of India And Major Sectors Of Economy, Share Of Each Sector To GDP And Growth Rate Of GDP And Other Sectors Of Economy 1951-52 Onward</button>
+        <button className={classes.button} onClick={getGDPOfIndia}>{GDPOfIndia}</button>
 
-        <button className={classes.button} onClick={getGrossDefenceBudget}>Year-Wise Gross Defence Budget (BE) As Percentage Of GDP From 2019-20 To 2021-22</button>
+        <button className={classes.button} onClick={getGrossDefenceBudget}>{GrossDefenceBudget}</button>
       </div>
 
-      <div 
-       style={{
-        height: "1000px",
+      <div style={{
+        height: "50%",
         backgroundPosition: "center",
         backgroundSize: "cover",
         filter: "contrast(75%)",
-        //backgroundImage: "url(/img/wallpaper.jpeg)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
       }}>
+      <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
         {chartData && <ChartGdp chartData={chartData} />}      
       </div> 
     </div>

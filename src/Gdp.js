@@ -5,14 +5,20 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
 import { SummaryCard } from "../src/People/Driver";
+import { ChartDonut } from "./ChartDonut";
+
+import { ChartLine } from "./ChartLine";
 import Content from "../src/Dashboard/Content";
-import { KEY , API_URL} from "../src/Const/Const";
+import { KEY , API_URL, ret_type,ret_limit,GDPOfIndia,GrossDefenceBudget_Resource,GDPOfIndia_Resource,NationalIncomeAndExpenditureComponentsOfGDP_Resource,
+  GrossDefenceBudget,NationalIncomeAndExpenditureComponentsOfGDP} from "../src/Const/Const";
 import { ChartPie } from "./ChartPie";
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchAPI = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"4b97a963-c5ee-43ad-8de6-c38629ff2342?api-key="+KEY+"&format=json&offset=0&limit=100"
+    //API_URL+"4b97a963-c5ee-43ad-8de6-c38629ff2342?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+NationalIncomeAndExpenditureComponentsOfGDP_Resource+KEY+ret_type+ret_limit
+
   );
   response.then((response) => {
     const data = response.json();
@@ -45,14 +51,6 @@ const fetchAPI = (callback) => {
           
         ],
       };
-
-      //sort the data in descending order and remove the last 10 records
-      // chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-
       callback(chartData);
     });
   });
@@ -62,7 +60,9 @@ const fetchAPI = (callback) => {
 const fetchGDPOfIndiaAPI = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"07d49df4-233f-4898-92db-e6855d4dd94c?api-key="+KEY+"&format=json&limit=62"
+    //API_URL+"07d49df4-233f-4898-92db-e6855d4dd94c?api-key="+KEY+"&format=json&limit=62"
+    API_URL+GDPOfIndia_Resource+KEY+ret_type+ret_limit
+    
   );
   response.then((response) => {
     const data = response.json();
@@ -243,13 +243,6 @@ const fetchGDPOfIndiaAPI = (callback) => {
         ],
       };
 
-      //sort the data in descending order and remove the last 10 records
-      // chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-
       callback(chartData);
     });
   });
@@ -258,9 +251,9 @@ const fetchGDPOfIndiaAPI = (callback) => {
 const fetchGrossDefenceBudget = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
-    API_URL+"028ce5f5-c769-468d-8c1f-f086a74b1ee0?api-key="+KEY+"&format=json"
+    //API_URL+"028ce5f5-c769-468d-8c1f-f086a74b1ee0?api-key="+KEY+"&format=json"
     //https://api.data.gov.in/resource/028ce5f5-c769-468d-8c1f-f086a74b1ee0?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json
-
+    API_URL+GrossDefenceBudget_Resource+KEY+ret_type+ret_limit
   );
   response.then((response) => {
     const data = response.json();
@@ -302,13 +295,6 @@ const fetchGrossDefenceBudget = (callback) => {
           
         ],
       };
-
-      //sort the data in descending order and remove the last 10 records
-      // chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
 
       callback(chartData);
     });
@@ -454,39 +440,40 @@ export function Gdp({ loggedIn, logout, login }) {
   //const classes = useStyles();
   const classes = useStyles();
 
-  //const [loading, setLoading] = useState(false);
   const [chartData, setChartData] = useState(null);
-  // const chartData = null;
+  const [chartType, setChartType] = useState('bar');
 
+  const [chartTitle, setChartTitle] = useState('bar');
   const refreshChart = () => {
     fetchAPI((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
+      setChartTitle(NationalIncomeAndExpenditureComponentsOfGDP);
       setChartData(chartData);
     });
   };
   const getGDPOfIndia = () => {
     fetchGDPOfIndiaAPI((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
+      setChartTitle(GDPOfIndia);
       setChartData(chartData);
     });
   };
 
   const getGrossDefenceBudget = () => {
     fetchGrossDefenceBudget((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
+      setChartTitle(GrossDefenceBudget);
       setChartData(chartData);
     });
   };
 
   const getGDPIndiaWB = () => {
     fetchGDPIndiaWB ((chartData) => {
-      // chartData = chartData;
+      setChartType('bar');
+      //setChartTitle(GDPdataFromWorldBank);
       setChartData(chartData);
     });
   };
-  // useEffect(() => {
-  //   refreshChart();
-  // }, [chartData]);
 
   return (
     <Content>
@@ -505,42 +492,116 @@ export function Gdp({ loggedIn, logout, login }) {
         backgroundSize: "cover",
         filter: "contrast(75%)",
         border:"1px solid black",
-        //backgroundImage: "url(/img/wallpaper.jpeg)",
+        backgroundImage: "url(/img/Gdp.png)",
       }}>
-        <button className={classes.button} onClick={refreshChart}>Year-Wise Second Advance Estimates Of National Income And Expenditure Components Of GDP Percentage Change In Real GDP From 2018-19 To 2021-22</button>
+        <button className={classes.button} onClick={refreshChart}>{NationalIncomeAndExpenditureComponentsOfGDP}</button>
 
-        <button className={classes.button} onClick={getGDPOfIndia}>GDP Of India And Major Sectors Of Economy, Share Of Each Sector To GDP And Growth Rate Of GDP And Other Sectors Of Economy 1951-52 Onward</button>
+        <button className={classes.button} onClick={getGDPOfIndia}>{GDPOfIndia}</button>
 
-        <button className={classes.button} onClick={getGrossDefenceBudget}>Year-Wise Gross Defence Budget (BE) As Percentage Of GDP From 2019-20 To 2021-22</button>
+        <button className={classes.button} onClick={getGrossDefenceBudget}>{GrossDefenceBudget}</button>
 
         <button className={classes.button} onClick={getGDPIndiaWB}>GDP data From World Bank</button>
         </div>
 
-      <div 
-       style={{
+        {chartData && chartType === 'bar' && 
+    <div style={{
         height: "50%",
         backgroundPosition: "center",
         backgroundSize: "cover",
         filter: "contrast(75%)",
         //backgroundImage: "url(/img/wallpaper2-min.png)",
-      }}
-      >
-        {chartData && <ChartGdp chartData={chartData} />}      
-      </div> 
-      <div 
-       style={{
+      }}>
+        <div style={{
         height: "50%",
         backgroundPosition: "center",
         backgroundSize: "cover",
         filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
         //backgroundImage: "url(/img/wallpaper2-min.png)",
-      }}
-      >
-        {chartData && <ChartPie chartData={chartData} />}      
-      </div> 
-    </div>
-    </Content>
-  );
+      }}>
+        {chartTitle}
+        </div>
 
-  
+        {chartData && <ChartGdp chartData={chartData} />}
+      </div>
+    }
+         {chartData && chartType === 'pie' && 
+      <div 
+       style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+               <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
+        {chartData && <ChartPie chartData={chartData} />}
+      </div>
+          }
+         {chartData && chartType === 'donut' && 
+
+      <div 
+       style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+               <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
+        {chartData && <ChartDonut chartData={chartData} />}
+      </div>
+      }
+         {chartData && chartType === 'line' && 
+
+<div 
+ style={{
+  height: "50%",
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+  filter: "contrast(75%)",
+  //backgroundImage: "url(/img/wallpaper2-min.png)",
+}}>
+                <div style={{
+        height: "50%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        filter: "contrast(75%)",
+        fontWeight : "bold",
+        fontSize:20,
+        //backgroundImage: "url(/img/wallpaper2-min.png)",
+      }}>
+        {chartTitle}
+        </div>
+  {chartData && <ChartLine chartData={chartData} />}
+</div>
+}
+
+    </div>
+
+
+    </Content>
+
+  );
 }

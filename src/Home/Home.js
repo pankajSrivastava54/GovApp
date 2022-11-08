@@ -59,7 +59,7 @@ const cards = [
   {
     name: "Crime",
     description: "Crime Related Charts & Data.",
-    img: "Crime.PNG",
+    img: "Crime.png",
     path: "crime",
   },
   // {
@@ -71,13 +71,13 @@ const cards = [
   {
     name: "Gov",
     description: "Government Related Charts & Data.",
-    img: "Gov.PNG",
+    img: "Gov.png",
     path: "Gov",
   },
   {
     name: "Gdp",
     description: "GDP Related Charts & Data.",
-    img: "GDP.PNG",
+    img: "GDP.png",
     path: "Gdp",
   },
   // {
@@ -103,25 +103,31 @@ const cards = [
   {
     name: "Shipping",
     description: "Shipping Related Chart & Data.",
-    img: "Shipping.PNG",
+    img: "Shipping.png",
     path: "shipping",
   },
   {
     name: "Ganga",
     description: "Maa Ganga Related Chart & Data.",
-    img: "Ganga.PNG",
+    img: "Ganga.png",
+    path: "ganga",
+  },
+  {
+    name: "Weather",
+    description: "Weather Related Chart & Data.",
+    img: "Ganga.png",
     path: "ganga",
   },
   {
     name: "Tourism",
     description: "Tourism Related Chart & Data.",
-    img: "Tourism.PNG",
+    img: "Tourism.png",
     path: "map",
   },
   {
     name: "Education",
     description: "Education Related Chart & Data.",
-    img: "Education.PNG",
+    img: "Education.png",
     path: "education",
   },
   // {
