@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
-import { SummaryCard } from "../src/People/Driver";
 import { ChartDonut } from "./ChartDonut";
 
 import { ChartLine } from "./ChartLine";
 import Content from "../src/Dashboard/Content";
 import { KEY , API_URL, ret_type,ret_limit,GDPOfIndia,GrossDefenceBudget_Resource,GDPOfIndia_Resource,NationalIncomeAndExpenditureComponentsOfGDP_Resource,
-  GrossDefenceBudget,NationalIncomeAndExpenditureComponentsOfGDP} from "../src/Const/Const";
+  GrossDefenceBudget,NationalIncomeAndExpenditureComponentsOfGDP,useStyles} from "../src/Const/Const";
 import { ChartPie } from "./ChartPie";
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchAPI = (callback) => {
@@ -367,74 +363,11 @@ const fetchGDPIndiaWB = (callback) => {
         ],
       };
 
-      //sort the data in descending order and remove the last 10 records
-      // chartData.datasets[0].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[1].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[2].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[3].data.sort((a, b) => b - a).slice(0, 20);
-      // chartData.datasets[4].data.sort((a, b) => b - a).slice(0, 20);
-
       callback(chartData);
     });
   });
 };
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(img/wallpaper2-min.PNG)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    paddingTop: "40px",
-  },
-  paper: {
-    margin: theme.spacing(8, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
- 
-  button: {
-    alignSelf:'center',
-    width:'20%',
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.error.light,
-    fontWeight : "bold",
-    fontSize:20,
-    color:'white'
-    },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
 export function Gdp({ loggedIn, logout, login }) {
   //const classes = useStyles();
@@ -492,7 +425,7 @@ export function Gdp({ loggedIn, logout, login }) {
         backgroundSize: "cover",
         filter: "contrast(75%)",
         border:"1px solid black",
-        backgroundImage: "url(/img/Gdp.png)",
+        backgroundImage: "url(/img/GDP.png)",
       }}>
         <button className={classes.button} onClick={refreshChart}>{NationalIncomeAndExpenditureComponentsOfGDP}</button>
 

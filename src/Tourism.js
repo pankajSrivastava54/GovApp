@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
 import Content from "../src/Dashboard/Content";
 import { KEY , API_URL,ret_type,ret_limit,FTAs2019To2020_Resource,FTAs2019To2020,
-  FTASTop60CountriesFrom2018To2020_Resource,FTASTop60CountriesFrom2018To2020} from "../src/Const/Const";
+  FTASTop60CountriesFrom2018To2020_Resource,FTASTop60CountriesFrom2018To2020,useStyles,FTVsfrom2017to2020_Resource,
+  FTVsfrom2017to2020,FEEsTourismFrom2018To2020_Resource,FEEsTourismFrom2018To2020} from "../src/Const/Const";
 import 'chart.js/auto'
 import { ChartPie } from "./ChartPie";
 import { ChartDonut } from "./ChartDonut";
@@ -66,6 +66,7 @@ const fetchTop15CountriesFTAs = (callback) => {
     });
   });
 };
+
 
 const fetchFTASTop60CountriesFrom2018To2020 = (callback) => {
   console.log("fetching fetchFTASTop60CountriesFrom2018To2020"+KEY);
@@ -170,50 +171,100 @@ const fetchFTASTop60CountriesFrom2018To2020 = (callback) => {
   });
 };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(img/wallpaper2-min.PNG)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    paddingTop: "40px",
-  },
-  paper: {
-    margin: theme.spacing(8, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  button: {
-    alignSelf:'center',
-    width:'20%',
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.light,
-    fontWeight : "bold",
-    fontSize:20,
-    color:'black'
-    },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
+const fetchFTVsfrom2017to2020 = (callback) => {
+  console.log("fetching fetchFTVsfrom2017to2020"+KEY);
+  const response = fetch(
+    //API_URL+"6c0a9e43-360f-460b-91a1-02837d827f3a?api-key="+KEY+"&format=json&limit=65"
+    API_URL+FTVsfrom2017to2020_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+      let newArr = [];
+
+      {data.records.filter(record => !(record.state_ut).includes('Total')).map(filteredName => (
+        console.log("filteredName size"+JSON.stringify(filteredName)),
+        newArr.push(filteredName)
+      ))}
+
+      const chartData = {
+        labels: newArr
+        .map((record) => record.state_ut),
+        datasets: [
+          {
+            label: "2017 - FTV",
+            data: newArr
+              .map((record) => record._2017___ftv),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2018 - FTV",
+            data: newArr
+              .map((record) => record._2018___ftv),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2019 - FTV",
+            data: newArr
+              .map((record) => record._2018___ftv),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2020 - FTV",
+            data: newArr
+              .map((record) => record._2020___ftv),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
+const fetchFEEsTourismFrom2018To2020 = (callback) => {
+  console.log("fetching FEEsTourismFrom2018To2020_Resource"+KEY);
+  const response = fetch(
+    //API_URL+"6c0a9e43-360f-460b-91a1-02837d827f3a?api-key="+KEY+"&format=json&limit=65"
+    API_URL+FEEsTourismFrom2018To2020_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+   
+
+      const chartData = {
+        labels:  data.records
+        .map((record) => record.year),
+        datasets: [
+          {
+            label: "FEE from Tourism (in Rs. Crore)",
+            data: data.records
+              .map((record) => record.fee_from_tourism__in_rs__crore_),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
 export function Tourism({ loggedIn, logout, login }) {
   const classes = useStyles();
 
@@ -232,6 +283,20 @@ export function Tourism({ loggedIn, logout, login }) {
   const getFTASTop60CountriesFrom2018To2020 = () => {
     fetchFTASTop60CountriesFrom2018To2020((chartData) => {
       setChartType('pie');
+      setChartTitle(FTAs2019To2020);
+      setChartData(chartData);
+    });
+  };
+  const getFTVsfrom2017to2020 = () => {
+    fetchFTVsfrom2017to2020((chartData) => {
+      setChartType('bar');
+      setChartTitle(FTAs2019To2020);
+      setChartData(chartData);
+    });
+  };
+  const getFEEsTourismFrom2018To2020 = () => {
+    fetchFEEsTourismFrom2018To2020((chartData) => {
+      setChartType('bar');
       setChartTitle(FTAs2019To2020);
       setChartData(chartData);
     });
@@ -258,6 +323,8 @@ export function Tourism({ loggedIn, logout, login }) {
       }}>
         <button className={classes.button} onClick={getTop15CountriesFTAs}>{FTAs2019To2020}</button>
         <button className={classes.button} onClick={getFTASTop60CountriesFrom2018To2020}>{FTASTop60CountriesFrom2018To2020}</button>
+        <button className={classes.button} onClick={getFTVsfrom2017to2020}>{FTVsfrom2017to2020}</button>
+        <button className={classes.button} onClick={getFEEsTourismFrom2018To2020}>{FEEsTourismFrom2018To2020}</button>
 
     </div>
       

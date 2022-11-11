@@ -17,7 +17,10 @@ import { KEY , API_URL,ret_type,ret_limit,Departmentwisereceiptsdisposalandpende
   YearWiseQuantityAndValueOfTheUreaImportedByTheCountryFrom201617To202021_Resource,DepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019,
   SectorWiseFDIEquityInflowFrom201617To202021,CountryWiseExportIndiaWheatInTermsQuantityTop25CountriesFrom1stApril2021To21stMarch2022,CategoryWisePharmaceuticalsImportsFromChinaFrom201516To202122,
   RainfallInAllIndia1901To2019_Resource,RainfallInAllIndia1901To2019,StateUTswiseIndianArmyIntakefrom201718to201920_Resource,
-  StateUTswiseIndianArmyIntakefrom201718to201920} from "../src/Const/Const";
+  StateUTswiseIndianArmyIntakefrom201718to201920,useStyles,ZoneWiseVacanciesIndianRailwaysOn01022022_Resource,
+  ZoneWiseVacanciesIndianRailwaysOn01022022,NCAPduring202122,NCAPduring202122_Resource,FDIPowerSectorfrom201112to202122_Resource,
+  FDIPowerSectorfrom201112to202122,HighestCorporateNetProfitsduring201920and202021_Resource,HighestCorporateNetProfitsduring201920and202021,
+  Top30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122_Resource,Top30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122} from "../src/Const/Const";
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchDepartmentwisereceiptsdisposalandpendencyofPublicGrievancefrom01012016to01112019API = (callback) => {
   console.log("fetching data"+KEY);
@@ -172,6 +175,8 @@ const fetchRainfallInAllIndia1901To2019 = (callback) => {
     });
   });
 };
+
+
 const fetchStateUTswiseIndianArmyIntakefrom201718to201920 = (callback) => {
   console.log(" fetchStateUTswiseIndianArmyIntakefrom201718to201920"+KEY);
   const response = fetch(
@@ -197,7 +202,7 @@ const fetchStateUTswiseIndianArmyIntakefrom201718to201920 = (callback) => {
           {
             label: "Intake - 2018-19",
             data: data.records
-              .map((record) => record.Intake - 2018-19),
+              .map((record) => record.intake___2018_19),
             backgroundColor: "rgba(255,0,0,1)",
             borderWidth: 4,
           },
@@ -215,6 +220,231 @@ const fetchStateUTswiseIndianArmyIntakefrom201718to201920 = (callback) => {
     });
   });
 };
+
+
+
+const fetchZoneWiseVacanciesIndianRailwaysOn01022022 = (callback) => {
+  console.log(" fetchZoneWiseVacanciesIndianRailwaysOn01022022"+KEY);
+  const response = fetch(
+    //API_URL+"e297f7c6-3ffa-4776-92b3-0dd05dde4e2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+ZoneWiseVacanciesIndianRailwaysOn01022022_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      let newArr = [];
+
+      {data.records.filter(record => !(record.zonal_railways).includes('Total')).map(filteredName => (
+        console.log("filteredName size"+JSON.stringify(data.records)),
+        newArr.push(filteredName)
+      ))}
+      const chartData = {
+        labels: newArr
+          .map((record) => record.zonal_railways),
+        datasets: [
+          {
+            label: "Intake - 2017-18",
+            data: newArr
+              .map((record) => record.vacancy_as_on_01_02_2022___gazetted_vacancies),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Intake - 2018-19",
+            data: newArr
+              .map((record) => record.vacancy_as_on_01_02_2022___non_gazetted_vacancies),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Intake - 2019-20",
+            data: newArr
+              .map((record) => record.intake___2019_20),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          
+        ],
+      };  
+      callback(chartData);
+    });
+  });
+};
+
+const fetchNCAPduring202122 = (callback) => {
+  console.log(" fetchNCAPduring202122"+KEY);
+  const response = fetch(
+    //API_URL+"e297f7c6-3ffa-4776-92b3-0dd05dde4e2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+NCAPduring202122_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      let newArr = [];
+
+      {data.records.filter(record => !(record.state).includes('Total')).map(filteredName => (
+        console.log("filteredName size"+JSON.stringify(data.records)),
+        newArr.push(filteredName)
+      ))}
+      const chartData = {
+        labels: newArr
+          .map((record) => record.state+"-"+record.cities),
+        datasets: [
+          {
+            label: "Fund Released",
+            data: newArr
+              .map((record) => record.fund_released),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          
+        ],
+      };  
+      callback(chartData);
+    });
+  });
+};
+
+const fetchFDIPowerSectorfrom201112to202122 = (callback) => {
+  console.log(" fetchFDIPowerSectorfrom201112to202122"+KEY);
+  const response = fetch(
+    //API_URL+"e297f7c6-3ffa-4776-92b3-0dd05dde4e2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+FDIPowerSectorfrom201112to202122_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      let newArr = [];
+
+      {data.records.filter(record => !(record._year).includes('Total')).map(filteredName => (
+        console.log("filteredName size"+JSON.stringify(data.records)),
+        newArr.push(filteredName)
+      ))}
+      const chartData = {
+        labels: newArr
+          .map((record) => record._year),
+        datasets: [
+          {
+            label: "Fund Released",
+            data: newArr
+              .map((record) => record.amount_in_us__million),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          
+        ],
+      };  
+      callback(chartData);
+    });
+  });
+};
+
+const fetchHighestCorporateNetProfitsduring201920and202021 = (callback) => {
+  console.log(" fetchFDIPowerSectorfrom201112to202122");
+  const response = fetch(
+    //API_URL+"e297f7c6-3ffa-4776-92b3-0dd05dde4e2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+HighestCorporateNetProfitsduring201920and202021_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      let newArr = [];
+
+      {data.records.filter(record => !(record._year).includes('Total')).map(filteredName => (
+        console.log("filteredName size"+JSON.stringify(data.records)),
+        newArr.push(filteredName)
+      ))}
+      const chartData = {
+        labels: newArr
+          .map((record) => record.company_name+"-"+record.state+"-"+record._year),
+        datasets: [
+          // {
+          //   label: "Company Name",
+          //   data: newArr
+          //     .map((record) => record._year),
+          //   backgroundColor: "rgba(128,0,128,1)",
+          //   borderWidth: 4,
+          // },
+          // {
+          //   label: "State",
+          //   data: newArr
+          //     .map((record) => record.state),
+          //   backgroundColor: "rgba(255,0,0,1)",
+          //   borderWidth: 4,
+          // },
+          {
+            label: "Net profit (In Rs.)",
+            data: newArr
+              .map((record) => record.net_profit__in_rs__),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+        ],
+      };  
+      callback(chartData);
+    });
+  });
+};
+
+const fetchTop30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122 = (callback) => {
+  console.log("fetching data fetchTop30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122");
+  const response = fetch(
+    API_URL+Top30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122_Resource+KEY+ret_type+ret_limit
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+    console.log("data data 222"+JSON.stringify(data));
+    let newArr = [];
+
+      {data.records.filter(record => !(record.districts__states).includes('Total')).map(filteredName => (
+        console.log("filteredName size"+JSON.stringify(data.records)),
+        newArr.push(filteredName)
+      ))}
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: newArr
+          .map((record) => record.districts__states),
+        datasets: [
+          {
+            label: "Top 5 Commodities",
+            data: newArr
+              .map((record) => record.top_5_commodities),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Products/Services identified with Export Potential",
+            data: newArr
+              .map((record) => record.products_services_identified_with_export_potential),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Value of Export (in US$ Million)",
+            data: newArr
+              .map((record) => record.value_of_export__in_us__million_),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
 const fetchYearWiseQuantityValueOfUreaImportedfrom201617To202021API = (callback) => {
   console.log("fetching data"+KEY);
   const response = fetch(
@@ -474,63 +704,6 @@ const fetchFDI201617To202021API = (callback) => {
     });
   });
 };
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(img/wallpaper2-min.PNG)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    paddingTop: "40px",
-  },
-  paper: {
-    margin: theme.spacing(8, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  
-  button: {
-    alignSelf:'center',
-    width:'20%',
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.error.light,
-    fontWeight : "bold",
-    fontSize:20,
-    color:'black'
-    },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
 export function Gov({ loggedIn, logout, login }) {
   //const classes = useStyles();
@@ -608,6 +781,43 @@ export function Gov({ loggedIn, logout, login }) {
       setChartData(chartData);
     });
   };
+  const getZoneWiseVacanciesIndianRailwaysOn01022022 = () => {
+    fetchZoneWiseVacanciesIndianRailwaysOn01022022((chartData) => {
+      setChartType('line');
+      setChartTitle(StateUTswiseIndianArmyIntakefrom201718to201920);
+      setChartData(chartData);
+    });
+  };
+  const getNCAPduring202122 = () => {
+    fetchNCAPduring202122((chartData) => {
+      setChartType('line');
+      setChartTitle(NCAPduring202122);
+      setChartData(chartData);
+    });
+  };
+  const getFDIPowerSectorfrom201112to202122 = () => {
+    fetchFDIPowerSectorfrom201112to202122((chartData) => {
+      setChartType('line');
+      setChartTitle(FDIPowerSectorfrom201112to202122);
+      setChartData(chartData);
+    });
+  };
+
+  const getHighestCorporateNetProfitsduring201920and202021 = () => {
+    fetchHighestCorporateNetProfitsduring201920and202021((chartData) => {
+      setChartType('bar');
+      setChartTitle(HighestCorporateNetProfitsduring201920and202021);
+      setChartData(chartData);
+    });
+  };
+
+  const getTop30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122 = () => {
+    fetchTop30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122((chartData) => {
+      setChartType('bar');
+      setChartTitle(Top30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122);
+      setChartData(chartData);
+    });
+  };
   
   return (
 <Content>
@@ -640,6 +850,13 @@ export function Gov({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getRainfallInAllIndia1901To2019}>{RainfallInAllIndia1901To2019}</button>
 
         <button className={classes.button} onClick={getStateUTswiseIndianArmyIntakefrom201718to201920}>{StateUTswiseIndianArmyIntakefrom201718to201920}</button>
+        <button className={classes.button} onClick={getZoneWiseVacanciesIndianRailwaysOn01022022}>{ZoneWiseVacanciesIndianRailwaysOn01022022}</button>
+
+        <button className={classes.button} onClick={getNCAPduring202122}>{NCAPduring202122}</button>
+        <button className={classes.button} onClick={getFDIPowerSectorfrom201112to202122}>{FDIPowerSectorfrom201112to202122}</button>
+        <button className={classes.button} onClick={getHighestCorporateNetProfitsduring201920and202021}>{HighestCorporateNetProfitsduring201920and202021}</button>
+        <button className={classes.button} onClick={getTop30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122}>{Top30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122}</button>
+
         </div>
 
         {chartData && chartType === 'bar' && 

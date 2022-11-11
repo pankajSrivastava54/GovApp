@@ -1,10 +1,12 @@
+import { makeStyles } from "@material-ui/core/styles";
+
 export const KEY = '?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863';
 
 export const API_URL = 'https://api.data.gov.in/resource/';
 
-
 export const ret_type = '&format=json';
 export const ret_limit = '&limit=200';
+
 export const CrimeDisposalPersonsArrested2020_Resource = 'a5fc05b9-4e5b-4625-a694-ead8caf11327';
 export const CrimeDisposalPersonsArrested2020="Crime Head-wise Disposal of Persons Arrested for Offences against State during 2020";
 
@@ -59,10 +61,8 @@ export const AmountReleasedByDSTForCentralSectorSchemeFrom201819To202021="Amount
 export const FundAllocationandExpenditurebytheDepartmentofScienceandTechnology201617to202021_Resource = 'f629e371-9104-4a56-be21-80d508fdc55e';
 export const FundAllocationandExpenditurebytheDepartmentofScienceandTechnology201617to202021="Fund Allocation And Expenditure By The Department Of Science And Technology (Since 2016-17 To 2020-21)";
 
-
 export const ResearchersPerMillionPeopleForSelectedCountriesIn2009_Resource = 'b651f642-ce7e-45fe-bb91-041926740e71';
 export const ResearchersPerMillionPeopleForSelectedCountriesIn2009="Researchers Per Million People For Selected Countries In 2009";
-
 
 export const MPhilDoctorateDegreesAwardedFacultyWise199091To201011_Resource = 'f832dc7c-7522-4c6b-af87-15d99cf9c596';
 export const MPhilDoctorateDegreesAwardedFacultyWise199091To201011="M.Phil/Doctorate Degrees Awarded Faculty-Wise (1990-91 To 2010-11)";
@@ -190,3 +190,98 @@ export const FTASTop60CountriesFrom2018To2020="Country-Wise Foreign Tourist Arri
 export const StateUTswiseIndianArmyIntakefrom201718to201920_Resource = '66268e80-02b8-4a9d-94cd-c8922258eea1';
 export const StateUTswiseIndianArmyIntakefrom201718to201920="State/UTs-wise Indian Army Intake from 2017-18 to 2019-20";
 
+export const FICNSeizedFIRfrom2016to2018_Resource = '84622aa8-3c54-47a2-8aed-da3e3d6b4455';
+export const FICNSeizedFIRfrom2016to2018="State/UTs-wise Fake Indian Currency Notes seized and Number of Cases/FIR from 2016 to 2018";
+
+export const FICNSeizedFIRfrom2019_Resource = 'f203639f-f210-4842-b345-b053567097f5';
+export const FICNSeizedFIRfrom2019="State/UTs-Wise Fake Indian Currency Notes Seized And Number Of Cases/FIR During 2019";
+
+export const BankwiseFrauds202021_Resource = 'b1e02fe4-8f5b-42d9-9ec0-2996c76b0829';
+export const BankwiseFrauds202021="Bank-wise Frauds in Scheduled Commercial Banks in respect of Amount Involved of Rs. 1 lakh and above, year of Occurrence during 2020-21";
+
+export const OutstandingAmountOwedByWilfulDefaulters3132021_Resource = 'd722b5a1-862f-4133-ab75-90cd1ac9ceb1';
+export const OutstandingAmountOwedByWilfulDefaulters3132021="Bank-Wise Outstanding Amount Owed By Wilful Defaulters As On 31.3.2021";
+
+export const DrugsSeizedBSFIndoBangladeshBorder2017To2022_Resource = '02f10ea7-f26d-4606-b7cd-3c54694bd91c';
+export const DrugsSeizedBSFIndoBangladeshBorder2017To2022="Drug-Wise Variety And Quantity Of Drugs Seized By Border Security Force (BSF) Along Indo-Bangladesh Border From 2017 To 2022";
+
+export const ZoneWiseVacanciesIndianRailwaysOn01022022_Resource = 'a97bf8d8-b0de-4e1a-be11-f3247548979b';
+export const ZoneWiseVacanciesIndianRailwaysOn01022022="Zone-Wise Vacancies In Indian Railways As On 01.02.2022";
+
+export const NCAPduring202122_Resource = '06608d04-8b98-490a-972b-bb934c6d8e5e';
+export const NCAPduring202122="State/UTs-wise Grants Sanctioned under National Clean Air Programme (NCAP) during 2021-22";
+
+export const FTVsfrom2017to2020_Resource = '316b2683-6eb7-48b6-8656-12444d682a2b';
+export const FTVsfrom2017to2020="State/UTs-wise Foreign Tourist Visits (FTVs) from 2017 to 2020";
+
+export const FDIPowerSectorfrom201112to202122_Resource = 'aee3da78-627f-4d6c-8818-77414f298809';
+export const FDIPowerSectorfrom201112to202122="Year-wise Foreign Direct Investment (FDI) Equity Inflows in Power Sector from 2011-12 to 2021-22";
+
+export const RoadAccidentsFrom2016To2020_Resource = '3dec8d06-7ac9-4ace-b1b8-2cde3f026d7a';
+export const RoadAccidentsFrom2016To2020="Year-Wise Total Number Of Road Accidents That Occurred In The Country From 2016 To 2020";
+
+export const FEEsTourismFrom2018To2020_Resource = '25e648d5-3228-46af-83d9-5ae474dc9b65';
+export const FEEsTourismFrom2018To2020="Year-Wise Foreign Exchange Earnings (FEEs) From Tourism In India From 2018 To 2020";
+
+export const Frauds100CroreSCBsFIsFromApril012021ToDecember312021_Resource = '0007096d-4fec-4924-98c2-7df434c382d4';
+export const Frauds100CroreSCBsFIsFromApril012021ToDecember312021="Bank-Wise Frauds Of More Than Rs. 100 Crore Of Scheduled Commercial Banks (SCBs) And Select Financial Institutions (FIs) From April 01, 2021 To December 31, 2021";
+
+export const DeclineInForestCoverOn10February2022_Resource = '5eb2e570-cb9a-434f-a4dd-34042f7b36d7';
+export const DeclineInForestCoverOn10February2022="State-Wise Decline In Forest Cover As Per ISFR 2021 In Comparison To Previous Assessment I.E. ISFR 2019 (In Reply To Starred Question On 10 February, 2022)";
+
+export const HighValueNotesInNIC2015To2021_Resource = 'c8cd4524-cace-4ca8-93ae-9fc265567f02';
+export const HighValueNotesInNIC2015To2021="Value-Wise Share Of High Value Notes (Notes Of Denomination Rs.500 And Above)In Notes In Circulation (NIC) From 2015 To 2021";
+
+export const NiCIncreaseAndDecreaseForm2017To2021_Resource = '390204e6-d491-4d50-8b1d-c71f5943bf23';
+export const NiCIncreaseAndDecreaseForm2017To2021="Year-Wise Notes In Circulation (NiC) In The Economy And Percentage Increase And Decrease Form 2017 To 2021";
+
+export const HighestCorporateNetProfitsduring201920and202021_Resource = '80d0c4fc-2526-4c72-b6e8-f43e6930d57b';
+export const HighestCorporateNetProfitsduring201920and202021="State-wise and Company-wise Ten Companies Earning Highest Corporate Net Profits during 2019-20 and 2020-21";
+
+export const Top30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122_Resource = '7b3cacd6-f366-4a72-b5cc-bfc806d06df5';
+export const Top30DistrictsTop5ExportedCommoditiesPeriodAprilSeptember202122="SDistricts/States-Wise Indias Top 30 Districts Of Exports Along With Top 5 Exported Commodities And Products/Services Identified With Export Potential During Period April-September 2021-22";
+
+
+export const useStyles = makeStyles((theme) => ({
+    root: {
+      height: "100vh",
+    },
+    image: {
+      backgroundImage: "url(img/wallpaper2-min.PNG)",
+      backgroundRepeat: "no-repeat",
+      backgroundColor:
+        theme.palette.type === "dark"
+          ? theme.palette.grey[900]
+          : theme.palette.grey[50],
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      width: "100%",
+      paddingTop: "40px",
+    },
+    paper: {
+      margin: theme.spacing(8, 8),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    button: {
+      alignSelf:'center',
+      width:'20%',
+      margin: theme.spacing(1),
+      backgroundColor: '#adb64a',
+      fontWeight : "bold",
+      fontSize:12,
+      color:'black'
+      },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));

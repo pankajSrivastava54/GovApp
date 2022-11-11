@@ -10,7 +10,7 @@ import { KEY , API_URL,ret_type,ret_limit,AmountReleasedByDSTForCentralSectorSch
   ResearchersPerMillionPeopleForSelectedCountriesIn2009,AICTEApprovedGovernmentEngineeringInstitutes201920To2021227_Resource,
   FundAllocationandExpenditurebytheDepartmentofScienceandTechnology201617to202021,
   VacantPostsOfTeachingAndNonTeachingStaff29thMar,VacantPostsOfTeachingAndNonTeachingStaff29thMar_Resource,AICTEApprovedGovernmentEngineeringInstitutes201920To202122,
-  MBBSCollegesGovernmentPrivate22March20222_Resource,MBBSCollegesGovernmentPrivate22March20222} from "../src/Const/Const";
+  MBBSCollegesGovernmentPrivate22March20222_Resource,MBBSCollegesGovernmentPrivate22March20222,useStyles} from "../src/Const/Const";
 import 'chart.js/auto'
 
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
@@ -550,49 +550,7 @@ const fetchVacantPostsOfTeachingAndNonTeachingStaff29thMar = (callback) => {
     });
   });
 };
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(img/wallpaper2-min.PNG)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    paddingTop: "40px",
-  },
-  paper: {
-    margin: theme.spacing(8, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  button: {
-    alignSelf:'center',
-    width:'20%',
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.light,
-    fontWeight : "bold",
-    fontSize:20,
-    color:'black'
-    },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+
 
 export function Education({ loggedIn, logout, login }) {
   const classes = useStyles();

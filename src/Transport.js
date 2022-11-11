@@ -10,7 +10,8 @@ import { KEY , API_URL,ret_type,ret_limit,CAGR1951To2017_Resource,CountryWiseCam
   DeathOfPedestrians2018To2020_Resource,DeathOfPedestrians2018To2020,BusesOwnedByPublicPrivateSectorsIndia1961To2017_Resource,
   BusesOwnedByPublicPrivateSectorsIndia1961To2017,Top5ExportsAutomobile201617To201819_Resource,Top5ExportsAutomobile201617To201819,
   VehicularPopulationNationalHighwayRoadLengthFrom2001To2017_Resource,VehicularPopulationNationalHighwayRoadLengthFrom2001To2017,
-  RoadAccidentsPersonsKilledTwoWheelerAccidents2016to2020_Resource,RoadAccidentsPersonsKilledTwoWheelerAccidents2016to2020} from "../src/Const/Const";
+  RoadAccidentsPersonsKilledTwoWheelerAccidents2016to2020_Resource,RoadAccidentsPersonsKilledTwoWheelerAccidents2016to2020,
+  useStyles,RoadAccidentsFrom2016To2020,RoadAccidentsFrom2016To2020_Resource} from "../src/Const/Const";
 import { ChartDonut } from "./ChartDonut";
 
 import { ChartLine } from "./ChartLine";
@@ -716,6 +717,8 @@ const fetchVehicularPopulationNationalHighwayRoadLengthFrom2001To2017 = (callbac
     });
   });
 };
+
+
 const fetchRoadAccidentsPersonsKilledTwoWheelerAccidents2016to2020 = (callback) => {
   console.log("fetchVehicularPopulationNationalHighwayRoadLengthFrom2001To2017"+KEY);
   const response = fetch(
@@ -757,63 +760,40 @@ const fetchRoadAccidentsPersonsKilledTwoWheelerAccidents2016to2020 = (callback) 
     });
   });
 };
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(img/wallpaper2-min.PNG)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    paddingTop: "40px",
-  },
-  paper: {
-    margin: theme.spacing(8, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
+const fetchRoadAccidentsFrom2016To2020 = (callback) => {
+  console.log("fetchRoadAccidentsFrom2016To2020"+KEY);
+  const response = fetch(
+    //API_URL+"ce2b2653-fc64-4cba-b577-486d590b8c88?api-key="+KEY+"&format=json"
+    API_URL+RoadAccidentsFrom2016To2020_Resource+KEY+ret_type+ret_limit
 
-  button: {
-    alignSelf:'center',
-    width:'20%',
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.light,
-    fontWeight : "bold",
-    fontSize:20,
-    color:'black'
-    },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+
+      const chartData = {
+        labels: data.records
+          .map((record) => record.year),
+        datasets: [
+          {
+            label: "Total number of road accidents",
+            data: data.records
+              .map((record) => record.total_number_of_road_accidents),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+        ],
+      };
+
+
+      callback(chartData);
+    });
+  });
+};
 
 export function Transport({ loggedIn, logout, login }) {
   const classes = useStyles();
@@ -897,6 +877,13 @@ export function Transport({ loggedIn, logout, login }) {
       setChartData(chartData);
     });
   };
+  const getRoadAccidentsFrom2016To2020 = () => {
+    fetchRoadAccidentsFrom2016To2020((chartData) => {
+      setChartType('bar');
+      setChartTitle(RoadAccidentsFrom2016To2020);
+      setChartData(chartData);
+    });
+  };
   
   return (
     <Content>
@@ -927,7 +914,7 @@ export function Transport({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getTop5ExportsAutomobile201617To201819}>{Top5ExportsAutomobile201617To201819}</button>
         <button className={classes.button} onClick={getVehicularPopulationNationalHighwayRoadLengthFrom2001To2017}>{VehicularPopulationNationalHighwayRoadLengthFrom2001To2017}</button>
         <button className={classes.button} onClick={getRoadAccidentsPersonsKilledTwoWheelerAccidents2016to2020}>{RoadAccidentsPersonsKilledTwoWheelerAccidents2016to2020}</button>
-
+        <button className={classes.button} onClick={getRoadAccidentsFrom2016To2020}>{RoadAccidentsFrom2016To2020}</button>
     </div>
     {chartData && chartType === 'bar' && 
     <div style={{

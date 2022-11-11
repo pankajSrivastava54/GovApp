@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "sarkarikhazana-c14fd"
-  }
+    "default": "sarkarikhazana-c14fd",
+    "prod": "sarkarikhazana-c14fd"
+  },
+  "targets": {},
+  "etags": {}
 }

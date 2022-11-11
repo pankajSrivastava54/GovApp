@@ -2,9 +2,12 @@ import React from "react";
 import AppBarAndDrawer from "./AppBarAndDrawer/AppBarAndDrawer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { SignIn } from "./SignIn";
+import './index.css';
+
 import {Gov} from "./Gov";
 import {Gdp} from "./Gdp";
 import {Rbi} from "./Rbi"
+import Tabs from "./Tabs";
 
 import {Transport} from "./Transport"
 import {Shipping} from "./Shipping"
@@ -50,8 +53,7 @@ export default function App() {
                     currentTheme={currentTheme}
                     setCurrentTheme={setCurrentTheme}
                   />
-                  {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+
                   <Switch>
                     <Route path="/crime">
                       <Crime />
@@ -113,6 +115,8 @@ export default function App() {
                     </Route>
                   </Switch>
                 </div>
+
+export default App;
               </Router>
             </DataProvider>
           </Provider>

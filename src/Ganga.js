@@ -8,7 +8,7 @@ import { SummaryCard } from "../src/People/Driver";
 import Content from "../src/Dashboard/Content";
 import { KEY , API_URL, ret_type,ret_limit,TreatmentPlantGanga2017,WaterQualityGanga2018To2020,WaterQualityGanga2021,
   DrainsDischargingIntoRiverGangaApr2022,DrainsDischargingIntoRiverGangaApr2022_Resource,WaterQualityGanga2021_Resource,
-  WaterQualityGanga2018To2020_Resource,TreatmentPlantGanga2017_Resource} from "../src/Const/Const";
+  WaterQualityGanga2018To2020_Resource,TreatmentPlantGanga2017_Resource,useStyles} from "../src/Const/Const";
 import { Line } from "react-chartjs-2";
 import 'chart.js/auto'
 
@@ -213,49 +213,49 @@ const fetchDrainsDischargingIntoRiverGangaApe2022s = (callback) => {
   });
 };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(img/wallpaper2-min.PNG)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    paddingTop: "40px",
-  },
-  paper: {
-    margin: theme.spacing(8, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  button: {
-    alignSelf:'center',
-    width:'20%',
-    margin: theme.spacing(1),
-    backgroundColor: '#6C4AB6',
-    fontWeight : "bold",
-    fontSize:20,
-    color:'white'
-    },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     height: "100vh",
+//   },
+//   image: {
+//     backgroundImage: "url(img/wallpaper2-min.PNG)",
+//     backgroundRepeat: "no-repeat",
+//     backgroundColor:
+//       theme.palette.type === "dark"
+//         ? theme.palette.grey[900]
+//         : theme.palette.grey[50],
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//     width: "100%",
+//     paddingTop: "40px",
+//   },
+//   paper: {
+//     margin: theme.spacing(8, 8),
+//     display: "flex",
+//     flexDirection: "column",
+//     alignItems: "center",
+//   },
+//   button: {
+//     alignSelf:'center',
+//     width:'20%',
+//     margin: theme.spacing(1),
+//     backgroundColor: '#6C4AB6',
+//     fontWeight : "bold",
+//     fontSize:15,
+//     color:'white'
+//     },
+//   avatar: {
+//     margin: theme.spacing(1),
+//     backgroundColor: theme.palette.secondary.main,
+//   },
+//   form: {
+//     width: "100%", // Fix IE 11 issue.
+//     marginTop: theme.spacing(1),
+//   },
+//   submit: {
+//     margin: theme.spacing(3, 0, 2),
+//   },
+// }));
 
 export function Ganga({ loggedIn, logout, login }) {
   const classes = useStyles();

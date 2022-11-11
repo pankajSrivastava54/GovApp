@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
-import { SummaryCard } from "../src/People/Driver";
 import Content from "../src/Dashboard/Content";
 import { KEY , API_URL, ret_type,ret_limit,GDPOfIndia_Resource,LiabilitiesAndAssetsOfTheReserveBankOfIndia_Resource,
-  LiabilitiesAndAssetsOfTheReserveBankOfIndia,GrossDefenceBudget_Resource,GDPOfIndia,GrossDefenceBudget} from "../src/Const/Const";
-import { Line } from "react-chartjs-2";
+  LiabilitiesAndAssetsOfTheReserveBankOfIndia,GrossDefenceBudget_Resource,GDPOfIndia,GrossDefenceBudget,BankwiseFrauds202021_Resource,
+  BankwiseFrauds202021,OutstandingAmountOwedByWilfulDefaulters3132021_Resource,OutstandingAmountOwedByWilfulDefaulters3132021,
+  useStyles,Frauds100CroreSCBsFIsFromApril012021ToDecember312021_Resource,Frauds100CroreSCBsFIsFromApril012021ToDecember312021,
+  HighValueNotesInNIC2015To2021_Resource,HighValueNotesInNIC2015To2021,NiCIncreaseAndDecreaseForm2017To2021,NiCIncreaseAndDecreaseForm2017To2021_Resource} from "../src/Const/Const";
 import 'chart.js/auto'
-import { green, purple } from "@material-ui/core/colors";
-import colors from "./Theme/colors";
 
 // method to fetch data from the API url at https://api.data.gov.in/resource/1d369aae-155a-4cc8-b7a8-04d4cd5ec2a6?api-key=579b464db66ec23bdd00000157d61d8ad2304d5a7708be21b48b6863&format=json&offset=0&limit=100
 const fetchLiabilitiesAndAssetsOfRBI2001TO2016API = (callback) => {
@@ -420,63 +417,213 @@ const fetchGrossDefenceBudget = (callback) => {
     });
   });
 };
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(img/wallpaper2-min.PNG)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    paddingTop: "40px",
-  },
-  paper: {
-    margin: theme.spacing(8, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  button: {
-    alignSelf:'center',
-    width:'20%',
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.error.light,
-    fontSize:20,
-    color : "black",
-    fontWeight : "bold"
-   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
+const fetchBankwiseFrauds202021 = (callback) => {
+  console.log("fetching data"+KEY);
+  const response = fetch(
+        API_URL+BankwiseFrauds202021_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+
+      const chartData = {
+        labels: data.records
+          .map((record) => record.bank)
+          .slice(0, 62),
+        datasets: [
+          {
+            label: "FY 2020-21 - Number",
+            data: data.records
+              .map((record) => record.fy_2020_21___number)
+              .slice(0, 62),
+            backgroundColor: "rgba(155, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+          {
+            label: "FY 2020-21 - Amount involved",
+            data: data.records
+              .map((record) => record.fy_2020_21___amount_involved)
+              .slice(0, 62),
+            backgroundColor: "rgba(55, 99, 132, 0.6)",
+            borderWidth: 4,
+          },
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
+
+const fetchOutstandingAmountOwedByWilfulDefaulters3132021 = (callback) => {
+  console.log("fetching data"+KEY);
+  const response = fetch(
+        API_URL+OutstandingAmountOwedByWilfulDefaulters3132021_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+
+      const chartData = {
+        labels: data.records
+          .map((record) => record.bank),
+        datasets: [
+          {
+            label: "Outstanding Amount (in crore Rs.)",
+            data: data.records
+              .map((record) => record.outstanding_amount__in_crore_rs__),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },   
+        ],
+      };
+
+      callback(chartData);
+    });
+  });
+};
+
+const fetchFrauds100CroreSCBsFIsFromApril012021ToDecember312021 = (callback) => {
+  console.log("fetching data"+KEY);
+  const response = fetch(
+        API_URL+Frauds100CroreSCBsFIsFromApril012021ToDecember312021_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+
+      const chartData = {
+        labels: data.records
+          .map((record) => record.name_of_the_bank),
+        datasets: [
+          {
+            label: "Number of frauds",
+            data: data.records
+              .map((record) => record.number_of_frauds),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },   
+          {
+            label: "Amount involved (in crore Rs.)",
+            data: data.records
+              .map((record) => record.amount_involved__in_crore_rs__),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          }, 
+        ],
+      };
+
+      callback(chartData);
+    });
+  });
+};
+
+
+const fetchHighValueNotesInNIC2015To2021 = (callback) => {
+  console.log("fetching data HighValueNotesInNIC2015To2021_Resource");
+  const response = fetch(
+        API_URL+HighValueNotesInNIC2015To2021_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+
+      const chartData = {
+        labels: data.records
+          .map((record) => record.year__as_on_march_31st_),
+        datasets: [
+          {
+            label: "Value of NIC (in Rs lakh crore)",
+            data: data.records
+              .map((record) => record.value_of_nic__in_rs_lakh_crore_),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },   
+          {
+            label: "Share of High Value Notes in NIC (in percentage)",
+            data: data.records
+              .map((record) => record.share_of_high_value_notes_in_nic__in_percentage_),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          }, 
+        ],
+      };
+
+      callback(chartData);
+    });
+  });
+};
+
+const fetchNiCIncreaseAndDecreaseForm2017To2021 = (callback) => {
+  console.log("fetching data fetchNiCIncreaseAndDecreaseForm2017To2021");
+  const response = fetch(
+        API_URL+NiCIncreaseAndDecreaseForm2017To2021_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      console.log("fetching data"+JSON.stringify(data));
+
+      const chartData = {
+        labels: data.records
+          .map((record) => record.year__end_march_),
+        datasets: [
+          {
+            label: "volume__nic__in_million_pieces_",
+            data: data.records
+              .map((record) => record.volume__nic__in_million_pieces_),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },   
+          {
+            label: "% Increase/Decrease in Volume",
+            data: data.records
+              .map((record) => record.__increase_decrease_in_volume),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          }, 
+          {
+            label: "Value - NiC (Rs. in crores)",
+            data: data.records
+              .map((record) => record.value___nic__rs__in_crores_),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          }, 
+          {
+            label: "% Increase/Decrease in Value",
+            data: data.records
+              .map((record) => record.__increase_decrease_in_value),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          }, 
+        ],
+      };
+
+      callback(chartData);
+    });
+  });
+};
 export function Rbi({ loggedIn, logout, login }) {
   //const classes = useStyles();
   const classes = useStyles();
@@ -500,7 +647,7 @@ export function Rbi({ loggedIn, logout, login }) {
       setChartData(chartData);
     });
   };
-
+  
   const getGrossDefenceBudget = () => {
     fetchGrossDefenceBudget((chartData) => {
       setChartType('line');
@@ -508,8 +655,42 @@ export function Rbi({ loggedIn, logout, login }) {
       setChartData(chartData);
     });
   };
-
-
+  const getBankwiseFrauds202021 = () => {
+    fetchBankwiseFrauds202021((chartData) => {
+      setChartType('line');
+      setChartTitle(GrossDefenceBudget);
+      setChartData(chartData);
+    });
+  };
+  const getOutstandingAmountOwedByWilfulDefaulters3132021 = () => {
+    fetchOutstandingAmountOwedByWilfulDefaulters3132021((chartData) => {
+      setChartType('line');
+      setChartTitle(GrossDefenceBudget);
+      setChartData(chartData);
+    });
+  };
+  const getFrauds100CroreSCBsFIsFromApril012021ToDecember312021 = () => {
+    fetchFrauds100CroreSCBsFIsFromApril012021ToDecember312021((chartData) => {
+      setChartType('line');
+      setChartTitle(Frauds100CroreSCBsFIsFromApril012021ToDecember312021);
+      setChartData(chartData);
+    });
+  };
+  const getHighValueNotesInNIC2015To2021 = () => {
+    fetchHighValueNotesInNIC2015To2021((chartData) => {
+      setChartType('line');
+      setChartTitle(HighValueNotesInNIC2015To2021);
+      setChartData(chartData);
+    });
+  };
+  const getNiCIncreaseAndDecreaseForm2017To2021 = () => {
+    fetchNiCIncreaseAndDecreaseForm2017To2021((chartData) => {
+      setChartType('line');
+      setChartTitle(NiCIncreaseAndDecreaseForm2017To2021);
+      setChartData(chartData);
+    });
+  };
+  
   return (
     <Content>
     <div
@@ -531,10 +712,14 @@ export function Rbi({ loggedIn, logout, login }) {
         backgroundImage: "url(/img/Rbi.png)",
       }}>
         <button  className={classes.button}  onClick={getLiabilitiesAndAssetsOfRBI2001TO2016}>{LiabilitiesAndAssetsOfTheReserveBankOfIndia}</button>
-
         <button className={classes.button} onClick={getGDPOfIndia}>{GDPOfIndia}</button>
-
         <button className={classes.button} onClick={getGrossDefenceBudget}>{GrossDefenceBudget}</button>
+        <button className={classes.button} onClick={getBankwiseFrauds202021}>{BankwiseFrauds202021}</button>
+        <button className={classes.button} onClick={getOutstandingAmountOwedByWilfulDefaulters3132021}>{OutstandingAmountOwedByWilfulDefaulters3132021}</button>
+        <button className={classes.button} onClick={getFrauds100CroreSCBsFIsFromApril012021ToDecember312021}>{Frauds100CroreSCBsFIsFromApril012021ToDecember312021}</button>
+        <button className={classes.button} onClick={getHighValueNotesInNIC2015To2021}>{HighValueNotesInNIC2015To2021}</button>
+        <button className={classes.button} onClick={getNiCIncreaseAndDecreaseForm2017To2021}>{NiCIncreaseAndDecreaseForm2017To2021}</button>
+
       </div>
 
       <div style={{

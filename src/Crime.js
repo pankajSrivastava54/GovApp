@@ -15,7 +15,9 @@ import { KEY, API_URL,CrimeDisposalPersonsArrested2020_Resource,ret_type,ret_lim
   NCRBDeathsInPoliceCustody2020,CasesNIA2017To2021_Resource,CasesPoAActNCRB2015to2017_Resource,CasesPoAActNCRB2015to2017,
   NDPSCasesNCRB2018to2020_Resource,NDPSCasesNCRB2018to2020,CasesCrimesagainstChildrenNCRB2014to2017_Resource,CasesCrimesagainstChildrenNCRB2014to2017,
   NRIMaritalComplaintsJanuary2017to31stDecember2021_Resource,NRIMaritalComplaintsJanuary2017to31stDecember2021,
-  SeizedCounterfeitCurrencyNotesFrom2016To2020_Resource,SeizedCounterfeitCurrencyNotesFrom2016To2020} from "../src/Const/Const";
+  SeizedCounterfeitCurrencyNotesFrom2016To2020_Resource,SeizedCounterfeitCurrencyNotesFrom2016To2020,FICNSeizedFIRfrom2016to2018_Resource,
+  FICNSeizedFIRfrom2016to2018,useStyles,DrugsSeizedBSFIndoBangladeshBorder2017To2022_Resource,DrugsSeizedBSFIndoBangladeshBorder2017To2022,
+  FICNSeizedFIRfrom2019_Resource,FICNSeizedFIRfrom2019} from "../src/Const/Const";
 
 import { ChartPie } from "./ChartPie";
 
@@ -1122,6 +1124,285 @@ const fetchSeizedCounterfeitCurrencyNotesFrom2016To2020 = (callback) => {
     });
   });
 };
+
+const fetchFICNSeizedFIRfrom2016to2018 = (callback) => {
+  console.log("fetching data fetchFICNSeizedFIRfrom2016to2018");
+  const response = fetch(
+    API_URL+FICNSeizedFIRfrom2016to2018_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    let newArr = [];
+
+    {data.records.filter(record => !(record.state_ut).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(data.records)),
+      newArr.push(filteredName)
+    ))}
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: newArr
+        .map((record) => record.state_ut),
+        datasets: [
+          {
+            label: "2016 - Number of FICN Seized",
+            data: newArr
+              .map((record) => record._2016___number_of_ficn_seized),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2016 - Total Value (In Rs.)",
+            data: newArr
+              .map((record) => record._2016___total_value__in_rs__),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "_2016___total_number_of_case_number_of_complaints_lodged",
+            data: newArr
+              .map((record) => record._2016___total_number_of_case_number_of_complaints_lodged),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2017 - Number of FICN Seized",
+            data: newArr
+              .map((record) => record._2017___number_of_ficn_seized),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2017 - Total Value (In Rs.)",
+            data: newArr
+              .map((record) => record._2017___total_value__in_rs__),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 100",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___100),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2017 - Total number of case/Number of Complaints lodged",
+            data: newArr
+              .map((record) => record._2017___total_number_of_case_number_of_complaints_lodged),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2018 - Number of FICN Seized",
+            data: newArr
+              .map((record) => record._2018___number_of_ficn_seized),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2018 - Total Value (In Rs.)",
+            data: newArr
+              .map((record) => record._2018___total_value__in_rs__),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2018 - Total number of case/Number of Complaints lodged",
+            data: newArr
+              .map((record) => record._2018___total_number_of_case_number_of_complaints_lodged),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
+const fetchFICNSeizedFIRfrom2019 = (callback) => {
+  console.log("fetching data FICNSeizedFIRfrom2019");
+  const response = fetch(
+    API_URL+FICNSeizedFIRfrom2019_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    let newArr = [];
+
+    {data.records.filter(record => !(record.state_ut).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(data.records)),
+      newArr.push(filteredName)
+    ))}
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: newArr
+        .map((record) => record.state_ut),
+        datasets: [
+          {
+            label: "Number of FICN Seized",
+            data: newArr
+              .map((record) => record.number_of_ficn_seized),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Total Value (In Rs.)",
+            data: newArr
+              .map((record) => record.total_value__in_rs__),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Total number of case/Number of Complaints lodged",
+            data: newArr
+              .map((record) => record.total_number_of_case_number_of_complaints_lodged),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2017 - Number of FICN Seized",
+            data: newArr
+              .map((record) => record._2017___number_of_ficn_seized),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2017 - Total Value (In Rs.)",
+            data: newArr
+              .map((record) => record._2017___total_value__in_rs__),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Denomination-wise Number of Seized Counterfeit Currency Notes - 100",
+            data: newArr
+              .map((record) => record.denomination_wise_number_of_seized_counterfeit_currency_notes___100),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2017 - Total number of case/Number of Complaints lodged",
+            data: newArr
+              .map((record) => record._2017___total_number_of_case_number_of_complaints_lodged),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2018 - Number of FICN Seized",
+            data: newArr
+              .map((record) => record._2018___number_of_ficn_seized),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2018 - Total Value (In Rs.)",
+            data: newArr
+              .map((record) => record._2018___total_value__in_rs__),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2018 - Total number of case/Number of Complaints lodged",
+            data: newArr
+              .map((record) => record._2018___total_number_of_case_number_of_complaints_lodged),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+const fetchDrugsSeizedBSFIndoBangladeshBorder2017To2022 = (callback) => {
+  console.log("fetching data fetchDrugsSeizedBSFIndoBangladeshBorder2017To2022");
+  const response = fetch(
+    API_URL+DrugsSeizedBSFIndoBangladeshBorder2017To2022_Resource+KEY+ret_type+ret_limit
+
+  );
+  response.then((response) => {
+    const data = response.json();
+    //const result = data.records.filter(record => record !== 0);
+    console.log("result data"+JSON.stringify(data));
+
+    data.then((data) => {
+      console.log("data data 222"+JSON.stringify(data));
+    let newArr = [];
+
+    {data.records.filter(record => !(record.drug).includes('Total')).map(filteredName => (
+      console.log("filteredName size"+JSON.stringify(data.records)),
+      newArr.push(filteredName)
+    ))}
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: newArr
+        .map((record) => record.drug),
+        datasets: [
+          {
+            label: "2017",
+            data: newArr
+              .map((record) => record._2017),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2018",
+            data: newArr
+              .map((record) => record._2018),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2019",
+            data: newArr
+              .map((record) => record._2019),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2020",
+            data: newArr
+              .map((record) => record._2020),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2021",
+            data: newArr
+              .map((record) => record._2021),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "2022",
+            data: newArr
+              .map((record) => record._2022),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          
+        ],
+      };
+      callback(chartData);
+    });
+  });
+};
+
+
 const fetchCasesPoAActNCRB2015to2017 = (callback) => {
   console.log("fetching data fetchCasesPoAActNCRB2015to2017");
   const response = fetch(
@@ -1397,62 +1678,6 @@ const fetchMissingAndTracedPersons2020 = (callback) => {
     });
   });
 };
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(img/wallpaper2-min.PNG)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    paddingTop: "40px",
-  },
-  paper: {
-    margin: theme.spacing(8, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  button: {
-    alignSelf:'center',
-    width:'20%',
-    margin: theme.spacing(1),
-    backgroundColor: '#6C4AB6',
-    fontWeight : "bold",
-    fontSize:20,
-    color:'white'
-    },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.light,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
 export function Crime({ loggedIn, logout, login }) {
   const classes = useStyles();
@@ -1619,6 +1844,27 @@ export function Crime({ loggedIn, logout, login }) {
       setChartData(chartData);
     });
   };
+  const getFICNSeizedFIRfrom2016to2018 = () => {
+    fetchFICNSeizedFIRfrom2016to2018((chartData) => {
+      setChartType('line');
+      setChartTitle(FICNSeizedFIRfrom2016to2018);
+      setChartData(chartData);
+    });
+  };
+  const getFICNSeizedFIRfrom2019 = () => {
+    fetchFICNSeizedFIRfrom2019((chartData) => {
+      setChartType('line');
+      setChartTitle(FICNSeizedFIRfrom2019);
+      setChartData(chartData);
+    });
+  };
+  const getDrugsSeizedBSFIndoBangladeshBorder2017To2022 = () => {
+    fetchDrugsSeizedBSFIndoBangladeshBorder2017To2022((chartData) => {
+      setChartType('line');
+      setChartTitle(FICNSeizedFIRfrom2016to2018);
+      setChartData(chartData);
+    });
+  };
   
   return (
     <Content>
@@ -1658,6 +1904,10 @@ export function Crime({ loggedIn, logout, login }) {
         <button className={classes.button} onClick={getNRIMaritalComplaintsJanuary2017to31stDecember2021}>{NRIMaritalComplaintsJanuary2017to31stDecember2021}</button>
         <button className={classes.button} onClick={getCasesCrimesagainstChildrenNCRB2014to2017}>{CasesCrimesagainstChildrenNCRB2014to2017}</button>
         <button className={classes.button} onClick={getSeizedCounterfeitCurrencyNotesFrom2016To2020}>{SeizedCounterfeitCurrencyNotesFrom2016To2020}</button>
+        <button className={classes.button} onClick={getFICNSeizedFIRfrom2016to2018}>{FICNSeizedFIRfrom2016to2018}</button>
+
+        <button className={classes.button} onClick={getDrugsSeizedBSFIndoBangladeshBorder2017To2022}>{DrugsSeizedBSFIndoBangladeshBorder2017To2022}</button>
+        <button className={classes.button} onClick={getFICNSeizedFIRfrom2019}>{FICNSeizedFIRfrom2019}</button>
 
     </div>
      {chartData && chartType === 'bar' && 

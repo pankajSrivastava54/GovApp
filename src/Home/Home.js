@@ -15,8 +15,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://react.school">
-        React School
+      <Link color="inherit" href="https://sarkarikhazana-c14fd.web.app/">
+        Sarkari Khazana
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
-import { SummaryCard } from "../src/People/Driver";
 import Content from "../src/Dashboard/Content";
 import { KEY , API_URL,ret_type,ret_limit,GrowthOfIndianShippingFrom1947Onwards,GrowthOfIndianShippingAsOn31December2014_Resource,
-  GrowthOfIndianShippingFrom1947Onwards_Resource,GrowthOfIndianShippingAsOn31December2014} from "../src/Const/Const";
-import { Line } from "react-chartjs-2";
+  GrowthOfIndianShippingFrom1947Onwards_Resource,GrowthOfIndianShippingAsOn31December2014,useStyles} from "../src/Const/Const";
 import 'chart.js/auto'
 
 
@@ -189,49 +185,7 @@ const fetchGrowthOfIndianShippingFrom1947Onwards = (callback) => {
 };
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(img/wallpaper2-min.PNG)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    paddingTop: "40px",
-  },
-  paper: {
-    margin: theme.spacing(8, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  button: {
-    alignSelf:'center',
-    width:'20%',
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success  .light,
-    fontWeight : "bold",
-    fontSize:20,
-    color:'black'
-    },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.light,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+
 
 export function Shipping({ loggedIn, logout, login }) {
   const classes = useStyles();

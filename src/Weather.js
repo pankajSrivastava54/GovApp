@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
 import { ChartGdp } from "./ChartGdp";
 import Content from "../src/Dashboard/Content";
 import { ChartPie } from "./ChartPie";
@@ -9,7 +8,8 @@ import { ChartDonut } from "./ChartDonut";
 
 import { ChartLine } from "./ChartLine";
 import { KEY , API_URL,ret_type,ret_limit,RainfallInAllIndia1901To2019_Resource,RainfallInAllIndia1901To2019,
-  MonthlySeasonalAnnualMeanTemperatureIndiaFrom1901To2016_Resource,MonthlySeasonalAnnualMeanTemperatureIndiaFrom1901To2016} from "../src/Const/Const";
+  MonthlySeasonalAnnualMeanTemperatureIndiaFrom1901To2016_Resource,MonthlySeasonalAnnualMeanTemperatureIndiaFrom1901To2016,
+  useStyles,DeclineInForestCoverOn10February2022_Resource,DeclineInForestCoverOn10February2022} from "../src/Const/Const";
 
 
 
@@ -69,6 +69,7 @@ const fetchMonthlySeasonalAnnualMeanTemperatureIndiaFrom1901To2016_Resource = (c
     });
   });
 };
+
 const fetchRainfallInAllIndia1901To2019 = (callback) => {
   console.log(" fetchRainfallInAllIndia1901To2019"+KEY);
   const response = fetch(
@@ -125,64 +126,49 @@ const fetchRainfallInAllIndia1901To2019 = (callback) => {
     });
   });
 };
+const fetchDeclineInForestCoverOn10February2022 = (callback) => {
+  console.log(" DeclineInForestCoverOn10February2022");
+  const response = fetch(
+    //API_URL+"e297f7c6-3ffa-4776-92b3-0dd05dde4e2a?api-key="+KEY+"&format=json&offset=0&limit=100"
+    API_URL+DeclineInForestCoverOn10February2022_Resource+KEY+ret_type+ret_limit
 
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  image: {
-    backgroundImage: "url(img/wallpaper2-min.PNG)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    width: "100%",
-    paddingTop: "40px",
-  },
-  paper: {
-    margin: theme.spacing(8, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  
-  button: {
-    alignSelf:'center',
-    width:'20%',
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.error.light,
-    fontWeight : "bold",
-    fontSize:20,
-    color:'black'
-    },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+  );
+  response.then((response) => {
+    const data = response.json();
+    data.then((data) => {
+      // set the chart data, trim the data to 10 records
+      const chartData = {
+        labels: data.records
+          .map((record) => record.state_ut),
+        datasets: [
+          {
+            label: "Geographical Area (GA)",
+            data: data.records
+              .map((record) => record.geographical_area__ga_),
+            backgroundColor: "rgba(0,0,255,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Total Forest Cover",
+            data: data.records
+              .map((record) => record.total_forest_cover),
+            backgroundColor: "rgba(255,0,0,1)",
+            borderWidth: 4,
+          },
+          {
+            label: "Change in Forest Cover w.r.t. ISFR 2019",
+            data: data.records
+              .map((record) => record.change_in_forest_cover_w_r_t__isfr_2019),
+            backgroundColor: "rgba(128,0,128,1)",
+            borderWidth: 4,
+          },
+          
+        ],
+      };  
+      callback(chartData);
+    });
+  });
+};
 
 export function Weather({ loggedIn, logout, login }) {
   //const classes = useStyles();
@@ -205,6 +191,13 @@ export function Weather({ loggedIn, logout, login }) {
     fetchRainfallInAllIndia1901To2019((chartData) => {
       setChartType('line');
       setChartTitle(RainfallInAllIndia1901To2019);
+      setChartData(chartData);
+    });
+  };
+  const getDeclineInForestCoverOn10February2022 = () => {
+    fetchDeclineInForestCoverOn10February2022((chartData) => {
+      setChartType('line');
+      setChartTitle(DeclineInForestCoverOn10February2022);
       setChartData(chartData);
     });
   };
@@ -231,6 +224,7 @@ export function Weather({ loggedIn, logout, login }) {
 
         <button className={classes.button} onClick={getMonthlySeasonalAnnualMeanTemperatureIndiaFrom1901To2016_Resource}>{MonthlySeasonalAnnualMeanTemperatureIndiaFrom1901To2016}</button>
         <button className={classes.button} onClick={getRainfallInAllIndia1901To2019}>{RainfallInAllIndia1901To2019}</button>
+        <button className={classes.button} onClick={getDeclineInForestCoverOn10February2022}>{DeclineInForestCoverOn10February2022}</button>
 
         </div>
 
