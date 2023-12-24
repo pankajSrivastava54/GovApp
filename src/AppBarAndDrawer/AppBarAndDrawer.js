@@ -79,25 +79,40 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
+      <div  />
       <Divider />
       <List>
         {[
-           { text: "crime", icon: "person" },
-          //  { text: "login", icon: "lock" },
-           { text: "gov", icon: "lock" },
-           { text: "GDP", icon: "person" },
+          //  { text: "crime", icon: "person" },
+            { text: "models", icon: "dashboard" },
+            { text: "genTxtOpenAI", icon: "photoCameraRounded" },
+
+            { text: "text2Speech", icon: "psychology" },
+            { text: "translateAudio", icon: "translate" },
+            { text: "transcription", icon: "transcribe" },
+            { text: "moderations", icon: "addModeratorRounded" },
+            { text: "imageGeneration", icon: "photoCameraRounded" },
+
+            { text: "-----------" },
+
+            { text: "genTextGemini", icon: "photoCameraRounded" },
+            { text: "geminiDiscovery", icon: "photoCameraRounded" },
+            { text: "-----------" },
+            { text: "azureTranslate", icon: "photoCameraRounded" },
+
+          //   { text: "gov", icon: "lock" },
+          //  { text: "GDP", icon: "person" },
           //  { text: "dashboard", icon: "dashboard" },
           //  { text: "people", icon: "people" },
-           { text: "shipping", icon: "map" },
+          //  { text: "shipping", icon: "map" },
           //  { text: "map", icon: "map" },
-           { text: "rbi", icon: "map" },
-           { text: "transport", icon: "map" },
-           { text: "weather", icon: "map" },
+          //  { text: "rbi", icon: "map" },
+          //  { text: "transport", icon: "map" },
+          //  { text: "weather", icon: "map" },
 
-           { text: "ganga", icon: "map" },
-           { text: "tourism", icon: "map" },
-           { text: "education", icon: "map" },
+          //  { text: "ganga", icon: "map" },
+          //  { text: "tourism", icon: "map" },
+          //  { text: "education", icon: "map" },
           //  { text: "components", icon: "apps" },
           //  { text: "settings", icon: "settings" },
         ].map(({ text, icon }, index) => (
@@ -153,7 +168,7 @@ function ResponsiveDrawer(props) {
             component={RouterLink}
             className={classes.logo}
           >
-            Gov World
+            My AI/ML experiments using OpenAI
           </Typography>
           <div style={{ flexGrow: 1 }}></div>
           {/* <PalettePicker

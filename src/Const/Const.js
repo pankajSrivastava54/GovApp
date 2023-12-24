@@ -17,7 +17,9 @@ export const SeizuresHeroinNCRB2016To2020_Resource = '43f3d838-7c03-4c48-9a27-5f
 export const SeizuresHeroinNCRB2016To2020="State/UTs-Wise Seizures Of Heroin As Published By The National Crime Records Bureau (NCRB) From 2016 To 2020";
 
 export const DisposalPersonsArrestedOffencesagainstState2020_Resource = 'ba0713b7-e646-4dc7-9c26-e7f8dc592df0';
-export const DisposalPersonsArrestedOffencesagainstState2020="Crime Head-wise Disposal of Persons Arrested for Offences against State during 2020";
+export const GetAllChatGPTModels="Get Chat GPT Models";
+export const DisposalPersonsArrestedOffencesagainstState2020="DisposalPersonsArrestedOffencesagainstState2020";
+
 
 export const ForeignAccusedDuring2020_Resource = '2f4cba8d-8190-4dcc-8b9b-3b39ed59ef44';
 export const ForeignAccusedDuring2020="Country-Wise Foreign Accused During 2020";
@@ -263,14 +265,16 @@ export const useStyles = makeStyles((theme) => ({
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      fontSize:14,
+
     },
     button: {
       alignSelf:'center',
-      width:'20%',
+      width:'100%',
       margin: theme.spacing(1),
-      backgroundColor: '#adb64a',
+      backgroundColor: 'white',
       fontWeight : "bold",
-      fontSize:12,
+      fontSize:16,
       color:'black'
       },
     avatar: {

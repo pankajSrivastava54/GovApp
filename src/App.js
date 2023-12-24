@@ -31,8 +31,19 @@ import { configureStore } from "@reduxjs/toolkit";
 import peopleReducer from "./ReduxTable/peopleSlice";
 import { Provider } from "react-redux";
 import { Crime } from "./Crime";
+import { Models } from "./Models";
+import { Text2Speech } from "./Text2Speech";
+import { TranslateAudio } from "./TranslateAudio";
+import { ImageGeneration } from "./ImageGeneration";
+import { GenerateText } from "./GenerateText";
+import { GenerateTextOpenAI, GenerateTextOpenAi } from "./GenerateTextOpenAI";
+
+
+import { Moderations } from "./Moderations";
+import { Transcription } from "./Transcription";
 import { Ganga } from "./Ganga";
 import { Weather } from "./Weather";
+import { AzureTranslate } from "./AzureTranslate";
 
 export default function App() {
   const store = configureStore({
@@ -55,12 +66,40 @@ export default function App() {
                   />
 
                   <Switch>
-                    <Route path="/crime">
+                  <Route path="/models">
+                      <Models />
+                    </Route>
+                    
+                    <Route path="/text2Speech">
+                      <Text2Speech />
+                    </Route>
+                    <Route path="/translateAudio">
+                      <TranslateAudio />
+                    </Route>
+                    <Route path="/transcription">
+                      <Transcription />
+                    </Route>
+                    <Route path="/moderations">
+                      <Moderations />
+                    </Route>
+                    <Route path="/imageGeneration">
+                      <ImageGeneration />
+                    </Route>
+                    <Route path="/genTextGemini">
+                      <GenerateText />
+                    </Route>
+                    <Route path="/genTxtOpenAI">
+                      <GenerateTextOpenAI />
+                    </Route>
+                    <Route path="/azureTranslate">
+                      <AzureTranslate />
+                    </Route>
+                    {/* <Route path="/crime">
                       <Crime />
                     </Route>
                     <Route path="/gov">
                       <Gov />
-                    </Route>
+                    </Route> */}
                     <Route path="/gdp">
                       <Gdp />
                     </Route>

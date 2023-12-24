@@ -16,7 +16,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://sarkarikhazana-c14fd.web.app/">
-        Sarkari Khazana
+      My AI/ML experiment
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -56,11 +56,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const cards = [
+  // {
+  //   name: "Crime",
+  //   description: "Crime Related Charts & Data.",
+  //   img: "Crime.png",
+  //   path: "crime",
+  // },
   {
-    name: "Crime",
-    description: "Crime Related Charts & Data.",
-    img: "Crime.png",
-    path: "crime",
+    name: "Models",
+    description: "Models chat Gpt.",
+    img: "Models.png",
+    path: "models",
   },
   // {
   //   name: "Login",
@@ -68,18 +74,18 @@ const cards = [
   //   img: "Login.PNG",
   //   path: "login",
   // },
-  {
-    name: "Gov",
-    description: "Government Related Charts & Data.",
-    img: "Gov.png",
-    path: "Gov",
-  },
-  {
-    name: "Gdp",
-    description: "GDP Related Charts & Data.",
-    img: "GDP.png",
-    path: "Gdp",
-  },
+  // {
+  //   name: "Gov",
+  //   description: "Government Related Charts & Data.",
+  //   img: "Gov.png",
+  //   path: "Gov",
+  // },
+  // {
+  //   name: "Gdp",
+  //   description: "GDP Related Charts & Data.",
+  //   img: "GDP.png",
+  //   path: "Gdp",
+  // },
   // {
   //   name: "Profile",
   //   description: "A profile dashboard page for viewing a user's data",
@@ -100,36 +106,36 @@ const cards = [
   //   img: "Crud.PNG",
   //   path: "people",
   // },
-  {
-    name: "Shipping",
-    description: "Shipping Related Chart & Data.",
-    img: "Shipping.png",
-    path: "shipping",
-  },
-  {
-    name: "Ganga",
-    description: "Maa Ganga Related Chart & Data.",
-    img: "Ganga.png",
-    path: "ganga",
-  },
-  {
-    name: "Weather",
-    description: "Weather Related Chart & Data.",
-    img: "Ganga.png",
-    path: "ganga",
-  },
-  {
-    name: "Tourism",
-    description: "Tourism Related Chart & Data.",
-    img: "Tourism.png",
-    path: "map",
-  },
-  {
-    name: "Education",
-    description: "Education Related Chart & Data.",
-    img: "Education.png",
-    path: "education",
-  },
+  // {
+  //   name: "Shipping",
+  //   description: "Shipping Related Chart & Data.",
+  //   img: "Shipping.png",
+  //   path: "shipping",
+  // },
+  // {
+  //   name: "Ganga",
+  //   description: "Maa Ganga Related Chart & Data.",
+  //   img: "Ganga.png",
+  //   path: "ganga",
+  // },
+  // {
+  //   name: "Weather",
+  //   description: "Weather Related Chart & Data.",
+  //   img: "Ganga.png",
+  //   path: "ganga",
+  // },
+  // {
+  //   name: "Tourism",
+  //   description: "Tourism Related Chart & Data.",
+  //   img: "Tourism.png",
+  //   path: "map",
+  // },
+  // {
+  //   name: "Education",
+  //   description: "Education Related Chart & Data.",
+  //   img: "Education.png",
+  //   path: "education",
+  // },
   // {
   //   name: "Components",
   //   description: "View all components built for this theme.",
@@ -154,7 +160,7 @@ export function Home() {
               color="textPrimary"
               gutterBottom
             >
-              Data is pulled from data.gov.in website using API
+              Model used from Open AI API
             </Typography>
             <Typography
               variant="h5"
@@ -162,7 +168,6 @@ export function Home() {
               color="textSecondary"
               paragraph
             >
-              This is the Open Government Data Portal designed, developed and hosted by the National Informatics Centre (NIC), a premier ICT organization of the Government of India under the aegis of the Ministry of Electronics & Information Technology..
             </Typography>
             {/* <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
